@@ -1,0 +1,111 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="bg-gray-100 min-h-screen py-10">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap -mx-4">
+            
+            <div class="w-full lg:w-2/3 px-4 mb-8">
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900">{{ $job->title }}</h1>
+                            <p class="text-blue-600 font-medium text-lg">{{ $job->company_name }} • {{ $job->location }}</p>
+                        </div>
+                        <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-semibold">
+                            {{ $job->job_type }}
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 border-t border-b py-6">
+                        <div>
+                            <p class="text-gray-500 text-sm">Salary</p>
+                            <p class="font-bold text-gray-800">{{ $job->salary }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">Category</p>
+                            <p class="font-bold text-gray-800">{{ $job->category }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">Posted On</p>
+                            <p class="font-bold text-gray-800">{{ $job->created_at->format('d M, Y') }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm">Experience</p>
+                            <p class="font-bold text-gray-800">{{ $job->experience }}</p>
+                        </div>
+                    </div>
+
+                    <div class="prose max-w-none text-gray-700 leading-relaxed">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Job Description</h3>
+                        <p>{{ $job->description }}</p>
+                        
+                        <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4">Requirements</h3>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Strong understanding of Laravel and PHP.</li>
+                            <li>Experience with Tailwind CSS or Bootstrap.</li>
+                            <li>Ability to work in a fast-paced environment.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-1/3 px-4">
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-600 sticky top-10">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Apply Now</h3>
+                    
+                    @if(session('success'))
+                        <div class="bg-green-50 text-green-700 p-4 rounded-lg mb-4 text-sm font-medium">
+                            ✅ {{ session('success') }}
+                        </div>
+                    @endif
+
+                    <form action="{{ route('jobs.apply', $job->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                        @csrf
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
+                            <input type="text" name="full_name"
+                            class="w-full px-4 py-2 border rounded-lg text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 outline-none"
+                            placeholder="John Doe" required>                       
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+                            <input type="email" name="email"
+                            class="w-full px-4 py-2 border rounded-lg text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 outline-none"
+                            placeholder="john@example.com" required>                        
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Resume (PDF)</label>
+                            <div class="border-2 border-dashed border-gray-300 p-4 rounded-lg text-center hover:border-blue-500 transition cursor-pointer">
+                                <input type="file" name="resume" accept=".pdf" class="hidden" id="resumeUpload" required>
+                                <label for="resumeUpload" class="cursor-pointer text-gray-500">
+                                    <i class="fas fa-cloud-upload-alt text-2xl mb-2 block"></i>
+                                    <span class="text-sm">Click to upload PDF</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Cover Letter (Optional)</label>
+                            <textarea name="cover_letter" rows="3"
+                            class="w-full px-4 py-2 border rounded-lg text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 outline-none"
+                            placeholder="Why are you a good fit?"></textarea>                        
+                        </div>
+
+                        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 shadow-lg transform active:scale-95 transition duration-200">
+                            Submit Application
+                        </button>
+                    </form>
+
+                    <p class="text-xs text-gray-500 mt-4 text-center">
+                        By clicking Apply, you agree to our Terms of Service.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@endsection

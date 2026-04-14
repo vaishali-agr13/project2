@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\JobController; // Yeh line add karein
+use App\Http\Controllers\HomeController; 
+use App\Http\Controllers\Admin\CategoryController;
+
+
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/jobs/create', [JobController::class, 'create'])->name('admin.jobs.create');
+    Route::get('/applications', [JobController::class, 'applications'])->name('applications.index');
+    Route::post('/jobs/store', [JobController::class, 'store'])->name('admin.jobs.store');
+    Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+    Route::get('/jobs/edit/{id}', [JobController::class, 'edit'])->name('jobs.edit');
+    Route::delete('/jobs/delete/{id}', [JobController::class, 'destroy'])->name('jobs.delete');
+    Route::post('/jobs/update/{id}', [JobController::class, 'update'])->name('jobs.update');
+
+    Route::get('/categories', [CategoryController::class, 'index']);
+    Route::get('/categories/create', [CategoryController::class, 'create']);
+    Route::post('/categories/store', [CategoryController::class, 'store']);
+
+    Route::get('/categories/edit/{id}', [CategoryController::class, 'edit']);
+    Route::post('/categories/update/{id}', [CategoryController::class, 'update']);
+    Route::delete('/categories/delete/{id}', [CategoryController::class, 'destroy']);
+    
+});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/categories', function () { return view('categories'); });
+Route::get('/categories/{slug}', [CategoryController::class, 'show']);
+
+Route::get('/find-jobs', [JobController::class, 'find_job']);
+
+Route::get('/jobs/{id}', [JobController::class, 'show'])->name('jobs.show');
+Route::get('/about', function () { return view('about'); });
+
+Route::post('/jobs/{id}/apply', [JobController::class, 'apply'])->name('jobs.apply');
+
