@@ -25,8 +25,21 @@ body {
   background: #dbeafe;
   color: #0f172a;
 
-  margin: 20px 40px;     /* left-right se gap */
-  border-radius: 20px;   /* 4 side se round */
+  margin: 20px 40px;
+  border-radius: 20px;
+
+  flex-wrap: wrap;   /* 4 side se round */
+}
+
+.hero-img img {
+  max-width: 100%;
+  height: auto;
+}
+
+.hero-img {
+  flex: 1;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .hero-text h2 {
@@ -70,7 +83,7 @@ body {
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   gap: 10px;
 
-  flex-wrap: nowrap; /* IMPORTANT */
+  flex-wrap: wrap;  /* IMPORTANT */
 }
 
 .search-box input {
@@ -123,7 +136,7 @@ body {
 
 .job-card p {
   font-size: 14px;
-  color: #555;
+  color: white;
 }
 
 .apply-btn {
@@ -138,4 +151,26 @@ body {
 
 .apply-btn:hover {
   background: #0056b3;
+}
+
+@media (max-width: 768px) {
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .search-box {
+    flex-direction: column;
+    border-radius: 20px;
+  }
+
+  .divider {
+    display: none; /* mobile pe remove */
+  }
+
+  .search-box button {
+    width: 100%;
+  }
+
 }
