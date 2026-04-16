@@ -15,16 +15,16 @@
   <header class="flex flex-wrap justify-between items-center px-6 py-5">
   
   <!-- Logo -->
-  <h1 class="text-2xl font-bold text-white w-full md:w-auto">
+  <h1 class="text-2xl font-bold text-white w-full md:w-auto" style="color:black;">
     JobPortal
   </h1>
 
   <!-- Menu -->
-  <nav class="flex flex-wrap gap-4 mt-4 md:mt-0">
+  <nav class="flex flex-wrap gap-4 mt-4 md:mt-0" style="color:black;">
     <a href="/" class="hover:text-blue-400">Home</a>
     <a href="/find-jobs" class="hover:text-blue-400">Find a Job</a>
     <a href="#" class="hover:text-blue-400">Companies</a>
-    <a href="#" class="hover:text-blue-400">Login</a>
+    <a href="/admin/login" class="hover:text-blue-400">Login</a>
   </nav>
 
 </header>
@@ -32,7 +32,7 @@
   @yield('content')
 
   <!-- Footer -->
-  <footer class="text-center py-6 bg-[#020617]">
+  <footer class="text-center py-6">
     <p class="text-gray-400">© 2026 JobPortal. All rights reserved.</p>
   </footer>
 

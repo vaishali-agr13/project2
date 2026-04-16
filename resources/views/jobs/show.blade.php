@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="bg-gray-100 min-h-screen py-10">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-wrap -mx-4">
-            
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-wrap lg:flex-nowrap -mx-4">
+        
             <div class="w-full lg:w-2/3 px-4 mb-8">
                 <div class="bg-white p-8 rounded-xl shadow-sm">
                     <div class="flex items-center justify-between mb-6">

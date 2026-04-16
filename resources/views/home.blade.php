@@ -58,7 +58,7 @@
   <div class="grid">
     @forelse($categories as $category)
     
-       <div class="card">
+       <div class="card  category-card">
          <p> {{$category->name}}</p>
 
           <p> {{$category->jobs_count}} Jobs Avilaible </p>
@@ -66,6 +66,30 @@
     
      @empty
     @endforelse
+  </div>
+</section>
+
+<section class="job-section">
+  <div class="container">
+    
+    <!-- LEFT CONTENT -->
+    <div class="left-content">
+      <h2>Explore Job Opportunities in <br> Popular Roles</h2>
+      
+      <p>
+        Explore top job opportunities in popular roles across various industries.
+        Find the perfect fit for your skills and ambitions, and take the next step
+        in your career today.
+      </p>
+
+      <a href="#" class="btn-explore">Explore Jobs</a>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="right-image">
+      <img src="{{ asset('images/job-seekers.webp') }}" alt="job illustration">
+    </div>
+
   </div>
 </section>
 
@@ -77,7 +101,7 @@
 
 
    @forelse($featuredJobs as $job)
-            <div class="card job-card">
+            <div class="card job-card category-card">
             <h4>{{ $job->title }}</h4>
             <p>{{ $job->company_name }}</p>
             <p>{{ $job->location }}</p>
@@ -89,27 +113,79 @@
 
            
         @empty
-@endforelse
+   @endforelse
+  </div>
+</section>
+
+
+<section class="job-alert-section">
+  <div class="job-alert-container">
+
+    <!-- LEFT CONTENT -->
+    <div class="job-alert-left">
+      <h2>Never miss out on the latest career opportunities</h2>
+      
+      <p>
+        Get daily alerts and stay ahead!
+      </p>
+
+      <a href="#" class="job-alert-btn">Get Job Alerts</a>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="job-alert-right">
+      <img src="{{ asset('images/job-alert.webp') }}" alt="job alert">
+    </div>
+
   </div>
 </section>
 
 
 <!-- Companies -->
-<section class="section dark">
+<section class="section">
   <h3>Top Companies Hiring</h3>
   <div class="grid">
-    <div class="card">
+    <div class="card category-card">
       <h4>Google</h4>
       <p>Software Engineer</p>
     </div>
-    <div class="card">
+    <div class="card category-card">
       <h4>Amazon</h4>
       <p>Backend Developer</p>
     </div>
-    <div class="card">
+    <div class="card category-card">
       <h4>Microsoft</h4>
       <p>UI/UX Designer</p>
     </div>
+  </div>
+</section>
+
+<section class="how-section">
+  <h3>How It Works</h3>
+
+  <div class="how-container">
+
+    <!-- Step 1 -->
+    <div class="how-card">
+      <div class="icon">👤</div>
+      <h4>Create Account</h4>
+      <p>Sign up and build your profile to get started with your job search.</p>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="how-card">
+      <div class="icon">🔍</div>
+      <h4>Search Jobs</h4>
+      <p>Find jobs that match your skills, interests, and location easily.</p>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="how-card">
+      <div class="icon">🚀</div>
+      <h4>Apply & Get Hired</h4>
+      <p>Apply to jobs and connect with employers to land your dream role.</p>
+    </div>
+
   </div>
 </section>
 
