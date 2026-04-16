@@ -18,10 +18,8 @@ class HomeController extends Controller
        
         $featuredJobs = Job::where('status', 1)
                            ->orderBy('created_at', 'desc')
-                           ->take(6)
                            ->get();
-
-        // Data ko view (home.blade.php) mein bhejien
+    
         return view('home', compact('featuredJobs','categories'));
     }
 }

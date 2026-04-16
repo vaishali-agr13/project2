@@ -118,7 +118,29 @@
 </section>
 
 
-<section class="job-alert-section">
+<section class="counter-section">
+
+<h3 class="counter-heading">Our Platform in Numbers</h3>
+  <p class="counter-subtext">Trusted by thousands of job seekers and companies</p>
+    <div class="counter-wrapper">
+          <div class="counter-box">
+            <h2>20+</h2>
+            <p>Jobs Available</p>
+          </div>
+
+          <div class="counter-box">
+            <h2>20+</h2>
+            <p>Companies</p>
+          </div>
+
+          <div class="counter-box">
+            <h2>20+</h2>
+            <p>Candidates</p>
+          </div>
+     </div>
+</section>
+
+<section class="section">
   <div class="job-alert-container">
 
     <!-- LEFT CONTENT -->
@@ -129,7 +151,10 @@
         Get daily alerts and stay ahead!
       </p>
 
-      <a href="#" class="job-alert-btn">Get Job Alerts</a>
+      <div class="job-alert-form">
+        <input type="email" placeholder="Enter your email">
+        <button>Subscribe</button>
+      </div>
     </div>
 
     <!-- RIGHT IMAGE -->
@@ -139,6 +164,8 @@
 
   </div>
 </section>
+
+
 
 
 <!-- Companies -->
@@ -184,6 +211,44 @@
       <div class="icon">🚀</div>
       <h4>Apply & Get Hired</h4>
       <p>Apply to jobs and connect with employers to land your dream role.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="advice-section">
+  <h3>Career Advice & Resources</h3>
+
+  <div class="advice-container">
+
+    <!-- Card 1 -->
+    <div class="advice-card">
+      <img src="{{ asset('images/photo1.jpg') }}" alt="Resume Tips">
+      <div class="advice-content">
+        <h4>How to Build a Strong Resume</h4>
+        <p>Learn how to create a resume that stands out to recruiters.</p>
+        <a href="#">Read More →</a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="advice-card">
+      <img src="{{ asset('images/photo2.jpg') }}" alt="Interview Tips">
+      <div class="advice-content">
+        <h4>Top Interview Tips</h4>
+        <p>Prepare confidently and crack your next interview easily.</p>
+        <a href="#">Read More →</a>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="advice-card">
+      <img src="{{ asset('images/photo3.jpg') }}" alt="Career Growth">
+      <div class="advice-content">
+        <h4>Career Growth Strategies</h4>
+        <p>Boost your career with smart planning and skill development.</p>
+        <a href="#">Read More →</a>
+      </div>
     </div>
 
   </div>
