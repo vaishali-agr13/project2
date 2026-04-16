@@ -28,6 +28,10 @@ body {
   height: auto;
 }
 
+.hero-text{
+  color:black;
+}
+
 .hero-text h2 {
   font-size: 40px;
 }
