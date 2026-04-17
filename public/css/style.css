@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: white !important;
-  color: #0f172a;
+  background: #f8fafc !important;
+  color: white;
 }
 
 /* HERO */
@@ -37,7 +37,7 @@ body {
 }
 
 .hero-text span {
-  color: #2563eb;
+  color: #661e92;
 }
 
 /* SEARCH */
@@ -84,7 +84,7 @@ body {
 
 .search-box button {
   padding: 12px 25px;
-  background: #22c55e;
+  background: #661e92;
   color: white;
   border: none;
   border-radius: 50px;
@@ -118,7 +118,7 @@ body {
   display: block;
   width: 60px;
   height: 4px;
-  background: #2563eb;
+  background: #661e92;
   border-radius: 10px;
   margin-top: 6px;
 }
@@ -154,6 +154,8 @@ body {
   min-height: 100px;
 }
 
+
+
 /* JOB CARD */
 .job-card {
   position: relative;
@@ -168,7 +170,7 @@ body {
   left: 0;
   height: 4px;
   width: 100%;
-  background: linear-gradient(to right, #2563eb, #60a5fa);
+  background: #661e92;
 }
 
 .job-card h4 {
@@ -187,7 +189,7 @@ body {
   margin-top: 15px;
   padding: 10px 18px;
   border: none;
-  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  background: linear-gradient(135deg, #661e92, #661e92);
   color: white;
   border-radius: 30px;
   cursor: pointer;
@@ -249,7 +251,7 @@ body {
 
 .btn-explore {
   display: inline-block;
-  background: #ff4d4d;
+  background: #661e92;
   color: white;
   padding: 12px 22px;
   border-radius: 25px;
@@ -288,7 +290,7 @@ body {
 
 .counter-box h2 {
   font-size: 32px;
-  color: #2563eb;
+  color: #661e92;
 }
 
 /* JOB ALERT */
@@ -334,9 +336,11 @@ body {
 }
 
 .how-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
+ display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  position: relative;
 }
 
 .how-card {
@@ -344,8 +348,41 @@ body {
   padding: 30px 20px;
   border-radius: 18px;
   border: 1px solid #cbd5e1;
+  text-align: center;
+  position: relative;
+  flex: 1;
+  color: black;
   transition: 0.3s;
-  color:black;
+}
+
+.step {
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  background: #661e92;
+  color: white;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.how-card .icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.how-card:not(:last-child)::after {
+  content: "➜";
+  position: absolute;
+  right: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: #661e92;
+}
+
+.how-card:hover {
+  transform: translateY(-5px);
 }
 
 /* ADVICE */
@@ -357,7 +394,7 @@ body {
 }
 
 .advice-card a {
-  color: #2563eb;   /* blue */
+  color: #661e92;   /* blue */
   text-decoration: none;
   font-weight: 600;
   display: inline-block;
@@ -399,7 +436,7 @@ body {
   padding: 12px 20px;
   border-radius: 50px;
   border: none;
-  background: #2563eb;
+  background: #661e92;
   color: white;
   cursor: pointer;
   white-space: nowrap;
@@ -428,6 +465,66 @@ body {
   background: #1d4ed8;
 }
 
+/* TOP HEADER */
+.top-header {
+  background: #661e92;
+  color: white;
+  padding: 8px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+/* LEFT SIDE */
+.top-left {
+  display: flex;
+  gap: 15px;
+}
+
+.top-left a:hover {
+  color: #c4b5fd;
+  transform: scale(1.2);
+}
+
+.top-left a {
+  color: white;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.top-right {
+  display: flex;
+  gap: 20px;
+}
+
+.top-right span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* RIGHT SIDE */
+.top-right a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.top-right a:hover {
+  text-decoration: underline;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+  }
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .hero {
@@ -451,5 +548,27 @@ body {
   .job-alert-container {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-header {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .how-container {
+    flex-direction: column;
+  }
+
+  .how-card::after {
+    content: "⬇";
+    right: 50%;
+    top: auto;
+    bottom: -25px;
+    transform: translateX(50%);
   }
 }

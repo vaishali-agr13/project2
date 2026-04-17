@@ -59,9 +59,9 @@
     @forelse($categories as $category)
     
        <div class="card  category-card">
-         <p> {{$category->name}}</p>
+         <p style="font-weight: bold;"> {{$category->name}}</p>
 
-          <p> {{$category->jobs_count}} Jobs Avilaible </p>
+          <p style="color:grey"> {{$category->jobs_count}} Jobs Avilaible </p>
        </div>
     
      @empty
@@ -145,7 +145,7 @@
 
     <!-- LEFT CONTENT -->
     <div class="job-alert-left">
-      <h2>Never miss out on the latest career opportunities</h2>
+      <h2>Never miss out <span style="color: #661e92">on the latest career</span> opportunities</h2>
       
       <p>
         Get daily alerts and stay ahead!
@@ -174,15 +174,15 @@
   <div class="grid">
     <div class="card category-card">
       <h4>Google</h4>
-      <p>Software Engineer</p>
+      <p style="color:grey">Software Engineer</p>
     </div>
     <div class="card category-card">
       <h4>Amazon</h4>
-      <p>Backend Developer</p>
+      <p style="color:grey">Backend Developer</p>
     </div>
     <div class="card category-card">
       <h4>Microsoft</h4>
-      <p>UI/UX Designer</p>
+      <p style="color:grey">UI/UX Designer</p>
     </div>
   </div>
 </section>
@@ -192,26 +192,26 @@
 
   <div class="how-container">
 
-    <!-- Step 1 -->
-    <div class="how-card">
-      <div class="icon">👤</div>
-      <h4>Create Account</h4>
-      <p>Sign up and build your profile to get started with your job search.</p>
-    </div>
+      <div class="how-card">
+        <div class="step">01</div>
+        <div class="icon">👤</div>
+        <h4>Create Account</h4>
+        <p>Sign up and build your profile to get started with your job search.</p>
+      </div>
 
-    <!-- Step 2 -->
-    <div class="how-card">
-      <div class="icon">🔍</div>
-      <h4>Search Jobs</h4>
-      <p>Find jobs that match your skills, interests, and location easily.</p>
-    </div>
+      <div class="how-card">
+        <div class="step">02</div>
+        <div class="icon">🔍</div>
+        <h4>Search Jobs</h4>
+        <p>Find jobs that match your skills, interests, and location easily.</p>
+      </div>
 
-    <!-- Step 3 -->
-    <div class="how-card">
-      <div class="icon">🚀</div>
-      <h4>Apply & Get Hired</h4>
-      <p>Apply to jobs and connect with employers to land your dream role.</p>
-    </div>
+      <div class="how-card">
+        <div class="step">03</div>
+        <div class="icon">🚀</div>
+        <h4>Apply & Get Hired</h4>
+        <p>Apply to jobs and connect with employers to land your dream role.</p>
+      </div>
 
   </div>
 </section>
