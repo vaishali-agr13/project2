@@ -7,6 +7,7 @@ body {
 
 /* HERO */
 .hero {
+  color: #6c1e96;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -240,10 +241,14 @@ body {
 .container {
   width: 90%;
   margin: auto;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+}
+
+.job-section .container {
+  display: flex;
 }
 
 .left-content {

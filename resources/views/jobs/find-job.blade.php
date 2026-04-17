@@ -79,7 +79,7 @@
 @foreach($jobs as $job)
     <div class="job-card">
       <div class="job-header">
-        <img src="assets/company-logo.png" alt="Company Logo" class="company-logo">
+          <img src="{{ asset('images/company-default-logo.svg') }}" class="company-logo">        
         <div class="job-company">
           <h3>{{$job->company_name}}</h3>
           <p>{{$job->location}}</p>

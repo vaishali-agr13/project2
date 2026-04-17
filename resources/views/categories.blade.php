@@ -7,17 +7,17 @@
     <p>{{ $category->description }}</p>
 </div>
 
-<div class="container">
+<div class="job-container">
 
-   <div class="job-grid"> 
-     @foreach($category->jobs as $job)
+<div class="job-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px;"> 
+        @foreach($category->jobs as $job)
     <div class="job-card">
 
         <!-- LEFT -->
         <div class="job-left">
 
             <div class="job-top">
-                <img src="/assets/company-logo.png" class="company-logo">
+                <img src="{{ asset('images/company-default-logo.svg') }}" class="company-logo">
 
                 <div class="company-info">
                     <h4>{{ $job->company_name }}</h4>
@@ -72,8 +72,22 @@
 
 .job-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Boxes ko chota karega aur side-by-side layega */
-    gap: 20px; /* Boxes ke beech ka gap */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* tablet */
+@media (max-width: 992px) {
+    .job-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* mobile */
+@media (max-width: 600px) {
+    .job-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .hero p {
@@ -82,17 +96,19 @@
 }
 
 /* CONTAINER (FIXED) */
-.container {
+.job-container {
     width: 100%;
     max-width: 1100px;
     margin: 40px auto;
     padding: 0 20px;
+     max-width: 1200px; /* ya 1300px */
+       display: block;   /* ✅ flex hatao */
+
 }
 
 /* JOB CARD (FIXED FLEX ISSUE) */
 .job-card {
-
-margin-bottom: 0; /* Kyunki gap ab grid sambhal raha hai */
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -102,7 +118,6 @@ margin-bottom: 0; /* Kyunki gap ab grid sambhal raha hai */
     border-radius: 12px;
 
     padding: 20px;
-    margin-bottom: 20px;
 
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     transition: 0.3s;
