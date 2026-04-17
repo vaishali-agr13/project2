@@ -105,6 +105,27 @@
     <p>© 2026 JobPortal. All rights reserved.</p>
   </div>
 
+
+  <script>
+
+ document.addEventListener("keydown", function(e) {
+  if (e.ctrlKey || e.metaKey) {
+    // keyCode: 187 (=,+), 189 (-,_)
+    if (e.keyCode === 187 || e.keyCode === 189) {
+      e.preventDefault();
+      document.body.style.zoom = "100%";
+    }
+  }
+});
+
+// Disable Ctrl + scroll zoom
+window.addEventListener("wheel", function(e) {
+  if (e.ctrlKey) {
+    e.preventDefault();
+  }
+}, { passive: false });
+</script>
+
 </footer>
 
 </body>
