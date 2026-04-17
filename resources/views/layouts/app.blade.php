@@ -53,9 +53,59 @@
   @yield('content')
 
   <!-- Footer -->
-  <footer class="text-center py-6">
-    <p class="text-gray-400">© 2026 JobPortal. All rights reserved.</p>
-  </footer>
+  <footer class="main-footer">
+
+  <div class="footer-container">
+
+    <!-- COLUMN 1 -->
+    <div class="footer-col">
+      <h4>JobPortal</h4>
+      <p>Find your dream job easily with thousands of opportunities from top companies.</p>
+    </div>
+
+    <!-- COLUMN 2 -->
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/find-jobs">Find Jobs</a></li>
+        <li><a href="#">Companies</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUMN 3 -->
+    <div class="footer-col">
+      <h5>Job Categories</h5>
+      <ul>
+        <li><a href="#">IT Jobs</a></li>
+        <li><a href="#">Marketing</a></li>
+        <li><a href="#">Sales</a></li>
+        <li><a href="#">Finance</a></li>
+      </ul>
+    </div>
+
+    <!-- COLUMN 4 -->
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <p>📞 +91 9876543210</p>
+      <p>✉️ support@jobportal.com</p>
+
+      <div class="footer-social">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="footer-bottom">
+    <p>© 2026 JobPortal. All rights reserved.</p>
+  </div>
+
+</footer>
 
 </body>
 </html>
