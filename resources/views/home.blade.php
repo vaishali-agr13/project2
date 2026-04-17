@@ -59,9 +59,11 @@
     @forelse($categories as $category)
     
        <div class="card  category-card">
+        <a href="{{ url('/categories/'.$category->id) }}">
          <p style="font-weight: bold;"> {{$category->name}}</p>
 
           <p style="color:grey"> {{$category->jobs_count}} Jobs Avilaible </p>
+       </a>
        </div>
     
      @empty
