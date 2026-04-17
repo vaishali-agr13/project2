@@ -158,9 +158,22 @@ body {
 
 /* JOB CARD */
 .job-card {
-  position: relative;
+   position: relative;
   border-radius: 18px;
   overflow: hidden;
+  padding-bottom: 50px; /* ADD THIS */
+}
+
+.salary {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: #ecfdf5;
+  color: #059669;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 20px;
 }
 
 .job-card::before {
