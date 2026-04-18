@@ -27,12 +27,14 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'icon'=>'required',
             'description' => 'nullable'
 
         ]);
 
         Category::create([
             'name' => $request->name,
+            'icon'=>$request->icon,
             'description' => $request->description
         ]);
 
@@ -50,6 +52,7 @@ class CategoryController extends Controller
         {
             $request->validate([
                 'name' => 'required',
+                'icon'=>'required',
                 'description' => 'nullable'
             ]);
 
@@ -57,6 +60,7 @@ class CategoryController extends Controller
 
             $category->update([
                 'name' => $request->name,
+                'icon'=>$request->icon,
                 'description' => $request->description
             ]);
 

@@ -40,6 +40,20 @@
                 @enderror
             </div>
 
+               <div class="form-group">
+                <label>Category Icon</label>
+                <input 
+                    type="text" 
+                    name="icon" 
+                    class="form-control" 
+                    value="{{ $category->icon }}"
+                    required
+                >
+                @error('name')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+
             <!-- Description -->
             <div class="form-group">
                 <label>Description</label>

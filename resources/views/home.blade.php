@@ -60,6 +60,11 @@
     
        <div class="card  category-card">
         <a href="{{ url('/categories/'.$category->id) }}">
+
+        <!-- ICON -->
+          <div class="category-icon">
+              <i class="fas {{ !empty($category->icon) ? $category->icon : 'fa-folder' }}"></i>
+          </div>
          <p style="font-weight: bold;"> {{$category->name}}</p>
 
           <p style="color:grey"> {{$category->jobs_count}} Jobs Avilaible </p>

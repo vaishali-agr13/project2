@@ -134,7 +134,7 @@
 }
 
 .jobs-hero .hero-content .highlight {
-  color: #4efc7c;
+  color: #6c1e96;
 }
 
 .jobs-hero .hero-content p {
