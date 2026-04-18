@@ -7,29 +7,42 @@
 <!-- Popup -->
 <div id="welcomePopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
   
-  <div style="background:white; width:300px; padding:20px; border-radius:8px; text-align:center; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:black;">
+  <div style="
+      background:white;
+      width:90%;
+      max-width:500px;
+      padding:35px 30px;
+      border-radius:15px;
+      text-align:center;
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      color:black;
+      box-shadow:0 10px 40px rgba(0,0,0,0.2);
+  ">
     
     <!-- Close Button -->
     <span onclick="closePopup()" 
-          style="position:absolute; top:10px; right:15px; font-size:22px; cursor:pointer; color:black;">
+          style="position:absolute; top:12px; right:18px; font-size:26px; cursor:pointer; color:black;">
         &times;
     </span>
 
-    <!-- Logo Center -->
-    <div style="display:flex; justify-content:center; align-items:center; margin-bottom:10px;">
-      <img src="{{asset('images/company-logo.png') }}" alt="Logo" style="height:70px; display:block;">
+    <!-- Logo -->
+    <div style="display:flex; justify-content:center; align-items:center; margin-bottom:15px;">
+      <img src="{{asset('images/company-logo.png') }}" alt="Logo" style="height:90px;">
     </div>
 
-    <!-- Title (Big Size) -->
-    <h3 style="font-size:26px; font-weight:bold; margin-bottom:8px;">
-      Welcome
+    <!-- Title -->
+    <h3 style="font-size:32px; font-weight:700; margin-bottom:10px;">
+      Welcome 👋
     </h3>
 
     <!-- Subtitle -->
-    <p style="color:gray; font-size:14px;">
+    <p style="color:gray; font-size:16px; margin-bottom:15px;">
       Welcome to our website! 🚀
     </p>
-    
+
   </div>
 </div>
 
