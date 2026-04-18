@@ -28,8 +28,8 @@
   <!-- RIGHT: CONTACT INFO -->
   <div class="top-right">
     <span>
-      <a href="https://wa.me/919876543210" target="_blank">
-           <i class="fa-brands fa-whatsapp"></i> +91 9876543210
+      <a href="https://wa.me/917000153244" target="_blank">
+           <i class="fa-brands fa-whatsapp"></i> +91 7000153244
       </a>
      </span>
     <span>
@@ -83,26 +83,31 @@
         <li><a href="/">Home</a></li>
         <li><a href="/find-jobs">Find Jobs</a></li>
         <li><a href="#">Companies</a></li>
-        <li><a href="#">Contact</a></li>
       </ul>
     </div>
 
     <!-- COLUMN 3 -->
     <div class="footer-col">
-      <h5>Job Categories</h5>
+     <h5></h5>
       <ul>
-        <li><a href="#">IT Jobs</a></li>
-        <li><a href="#">Marketing</a></li>
-        <li><a href="#">Sales</a></li>
-        <li><a href="#">Finance</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
       </ul>
     </div>
 
     <!-- COLUMN 4 -->
     <div class="footer-col">
       <h5>Contact</h5>
-      <p>📞 +91 9876543210</p>
-      <p>✉️ support@jobportal.com</p>
+      <p> <a href="https://wa.me/917000153244" target="_blank">
+           <i class="fa-brands fa-whatsapp"></i> +91 7000153244
+          </a>
+      </p>
+      <p>
+         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=support@jobportal.com" target="_blank">
+           <i class="fa-regular fa-envelope"></i> support@jobportal.com
+         </a>
+      </p>
 
       <div class="footer-social">
         <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
