@@ -246,14 +246,17 @@
   <h3>Top Companies Hiring</h3>
   <div class="grid">
     <div class="card category-card">
+      <img src="{{ asset('images/Google_logo.svg') }}" class="company-logo">
       <h4>Google</h4>
       <p style="color:grey">Software Engineer</p>
     </div>
     <div class="card category-card">
+      <img src="{{ asset('images/Amazon_logo.svg') }}" class="company-logo">
       <h4>Amazon</h4>
       <p style="color:grey">Backend Developer</p>
     </div>
     <div class="card category-card">
+      <img src="{{ asset('images/Microsoft_logo.svg') }}" class="company-logo">
       <h4>Microsoft</h4>
       <p style="color:grey">UI/UX Designer</p>
     </div>
