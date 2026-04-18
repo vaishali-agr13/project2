@@ -22,4 +22,21 @@ class HomeController extends Controller
     
         return view('home', compact('featuredJobs','categories'));
     }
+
+    public function about()
+    {
+        return view('about');
+    }
+    
+    public function services()
+    {
+         return view('services');
+    }
+    
+    public function privacy_policy()
+    {
+         return view('privacy_policy');
+    }
+
+
 }

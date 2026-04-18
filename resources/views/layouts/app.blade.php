@@ -55,9 +55,9 @@
     <a href="/" class="hover:text-blue-400"><i class="fa-solid fa-house"></i></a>
     <a href="/find-jobs" class="hover:text-blue-400">Find a Job</a>
     <a href="#" class="hover:text-blue-400">Companies</a>
-    <a href="#" class="hover:text-blue-400">About</a>
-    <a href="#" class="hover:text-blue-400">Services</a>
-    <a href="#" class="hover:text-blue-400">Privacy Policy</a>
+    <a href="/about" class="hover:text-blue-400">About</a>
+    <a href="/services" class="hover:text-blue-400">Services</a>
+    <a href="/privacy-policy" class="hover:text-blue-400">Privacy Policy</a>
     <!-- <a href="/admin/login" class="hover:text-blue-400">Login</a> -->
   </nav>
 

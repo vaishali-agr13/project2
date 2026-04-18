@@ -42,6 +42,10 @@ Route::get('/categories', function () { return view('categories'); });
 Route::get('/categories/{slug}', [CategoryController::class, 'show']);
 
 Route::get('/find-jobs', [JobController::class, 'find_job']);
+Route::get('/about', [HomeController::class, 'about']);
+Route::get('/services', [HomeController::class, 'services']);
+Route::get('/privacy-policy', [HomeController::class, 'privacy_policy']);
+
 
 Route::get('/jobs/{id}', [JobController::class, 'show'])->name('jobs.show');
 Route::get('/about', function () { return view('about'); });
