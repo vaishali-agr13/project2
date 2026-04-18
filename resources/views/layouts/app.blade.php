@@ -29,31 +29,29 @@
   <div class="top-right">
     <span>
       <a href="https://wa.me/919876543210" target="_blank">
-           📞 +91 9876543210
+           <i class="fa-brands fa-whatsapp"></i> +91 9876543210
       </a>
      </span>
     <span>
-
-    <a href="mailto:example@jobportal.com">
-        ✉️ support@jobportal.com
-    </a>
-
+       <a href="https://mail.google.com/mail/?view=cm&fs=1&to=support@jobportal.com" target="_blank">
+           <i class="fa-regular fa-envelope"></i> support@jobportal.com
+       </a>
     </span>
   </div>
 
 </div>
 
-  <header class="flex flex-wrap justify-between items-center px-6 py-5">
+  <header class="flex justify-between items-center px-6 py-3">
   
   <!-- Logo -->
-  <h1 class="text-2xl font-bold text-white w-full md:w-auto" style="color:black;">
+  <h1 class="text-white" style="color:black;">
     <a href="/">
-        <img src="{{ asset('images/company-logo.png') }}" class="company_logo" alt="Resume Tips">
+        <img src="{{ asset('images/company-logo.png') }}"  class="company_logo"  alt="Resume Tips">
     </a>
   </h1>
 
   <!-- Menu -->
-  <nav class="flex flex-wrap gap-4 mt-4 md:mt-0" style="color:black;">
+  <nav class="flex items-center gap-6" style="color:black;">
     <a href="/" class="hover:text-blue-400"><i class="fa-solid fa-house"></i></a>
     <a href="/find-jobs" class="hover:text-blue-400">Find a Job</a>
     <a href="#" class="hover:text-blue-400">Companies</a>

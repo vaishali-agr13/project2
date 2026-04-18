@@ -11,13 +11,24 @@
     
     <!-- Close Button -->
     <span onclick="closePopup()" 
-          style="position:absolute; top:10px; right:15px; font-size:20px; cursor:pointer; color:black;">
+          style="position:absolute; top:10px; right:15px; font-size:22px; cursor:pointer; color:black;">
         &times;
     </span>
 
-    <h3>Welcome 👋</h3>
-    <p>Welcome to our website!</p>
-    
+    <!-- Logo Center -->
+    <div style="display:flex; justify-content:center; align-items:center; margin-bottom:10px;">
+      <img src="{{asset('images/company-logo.png') }}" alt="Logo" style="height:70px; display:block;">
+    </div>
+
+    <!-- Title (Big Size) -->
+    <h3 style="font-size:26px; font-weight:bold; margin-bottom:8px;">
+      Welcome
+    </h3>
+
+    <!-- Subtitle -->
+    <p style="color:gray; font-size:14px;">
+      Welcome to our website! 🚀
+    </p>
     
   </div>
 </div>
