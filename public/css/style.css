@@ -161,18 +161,32 @@ input::placeholder {
 
 /* JOB CARD */
 .job-card {
-   position: relative;
-  border-radius: 18px;
-  overflow: hidden;
-  padding-bottom: 50px; /* ADD THIS */
+  border-radius: 16px; 
+  overflow: hidden; 
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* important */
 }
 
+
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; 
+}
+
+.share-icons {
+    display: flex;
+  gap: 10px;
+  font-size: 18px;
+}
+
+
 .salary {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  background: #ecfdf5;
-  color: #059669;
+   background: #ecfdf5;
+  color: #661e92;
   padding: 6px 12px;
   font-size: 13px;
   font-weight: 600;
@@ -180,13 +194,14 @@ input::placeholder {
 }
 
 .job-card::before {
-  content: "";
+   content: "";
   position: absolute;
   top: 0;
   left: 0;
   height: 4px;
   width: 100%;
   background: #661e92;
+  opacity: 1;
 }
 
 .job-card h4 {
@@ -270,6 +285,7 @@ input::placeholder {
 }
 
 .btn-explore {
+  margin-top:25px;
   display: inline-block;
   background: #661e92;
   color: white;
@@ -621,6 +637,27 @@ input::placeholder {
   padding: 15px;
   border-top: 1px solid #1e293b;
   font-size: 14px;
+}
+
+.category-icon {
+  color:#661e92;
+}
+
+.custom-border {
+  border-top: 2px solid #661e92
+}
+.submit-btn {
+  background-color: #661e92;
+}
+
+.company-logo {
+ position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  opacity: 1;
+  display: block;     
 }
 
 /* MOBILE RESPONSIVE */

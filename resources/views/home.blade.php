@@ -2,6 +2,29 @@
 
 @section('content')
 
+
+
+<!-- Popup -->
+<div id="welcomePopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
+  
+  <div style="background:white; width:300px; padding:20px; border-radius:8px; text-align:center; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:black;">
+    
+    <!-- Close Button -->
+    <span onclick="closePopup()" 
+          style="position:absolute; top:10px; right:15px; font-size:20px; cursor:pointer; color:black;">
+        &times;
+    </span>
+
+    <h3>Welcome 👋</h3>
+    <p>Welcome to our website!</p>
+    
+    
+  </div>
+</div>
+
+
+
+
 <section class="hero">
   <div class="hero-text">
     <h2>Find Your <span>Dream Job</span> Easily</h2>
@@ -89,7 +112,7 @@
         in your career today.
       </p>
 
-      <a href="#" class="btn-explore">Explore Jobs</a>
+      <a href="/find-jobs" class="btn-explore">Explore Jobs</a>
     </div>
 
     <!-- RIGHT IMAGE -->
@@ -109,17 +132,32 @@
 
    @forelse($featuredJobs as $job)
             <div class="card job-card category-card">
-            <h4>{{ $job->title }}</h4>
-            <p>{{ $job->company_name }}</p>
-            <p>{{ $job->location }}</p>
+                    <img src="{{ asset('images/company-default-logo.svg') }}" class="company-logo">
+                    <h4>{{ $job->title }}</h4>
+                    <p>{{ $job->company_name }}</p>
+                    <p>{{ $job->location }}</p>
 
-            <div class="salary">
-              ₹{{ $job->salary }}
-            </div>
-            
-            <a href="{{ route('jobs.show', $job->id) }}" class="block mt-4 text-blue-500 font-semibold hover:text-blue-700 transition">
-                <button class="apply-btn">View Details →</button>    
-            </a>
+                   <a href="{{ route('jobs.show', $job->id) }}" class="block mt-4">
+                        <button class="apply-btn">View Details →</button>    
+                    </a>
+
+                    <div class="bottom-row">
+                        <div class="share-icons">
+                            <a href="https://wa.me/?text={{ urlencode($job->title . ' ' . route('jobs.show', $job->id)) }}" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(route('jobs.show', $job->id)) }}" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+
+                        <div class="salary">
+                            ₹{{ $job->salary }}
+                        </div>
+                    </div>
+
+                    
           </div>
 
            
@@ -267,3 +305,12 @@
 
 @endsection
 
+<script>
+window.onload = function() {
+    document.getElementById('welcomePopup').style.display = 'block';
+};
+
+function closePopup() {
+    document.getElementById('welcomePopup').style.display = 'none';
+}
+</script>

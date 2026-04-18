@@ -7,43 +7,40 @@
     <p>{{ $category->description }}</p>
 </div>
 
-<div class="job-container">
+<section class="section">
 
-<div class="job-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px;"> 
+
+    <div class="grid">
         @foreach($category->jobs as $job)
-    <div class="job-card">
+            <div class="card job-card category-card">
+                    <img src="{{ asset('images/company-default-logo.svg') }}" class="company-logo">
+                    <h4>{{ $job->title }}</h4>
+                    <p>{{ $job->company_name }}</p>
+                    <p>{{ $job->location }}</p>
 
-        <!-- LEFT -->
-        <div class="job-left">
+                    <a href="{{ route('jobs.show', $job->id) }}" class="block mt-4">
+                        <button class="apply-btn">View Details →</button>    
+                    </a>
 
-            <div class="job-top">
-                <img src="{{ asset('images/company-default-logo.svg') }}" class="company-logo">
+                    <div class="bottom-row">
+                        <div class="share-icons">
+                            <a href="https://wa.me/?text={{ urlencode($job->title . ' ' . route('jobs.show', $job->id)) }}" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
 
-                <div class="company-info">
-                    <h4>{{ $job->company_name }}</h4>
-                    <p>📍 {{ $job->location }}</p>
-                </div>
-            </div>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(route('jobs.show', $job->id)) }}" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
 
-            <h2 class="job-title">{{ $job->title }}</h2>
-
-            <div class="meta">
-                <span>🕒 {{ $job->job_type }}</span>
-                <span>⏱ 3 days ago</span>
-            </div>
-
-            <p class="desc">{{ $job->description }}</p>
-
-            <h3 class="salary">
-                {{ $job->salary }} <span>/Monthly</span>
-            </h3>
-
-        </div>
-
+                        <div class="salary">
+                            ₹{{ $job->salary }}
+                        </div>
+                    </div>
+          </div>
+        @endforeach
     </div>
-    @endforeach
-</div>
-</div>
+</section>
 
 @endsection
 
@@ -108,6 +105,8 @@
 
 /* JOB CARD (FIXED FLEX ISSUE) */
 .job-card {
+      position: relative;
+
     width: 100%;
     height: 100%;
     display: flex;
@@ -118,7 +117,7 @@
     border-radius: 12px;
 
     padding: 20px;
-
+    padding-right: 60px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     transition: 0.3s;
 }
@@ -142,9 +141,12 @@
 
 /* LOGO */
 .company-logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 8px;
+    position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;   /* size adjust kar sakti ho */
+  height: 40px;
+  object-fit: contain;
 }
 
 /* COMPANY INFO */

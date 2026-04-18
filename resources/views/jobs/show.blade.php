@@ -1,6 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
+<!--pop up code -->
+
+<div id="thankPopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
+  
+  <div style="background:white; width:320px; padding:20px; border-radius:8px; text-align:center; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:black;">
+    
+    <span onclick="closeThankPopup()" style="position:absolute; top:10px; right:15px; cursor:pointer;">&times;</span>
+
+    <h3>Thank You 🎉</h3>
+    <p>Your application has been submitted successfully.</p>
+
+
+     <a href="https://wa.me/919876543210" target="_blank"
+       style="display:block; margin-top:15px; background:#25D366; color:white; padding:10px; border-radius:5px; text-decoration:none;">
+        Chat on WhatsApp
+    </a>
+
+    <!-- Community Join Button -->
+    <a href="https://chat.whatsapp.com/H4PArHFPz8L0W4L3msdTKP" target="_blank"
+       style="display:block; margin-top:10px; background:#661e92; color:white; padding:10px; border-radius:5px; text-decoration:none;">
+        Join Community
+    </a>
+
+
+
+  </div>
+</div>
+
+
 <div class="bg-gray-100 min-h-screen py-10">
     <div class="max-w-7xl mx-auto px-6">
         <div class="flex flex-wrap lg:flex-nowrap -mx-4">
@@ -51,7 +80,7 @@
             </div>
 
             <div class="w-full lg:w-1/3 px-4">
-                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-600 sticky top-10">
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 custom-border sticky top-10">
                     <h3 class="text-xl font-bold text-gray-900 mb-4">Apply Now</h3>
                     
                     @if(session('success'))
@@ -94,7 +123,7 @@
                             placeholder="Why are you a good fit?"></textarea>                        
                         </div>
 
-                        <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 shadow-lg transform active:scale-95 transition duration-200">
+                        <button type="submit" class="w-full text-white font-bold submit-btn py-3 rounded-lg hover:bg-blue-700 shadow-lg transform active:scale-95 transition duration-200">
                             Submit Application
                         </button>
                     </form>
@@ -109,3 +138,17 @@
     </div>
 </div>
 @endsection
+
+<script>
+function closeThankPopup() {
+    document.getElementById('thankPopup').style.display = 'none';
+}
+</script>
+
+@if(session('success'))
+<script>
+    window.onload = function() {
+        document.getElementById('thankPopup').style.display = 'block';
+    }
+</script>
+@endif

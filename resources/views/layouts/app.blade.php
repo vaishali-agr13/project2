@@ -19,16 +19,26 @@
   
   <!-- LEFT: SOCIAL MEDIA -->
   <div class="top-left">
-    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.facebook.com/share/1AjicM8ZoD"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://x.com/"><i class="fa-brands fa-twitter"></i></a>
+    <a href="https://www.linkedin.com"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="https://www.instagram.com/rjindiajobs?utm_source=qr&igsh=MWpxZTd2aGc3YTk1ZA=="><i class="fa-brands fa-instagram"></i></a>
   </div>
 
   <!-- RIGHT: CONTACT INFO -->
   <div class="top-right">
-    <span>📞 +91 9876543210</span>
-    <span>✉️ support@jobportal.com</span>
+    <span>
+      <a href="https://wa.me/919876543210" target="_blank">
+           📞 +91 9876543210
+      </a>
+     </span>
+    <span>
+
+    <a href="mailto:example@jobportal.com">
+        ✉️ support@jobportal.com
+    </a>
+
+    </span>
   </div>
 
 </div>
@@ -37,7 +47,9 @@
   
   <!-- Logo -->
   <h1 class="text-2xl font-bold text-white w-full md:w-auto" style="color:black;">
-    JobPortal
+    <a href="/">
+        <img src="{{ asset('images/company-logo.png') }}" class="company_logo" alt="Resume Tips">
+    </a>
   </h1>
 
   <!-- Menu -->
@@ -45,6 +57,9 @@
     <a href="/" class="hover:text-blue-400"><i class="fa-solid fa-house"></i></a>
     <a href="/find-jobs" class="hover:text-blue-400">Find a Job</a>
     <a href="#" class="hover:text-blue-400">Companies</a>
+    <a href="#" class="hover:text-blue-400">About</a>
+    <a href="#" class="hover:text-blue-400">Services</a>
+    <a href="#" class="hover:text-blue-400">Privacy Policy</a>
     <!-- <a href="/admin/login" class="hover:text-blue-400">Login</a> -->
   </nav>
 
@@ -92,9 +107,9 @@
       <p>✉️ support@jobportal.com</p>
 
       <div class="footer-social">
-        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.linkedin.com/"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://x.com/"><i class="fa-brands fa-twitter"></i></a>
       </div>
     </div>
 
