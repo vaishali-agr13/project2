@@ -177,7 +177,7 @@
                         </div>
 
                         <div class="salary">
-                            ₹{{ $job->salary }}
+                            ₹{{ $job->salary_min }} - ₹{{ $job->salary_max }} 
                         </div>
                     </div>
 

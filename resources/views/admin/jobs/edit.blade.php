@@ -41,8 +41,13 @@
             </div>
 
             <div class="form-group">
-                <label>Salary</label>
-                <input type="text" name="salary" class="form-control" value="{{ $job->salary }}">
+                <label>Min Salary</label>
+                <input type="text" name="salary_min" class="form-control" value="{{ $job->salary_min }}">
+            </div>
+
+            <div class="form-group">
+                <label>Max Salary</label>
+                <input type="text" name="salary_max" class="form-control" value="{{ $job->salary_max }}">
             </div>
 
             <div class="form-group">

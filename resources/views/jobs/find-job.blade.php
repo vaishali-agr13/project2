@@ -10,42 +10,42 @@
         <form action="{{ url('/find-jobs') }}" method="GET">
                            
                 <!-- Search Box -->
-        <div class="search-box">
-        
-            <div class="search-item">
-                <span>🔍</span>
-                <input type="text" name="title" value="{{ request('title') }}" placeholder="Job title">
-            </div>
+          <div class="search-box">
+          
+              <div class="search-item">
+                  <span>🔍</span>
+                  <input type="text" name="title" value="{{ request('title') }}" placeholder="Job title">
+              </div>
 
-            <div class="divider"></div>
+              <div class="divider"></div>
 
-            <div class="search-item">
-                <span>📍</span>
-                <input type="text" name="location" value="{{ request('location') }}" placeholder="Location" value="">
-            </div>
+              <div class="search-item">
+                  <span>📍</span>
+                  <input type="text" name="location" value="{{ request('location') }}" placeholder="Location" value="">
+              </div>
 
-            <div class="divider"></div>
+              <div class="divider"></div>
 
-            <div class="search-item">
-                <select  name="category">
-                    <option value="" disabled selected>
-                          Select Category
-                      </option>
-
-                     @foreach($categories as $category)
-                        <option value="{{ $category->name }}"
-                              {{ request('category') == $category->name ? 'selected' : '' }}>
-                             {{ $category->name }}
+              <div class="search-item">
+                  <select  name="category">
+                      <option value="" disabled selected>
+                            Select Category
                         </option>
-                
-                    @endforeach
 
-                </select>
-            </div>
+                      @foreach($categories as $category)
+                          <option value="{{ $category->name }}"
+                                {{ request('category') == $category->name ? 'selected' : '' }}>
+                              {{ $category->name }}
+                          </option>
+                  
+                      @endforeach
 
-            <button type="submit">Search</button>
-            
-        </div>
+                  </select>
+              </div>
+
+              <button type="submit">Search</button>
+              
+          </div>
         </form>
   <!-- Categories -->
   <div class="categories">
@@ -69,47 +69,163 @@
 </div>
 
 <div class="jobs-page">
-  <!-- Left Sidebar -->
+
+  <!-- LEFT SIDEBAR (SEPARATE FORM) -->
+  <aside class="filters">
+
+    <form method="GET" action="{{ url('/find-jobs') }}">
+
+      <h3>All Filters</h3>
+
+      <!-- Job Type -->
+      <div class="filter-group">
+        <h4>Job Type</h4>
+        <label>
+          <input type="checkbox" name="job_type[]" value="Full-Time"
+          {{ in_array('Full-Time', request('job_type', [])) ? 'checked' : '' }}>
+         <span>Full Time</span>
+        </label>
+
+        <label>
+          <input type="checkbox" name="job_type[]" value="Part-Time"
+          {{ in_array('Part-Time', request('job_type', [])) ? 'checked' : '' }}>
+          <span>Part Time</span>
+        </label>
+
+        
+      </div>
+
+      <!-- Location -->
+      <div class="filter-group">
+        <h4>Location</h4>
+        <label>
+          <input type="checkbox" name="locations[]" value="Delhi"
+          {{ in_array('Delhi', request('locations', [])) ? 'checked' : '' }}>
+          <span>Delhi</span>
+        </label>
+
+        <label>
+          <input type="checkbox" name="locations[]" value="Mumbai"
+          {{ in_array('Mumbai', request('locations', [])) ? 'checked' : '' }}>
+        <span>Mumbai</span>
+        </label>
+
+         <label>
+          <input type="checkbox" name="locations[]" value="Pune"
+          {{ in_array('Pune', request('locations', [])) ? 'checked' : '' }}>
+          <span>Pune</span>
+        </label>
+         <label>
+          <input type="checkbox" name="locations[]" value="Hyderabad"
+          {{ in_array('Hyderabad', request('locations', [])) ? 'checked' : '' }}>
+          <span>Hyderabad</span>
+        </label>
+         <label>
+          <input type="checkbox" name="locations[]" value="Noida"
+          {{ in_array('Noida', request('locations', [])) ? 'checked' : '' }}>
+          <span>Noida</span>
+        </label>
+
+         <label>
+          <input type="checkbox" name="locations[]" value="Bengaluru"
+          {{ in_array('Bengaluru', request('locations', [])) ? 'checked' : '' }}>
+          <span>Bengaluru</span>
+        </label>
+
+        
+         <label>
+          <input type="checkbox" name="locations[]" value="Indore"
+          {{ in_array('Indore', request('locations', [])) ? 'checked' : '' }}>
+          <span>Indore</span>
+        </label>
+        
+         <label>
+          <input type="checkbox" name="locations[]" value="Bhopal"
+          {{ in_array('Bhopal', request('locations', [])) ? 'checked' : '' }}>
+          <span>Bhopal</span>
+        </label>
+
+      </div>
+
+      <!-- Salary -->
+      <div class="filter-group">
+        <h4>Salary</h4>
+        <label>
+          <input type="radio" name="salary" value="0-3"
+          {{ request('salary') == '0-3' ? 'checked' : '' }}>
+          <span>0-3 LPA</span>
+        </label>
+
+        <label>
+          <input type="radio" name="salary" value="3-6"
+          {{ request('salary') == '3-6' ? 'checked' : '' }}>
+         <span>3-6 LPA</span>
+        </label>
+        <label>
+          <input type="radio" name="salary" value="6-10"
+          {{ request('salary') == '6-10' ? 'checked' : '' }}>
+         <span>6-10 LPA</span>
+        </label>
+        <label>
+          <input type="radio" name="salary" value="10-15"
+          {{ request('salary') == '10-15' ? 'checked' : '' }}>
+         <span>10-15 LPA</span>
+        </label>
+
+      </div>
+
+      <!-- Buttons -->
+      <button type="submit" class="filter-btn">Apply Filters</button>
+
+      <a href="{{ url('/find-jobs') }}" class="clear-btn">Clear All</a>
+
+    </form>
+
+  </aside>
 
 
-  
-  <!-- Right Job Listings -->
+  <!-- RIGHT JOB LIST -->
   <main class="job-listing">
 
-@foreach($jobs as $job)
-    <div class="job-card">
-      <div class="job-header">
-          <img src="{{ asset('images/company-default-logo.svg') }}" class="company-logo">        
-        <div class="job-company">
-          <h3>{{$job->company_name}}</h3>
-          <p>{{$job->location}}</p>
+    @forelse($jobs as $job)
+      <div class="job-card">
+
+        <div class="job-header">
+          <img src="{{ asset('images/company-default-logo.svg') }}" class="company-logo">
+
+          <div class="job-company">
+            <h3>{{$job->company_name}}</h3>
+            <p>{{$job->location}}</p>
+          </div>
         </div>
-      </div>
 
-      <div class="job-title">
-        <h2>{{$job->title}}</h2>
-        <p>{{$job->job_type}} • 1 year ago</p>
-      </div>
+        <div class="job-title">
+          <h2>{{$job->title}}</h2>
+          <p>{{$job->job_type}} • 1 year ago</p>
+        </div>
 
-      <div class="job-description">
-        {{$job->description}} 
-      </div>
+        <div class="job-description">
+          {{$job->description}}
+        </div>
 
-      <div class="job-footer">
-        <p class="salary">{{$job->salary}} </p>
-        <a href="{{ url('/jobs/'.$job->id) }}" class="apply-btn">
+        <div class="job-footer">
+          <p class="salary">₹{{ $job->salary_min }} - ₹{{ $job->salary_max }} </p>
+
+          <a href="{{ url('/jobs/'.$job->id) }}" class="apply-btn">
             View Details
-        </a>
-       
-      </div>s
+          </a>
+        </div>
+
+      </div>
+    @empty
+    <div style="width:100%; text-align:center; padding:40px;">
+      <h2 style="color:#444;">No Jobs Found</h2>
+      <p style="color:gray;">Try changing filters or search keyword</p>
     </div>
+   @endforelse
 
-@endforeach
-
-     
-
-    <!-- More job cards here -->
   </main>
+
 </div>
 
 @endsection
@@ -262,17 +378,52 @@
   display: flex;
   gap: 20px;
   padding: 20px;
+    align-items: flex-start;   /* 🔥 YE ADD KARO */
+
 }
 
 /* Sidebar */
 .filters {
-  width: 250px;
-  flex-shrink: 0;
+ width: 250px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  height: fit-content;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 20px;
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filter-group h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.filter-group label {
+   display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
 }
 
 .filters h3,
 .filters h4 {
   color: #1a3d7c;
+}
+
+.filter-group input {
+  margin: 0;
+}
+
+.filter-group input[type="checkbox"],
+.filter-group input[type="radio"] {
+  width: 16px;
+  height: 16px;
 }
 
 .filters input {
@@ -296,10 +447,11 @@
 /* Job Listing */
 .job-listing {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  /* 🔥 2 cards per row */
   gap: 20px;
   margin: 20px;
+
 }
 
 /* Job Card */
@@ -407,4 +559,22 @@
   flex: 1;
 }
 
+.filter-btn {
+  width: 100%;
+  padding: 10px;
+  background: #1a3d7c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.clear-btn {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  color: red;
+  text-decoration: none;
+}
     </style>

@@ -92,10 +92,19 @@
                         {{-- Salary --}}
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="salary">Salary Range</label>
-                                <input type="text" name="salary" class="form-control" placeholder="e.g. 5 LPA - 8 LPA" value="{{ old('salary') }}">
+                                <label for="salary">Salary Min</label>
+                                <input type="text" name="salary_min" class="form-control" placeholder="e.g. 50000" value="{{ old('salary_min') }}">
                             </div>
                         </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="salary">Salary Max</label>
+                                <input type="text" name="salary_max" class="form-control" placeholder="e.g. 600000 "value="{{ old('salary_max') }}">
+                            </div>
+                        </div>
+
 
                         {{-- Experience (Naya Field) --}}
                         <div class="col-md-4">
@@ -117,10 +126,8 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        {{-- Status --}}
+                         {{-- Status --}}
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="status">Status</label>
@@ -130,6 +137,10 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row">
+                       
                     </div>
 
                     {{-- Description --}}

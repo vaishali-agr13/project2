@@ -46,7 +46,8 @@ class JobController extends Controller
             'category' => $request->category, // tumhara column name
             'company_name' => $request->company_name,
             'location' => $request->location,
-            'salary' => $request->salary,
+            'salary_min' => $request->salary_min,
+            'salary_max' => $request->salary_max,
             'experience' => $request->experience,
             'description' => $request->description,
             'job_type' => $request->job_type,
@@ -72,7 +73,8 @@ class JobController extends Controller
             'category' => 'required',
             'description' => 'required',
             'location' => 'required',
-            'salary' => 'nullable',
+            'salary_min' => 'nullable',
+            'salary_max' => 'nullable',
             'company_name' => 'nullable',
             'experience' => 'required', // Isse mandatory banaya hai
         ]);
@@ -166,6 +168,34 @@ class JobController extends Controller
                 }
 
             });
+
+
+
+            // Job Type
+            if ($request->has('job_type')) {
+                $query->whereIn('job_type', $request->job_type);
+            }
+
+            // Location (sidebar)
+           if ($request->has('locations')) {
+                $query->whereIn('location', $request->locations);
+            }
+
+            // Salary
+            if ($request->filled('salary')) {
+
+                    $ranges = [
+                        '0-3' => [0, 300000],
+                        '3-6' => [300000, 600000],
+                    ];
+
+                    if (isset($ranges[$request->salary])) {
+                        [$min, $max] = $ranges[$request->salary];
+
+                        $query->where('salary_min', '>=', $min)
+                            ->where('salary_max', '<=', $max);
+                    }
+             }
 
             $jobs = $query->latest()->get();
 

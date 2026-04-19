@@ -172,6 +172,14 @@ input::placeholder {
   height: 100%; /* important */
 }
 
+.filter-group label span {
+  display: inline !important;
+  color: #000 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-size: 14px !important;
+}
+
 
 .bottom-row {
   display: flex;
@@ -206,11 +214,7 @@ input::placeholder {
   background: #661e92;
   opacity: 1;
 }
-.company_logo{
-   height: 50px;   /* adjust 40–60px as needed */
-  width: auto;
-  object-fit: contain;
-}
+
 
 .job-card h4 {
   font-size: 18px;
@@ -522,6 +526,7 @@ input::placeholder {
 
 /* LEFT SIDE */
 .top-left {
+  margin-left: -23px !important;
   display: flex;
   gap: 15px;
 }
@@ -685,7 +690,7 @@ header nav a {
 }
 
 .company_logo {
-  
+  padding-left:28px;
 height: 50px;   /* try 45–60px */
   width: auto;
   object-fit: contain;

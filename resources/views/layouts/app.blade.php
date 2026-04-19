@@ -18,7 +18,7 @@
 <div class="top-header">
   
   <!-- LEFT: SOCIAL MEDIA -->
-  <div class="top-left">
+  <div class="top-left" style="margin-left:-23px;">
     <a href="https://www.facebook.com/share/1AjicM8ZoD"><i class="fa-brands fa-facebook-f"></i></a>
     <a href="https://x.com/"><i class="fa-brands fa-twitter"></i></a>
     <a href="https://www.linkedin.com"><i class="fa-brands fa-linkedin-in"></i></a>
