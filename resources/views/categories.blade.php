@@ -3,6 +3,9 @@
 @section('content')
 
 <div class="hero">
+    <div class="category-icon">
+              <i class="fas {{ !empty($category->icon) ? $category->icon : 'fa-folder' }}"></i>
+    </div>
     <h1>{{ $category->name }}</h1>
     <p>{{ $category->description }}</p>
 </div>
@@ -33,8 +36,21 @@
                             </a>
                         </div>
 
+                         @php
+                           if (!function_exists('formatSalary')) {
+                                function formatSalary($amount) {
+                                    if ($amount >= 100000) {
+                                        return round($amount / 100000) . ' LPA';
+                                    } elseif ($amount >= 1000) {
+                                        return round($amount / 1000) . 'k';
+                                    }
+                                    return $amount;
+                                }   
+                            }
+                        @endphp
+
                         <div class="salary">
-                            ₹{{ $job->salary_min }} - ₹{{ $job->salary_max }} 
+                           ₹ {{ formatSalary($job->salary_min) }} - ₹{{ formatSalary($job->salary_max) }} 
                         </div>
                     </div>
           </div>
@@ -63,6 +79,7 @@
 }
 
 .hero h1 {
+    font-weight:700;
     font-size: 36px;
     margin: 0;
 }
@@ -72,6 +89,8 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
+
+
 
 /* tablet */
 @media (max-width: 992px) {
@@ -191,4 +210,6 @@
 .salary span {
     font-size: 14px;
     color: #666;
-}   </style>
+}   
+
+</style>

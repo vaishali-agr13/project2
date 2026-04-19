@@ -176,8 +176,21 @@
                             </a>
                         </div>
 
+                        @php
+                           if (!function_exists('formatSalary')) {
+                                function formatSalary($amount) {
+                                    if ($amount >= 100000) {
+                                        return round($amount / 100000) . ' LPA';
+                                    } elseif ($amount >= 1000) {
+                                        return round($amount / 1000) . 'k';
+                                    }
+                                    return $amount;
+                                }   
+                            }
+                        @endphp
+
                         <div class="salary">
-                            ₹{{ $job->salary_min }} - ₹{{ $job->salary_max }} 
+                            ₹ {{ formatSalary($job->salary_min) }} - ₹{{ formatSalary($job->salary_max) }}
                         </div>
                     </div>
 
@@ -197,18 +210,23 @@
   <p class="counter-subtext">Trusted by thousands of job seekers and companies</p>
     <div class="counter-wrapper">
           <div class="counter-box">
-            <h2>20+</h2>
+            <h2>9350+</h2>
             <p>Jobs Available</p>
           </div>
 
           <div class="counter-box">
-            <h2>20+</h2>
+            <h2>1670+</h2>
             <p>Companies</p>
           </div>
 
           <div class="counter-box">
-            <h2>20+</h2>
+            <h2>27000+</h2>
             <p>Candidates</p>
+          </div>
+
+          <div class="counter-box">
+            <h2>7121+</h2>
+            <p>Jobs Placements </p>
           </div>
      </div>
 </section>
@@ -232,7 +250,7 @@
 
     <!-- RIGHT IMAGE -->
     <div class="job-alert-right">
-      <img src="{{ asset('images/job-alert.webp') }}" alt="job alert">
+      <img src="{{ asset('images/job-alert.png') }}" alt="job alert">
     </div>
 
   </div>
@@ -260,6 +278,41 @@
       <h4>Microsoft</h4>
       <p style="color:grey">UI/UX Designer</p>
     </div>
+    <div class="card category-card">
+      <img src="{{ asset('images/vipdigitalhub.jpg') }}" class="company-logo">
+      <h4>VIP DIgital Hub</h4>
+      <p style="color:grey">Laravel Developer</p>
+    </div>
+    <div class="card category-card">
+      <img src="{{ asset('images/Tech_Mahindra-Logo.png') }}" class="company-logo">
+      <h4>Tech Mahindra</h4>
+      <p style="color:grey">Java Developer</p>
+    </div>
+    <div class="card category-card">
+      <img src="{{ asset('images/softobiz.jpg') }}" class="company-logo">
+      <h4>Softobiz Technology</h4>
+      <p style="color:grey">Python Developerr</p>
+    </div>
+    <div class="card category-card">
+      <img src="{{ asset('images/impetus.png') }}" class="company-logo">
+      <h4>Impetus</h4>
+      <p style="color:grey">Angular Developer</p>
+    </div>
+    <div class="card category-card">
+      <img src="{{ asset('images/cis.jpg') }}" class="company-logo">
+      <h4>CIS</h4>
+      <p style="color:grey">Website Designer</p>
+    </div>
+    <div class="card category-card">
+      <img src="{{ asset('images/synapseindia.jpeg') }}" class="company-logo">
+      <h4>Synapse India</h4>
+      <p style="color:grey">Mern Stack Developer</p>
+    </div><div class="card category-card">
+      <img src="{{ asset('images/ondoor.png') }}" class="company-logo">
+      <h4>Ondoor Concepts</h4>
+      <p style="color:grey">Azure Developer</p>
+    </div>
+
   </div>
 </section>
 
@@ -288,6 +341,55 @@
         <h4>Apply & Get Hired</h4>
         <p>Apply to jobs and connect with employers to land your dream role.</p>
       </div>
+
+  </div>
+</section>
+
+
+<section class="reviews-section">
+  <h2>What Candidates Say</h2>
+
+  <div class="reviews-container">
+
+    <div class="review-card">
+      <img src="https://i.pravatar.cc/80?img=1" alt="user">
+      <h4>Riya Sharma</h4>
+      <p class="role">Frontend Developer</p>
+      <p class="review-text">
+        "This platform helped me land my first job within 2 weeks. The process was smooth and easy!"
+      </p>
+      <div class="stars">★★★★★</div>
+    </div>
+
+    <div class="review-card">
+      <img src="https://i.pravatar.cc/80?img=2" alt="user">
+      <h4>Aman Verma</h4>
+      <p class="role">Backend Developer</p>
+      <p class="review-text">
+        "Great experience! The job listings are genuine and updated regularly."
+      </p>
+      <div class="stars">★★★★☆</div>
+    </div>
+
+    <div class="review-card">
+      <img src="https://i.pravatar.cc/80?img=3" alt="user">
+      <h4>Neha Gupta</h4>
+      <p class="role">UI/UX Designer</p>
+      <p class="review-text">
+        "Loved the UI and filters. Found a perfect remote job easily!"
+      </p>
+      <div class="stars">★★★★★</div>
+    </div>
+
+    <div class="review-card">
+      <img src="https://i.pravatar.cc/80?img=3" alt="user">
+      <h4>Kirti Agrawal</h4>
+      <p class="role">Java Developer</p>
+      <p class="review-text">
+        "Loved the UI and filters. Found a perfect remote job easily!"
+      </p>
+      <div class="stars">★★★★★</div>
+    </div>
 
   </div>
 </section>

@@ -208,8 +208,21 @@
           {{$job->description}}
         </div>
 
+        @php
+              if (!function_exists('formatSalary')) {
+                  function formatSalary($amount) {
+                      if ($amount >= 100000) {
+                          return round($amount / 100000) . ' LPA';
+                      } elseif ($amount >= 1000) {
+                          return round($amount / 1000) . 'k';
+                      }
+                      return $amount;
+                  }   
+              }
+        @endphp
+
         <div class="job-footer">
-          <p class="salary">₹{{ $job->salary_min }} - ₹{{ $job->salary_max }} </p>
+          <p class="salary">₹ {{ formatSalary($job->salary_min) }} - ₹{{ formatSalary($job->salary_max) }} </p>
 
           <a href="{{ url('/jobs/'.$job->id) }}" class="apply-btn">
             View Details
@@ -562,7 +575,7 @@
 .filter-btn {
   width: 100%;
   padding: 10px;
-  background: #1a3d7c;
+  background: #6c1e96;
   color: white;
   border: none;
   border-radius: 6px;

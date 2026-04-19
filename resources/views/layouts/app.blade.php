@@ -28,13 +28,13 @@
   <!-- RIGHT: CONTACT INFO -->
   <div class="top-right">
     <span>
-      <a href="https://wa.me/917000153244" target="_blank">
-           <i class="fa-brands fa-whatsapp"></i> +91 7000153244
+      <a href="https://wa.me/919039023534" target="_blank">
+           <i class="fa-brands fa-whatsapp"></i> +91 9039023534
       </a>
      </span>
     <span>
-       <a href="https://mail.google.com/mail/?view=cm&fs=1&to=support@jobportal.com" target="_blank">
-           <i class="fa-regular fa-envelope"></i> support@jobportal.com
+       <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@rjindiajobs.com" target="_blank">
+           <i class="fa-regular fa-envelope"></i> info@rjindiajobs.com
        </a>
     </span>
   </div>
@@ -72,7 +72,7 @@
 
     <!-- COLUMN 1 -->
     <div class="footer-col">
-      <h4>JobPortal</h4>
+      <img src="{{ asset('images/company-logo.png') }}"  class="company_logo"  alt="Resume Tips">
       <p>Find your dream job easily with thousands of opportunities from top companies.</p>
     </div>
 
@@ -99,13 +99,13 @@
     <!-- COLUMN 4 -->
     <div class="footer-col">
       <h5>Contact</h5>
-      <p> <a href="https://wa.me/917000153244" target="_blank">
-           <i class="fa-brands fa-whatsapp"></i> +91 7000153244
+      <p> <a href="https://wa.me/919039023534" target="_blank">
+           <i class="fa-brands fa-whatsapp"></i> +91 9039023534
           </a>
       </p>
       <p>
-         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=support@jobportal.com" target="_blank">
-           <i class="fa-regular fa-envelope"></i> support@jobportal.com
+         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@rjindiajobs.com" target="_blank">
+           <i class="fa-regular fa-envelope"></i>  info@rjindiajobs.com
          </a>
       </p>
 
