@@ -231,10 +231,9 @@
      </div>
 </section>
 
-<section class="section">
+<!-- <section class="section">
   <div class="job-alert-container">
 
-    <!-- LEFT CONTENT -->
     <div class="job-alert-left">
       <h2>Never miss out <span style="color: #661e92">on the latest career</span> opportunities</h2>
       
@@ -248,9 +247,49 @@
       </div>
     </div>
 
-    <!-- RIGHT IMAGE -->
-    <div class="job-alert-right">
+\    <div class="job-alert-right">
       <img src="{{ asset('images/job-alert.png') }}" alt="job alert">
+    </div>
+
+  </div>
+</section> -->
+
+
+
+<!-- 🔹 WHATSAPP COMMUNITY SECTION -->
+<section class="py-16 bg-purple-700 text-white">
+  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
+
+    <!-- LEFT CONTENT -->
+    <div>
+      <h2 class="text-3xl font-bold mb-4">Join Our Community 🚀</h2>
+      <p class="text-purple-100 mb-6">
+        Stay updated with the latest job openings, internships, and hiring alerts.  
+        Join our WhatsApp community and never miss an opportunity.
+      </p>
+
+      <ul class="space-y-2 mb-6 text-purple-100">
+        <li>✔ Daily Job Updates</li>
+        <li>✔ Internship Alerts</li>
+        <li>✔ Direct Hiring Notifications</li>
+      </ul>
+
+      <!-- BUTTON -->
+      <a href="https://chat.whatsapp.com/YOUR-LINK-HERE" target="_blank"
+         class="inline-block bg-white text-purple-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition">
+        Join WhatsApp Community
+      </a>
+
+      <!-- CONTACT -->
+      <p class="mt-4 text-sm text-purple-200">
+        📞 Contact: +91 9039023534
+      </p>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div>
+      <img src="{{ asset('images/whatsapp-community.png') }}" 
+           class="w-full rounded-2xl shadow-lg">
     </div>
 
   </div>
