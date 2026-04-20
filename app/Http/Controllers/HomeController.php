@@ -40,7 +40,8 @@ class HomeController extends Controller
 
     public function companies()
     { 
-         return view('company');
+         $categories = Category::all();
+         return view('company', compact('categories'));
     }
 
     

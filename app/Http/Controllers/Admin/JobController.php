@@ -46,12 +46,14 @@ class JobController extends Controller
             'category' => $request->category, // tumhara column name
             'company_name' => $request->company_name,
             'location' => $request->location,
+            'company_email' => $request->company_email,
             'salary_min' => $request->salary_min,
             'salary_max' => $request->salary_max,
             'experience' => $request->experience,
             'description' => $request->description,
             'job_type' => $request->job_type,
             'status' => $request->status,
+            'posted_by_type'=>$request->posted_by_type,
         ]);
 
         return redirect()->route('jobs.index')->with('success', 'Job Updated Successfully');
@@ -67,6 +69,7 @@ class JobController extends Controller
 
     public function store(Request $request)
     {
+
         // 1. Data Validate karein
         $data = $request->validate([
             'title' => 'required|max:255',
@@ -76,14 +79,20 @@ class JobController extends Controller
             'salary_min' => 'nullable',
             'salary_max' => 'nullable',
             'company_name' => 'nullable',
+            'company_email' => 'nullable',
             'experience' => 'required', // Isse mandatory banaya hai
+             'posted_by_type' => 'required'  ,
         ]);
 
         // 2. Database mein save karein
         Job::create($data);
+        if ($request->posted_by_type == 'admin') {
+            return redirect()->route('admin.jobs.create')->with('success', 'Job Successfully Post ho gayi hai!');
 
-        // 3. Wapas bhej dein message ke saath
-        return redirect()->route('admin.jobs.create')->with('success', 'Job Successfully Post ho gayi hai!');
+        }
+        else {
+            return back()->with('success', 'Job posted successfully');
+        }
     }
 
     public function applications()

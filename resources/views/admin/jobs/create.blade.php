@@ -79,13 +79,15 @@
                             </div>
                         </div>
 
-                        {{-- Location --}}
-                        <div class="col-md-6">
+                        {{-- company email --}}
+
+                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="location">Location</label>
-                                <input type="text" name="location" class="form-control" placeholder="e.g. Indore, Remote, etc." value="{{ old('location') }}" required>
+                                <label for="company_name">Company Email</label>
+                                <input type="text" name="company_email" class="form-control" placeholder="e.g. Google" value="{{ old('company_email') }}" required>
                             </div>
                         </div>
+                       
                     </div>
 
                     <div class="row">
@@ -137,6 +139,13 @@
                                 </select>
                             </div>
                         </div>
+
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" name="location" class="form-control" placeholder="e.g. Indore, Remote, etc." value="{{ old('location') }}" required>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -149,6 +158,9 @@
                         <textarea name="description" class="form-control" rows="5" placeholder="Enter full job requirements..." required>{{ old('description') }}</textarea>
                     </div>
                 </div>
+
+                <input type="hidden" name="posted_by_type" value="admin">
+
 
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary px-4">Publish Job</button>

@@ -36,6 +36,11 @@
             </div>
 
             <div class="form-group">
+                <label>Company Email</label>
+                <input type="text" name="company_email" class="form-control" value="{{ $job->company_email }}">
+            </div>
+
+            <div class="form-group">
                 <label>Location</label>
                 <input type="text" name="location" class="form-control" value="{{ $job->location }}">
             </div>
@@ -75,6 +80,9 @@
                     <option value="0" {{ $job->status == 0 ? 'selected' : '' }}>Inactive</option>
                 </select>
             </div>
+
+            <input type="hidden" name="posted_by_type" value="admin">
+
 
             <button class="btn btn-primary mt-3">Update Job</button>
         </form>

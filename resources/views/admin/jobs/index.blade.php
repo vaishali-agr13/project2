@@ -22,6 +22,7 @@
                     <th>Title</th>
                     <th>Company</th>
                     <th>Category</th>
+                    <th>Posted By</th>
                     <th>Type</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -34,6 +35,7 @@
                     <td>{{ $job->title }}</td>
                     <td>{{ $job->company_name }}</td>
                     <td>{{ $job->categoryData->name ?? 'N/A' }}</td>
+                    <td>{{ $job->posted_by_type ?? 'N/A' }}</td>
                     <td><span class="badge badge-info">{{ $job->job_type }}</span></td>
                     <td>
                         @if($job->status == 1)

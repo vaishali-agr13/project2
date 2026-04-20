@@ -40,6 +40,7 @@ Route::prefix('admin')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories', function () { return view('categories'); });
 Route::get('/categories/{slug}', [CategoryController::class, 'show']);
+Route::post('/jobs/store', [JobController::class, 'store']);
 
 Route::get('/find-jobs', [JobController::class, 'find_job']);
 Route::get('/about', [HomeController::class, 'about']);
