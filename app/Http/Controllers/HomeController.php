@@ -38,5 +38,11 @@ class HomeController extends Controller
          return view('privacy_policy');
     }
 
+    public function companies()
+    { 
+         return view('company');
+    }
+
+    
 
 }
