@@ -77,7 +77,15 @@ class CategoryController extends Controller
 
         public function show($id)
         {
-            $category = Category::with('jobs')->findOrFail($id);
+            $category = Category::with(['jobs' => function ($query) {
+                    $query->where(function ($q) {
+                        $q->where('posted_by_type', 'admin')
+                        ->orWhere(function ($q2) {
+                            $q2->where('posted_by_type', 'company')
+                                ->where('approval_status', 'approved');
+                        });
+                    })->latest();
+                }])->findOrFail($id);
 
             return view('categories', compact('category'));
         }

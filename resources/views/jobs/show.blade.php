@@ -49,7 +49,7 @@
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 border-t border-b py-6">
                         <div>
                             <p class="text-gray-500 text-sm">Salary</p>
-                            <p class="font-bold text-gray-800">{{ $job->salary }}</p>
+                            <p class="font-bold text-gray-800">{{ $job->salary_min }} - {{ $job->salary_max }}</p>
                         </div>
                         <div>
                             <p class="text-gray-500 text-sm">Category</p>

@@ -22,7 +22,8 @@ class Job extends Model
         'description',
         'job_type',
         'status',
-        'experience'
+        'experience',
+        'approval_status',
     ];
 
     public function categoryData()

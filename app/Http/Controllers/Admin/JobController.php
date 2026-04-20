@@ -148,15 +148,45 @@ class JobController extends Controller
 
     public function find_job(Request $request)
         {
-           
-           $categories = Category::with(['jobs' => function ($query) {
-                $query->latest();
-            }])
-            ->withCount('jobs')
-            ->get();
+            // $categories = Category::with(['jobs' => function ($query) {
+            //         $query->latest();
+            //     }])
+            //     ->withCount('jobs')
+            //     ->get();
 
+
+
+            $categories = Category::with(['jobs' => function ($query) {
+                    $query->where(function ($q) {
+                        $q->where('posted_by_type', 'admin')
+                        ->orWhere(function ($q2) {
+                            $q2->where('posted_by_type', 'company')
+                                ->where('approval_status', 'approved');
+                        });
+                    })->latest();
+                }])
+                ->withCount(['jobs' => function ($query) {
+                    $query->where(function ($q) {
+                        $q->where('posted_by_type', 'admin')
+                        ->orWhere(function ($q2) {
+                            $q2->where('posted_by_type', 'company')
+                                ->where('approval_status', 'approved');
+                        });
+                    });
+                }])
+                ->get();
             $query = Job::with('categoryData');
 
+            // ✅ IMPORTANT: Admin + Company Approved Logic
+            $query->where(function ($q) {
+                $q->where('posted_by_type', 'admin')
+                ->orWhere(function ($q2) {
+                    $q2->where('posted_by_type', 'company')
+                        ->where('approval_status', 'approved');
+                });
+            });
+
+            // 🔍 Search Filters
             $query->where(function ($q) use ($request) {
 
                 // TITLE search
@@ -169,47 +199,63 @@ class JobController extends Controller
                     $q->where('location', 'like', "%{$request->location}%");
                 }
 
-                // CATEGORY search (relation)
+                // CATEGORY search
                 if ($request->filled('category')) {
                     $q->whereHas('categoryData', function ($cat) use ($request) {
                         $cat->where('name', 'like', "%{$request->category}%");
                     });
                 }
-
             });
-
-
 
             // Job Type
             if ($request->has('job_type')) {
                 $query->whereIn('job_type', $request->job_type);
             }
 
-            // Location (sidebar)
-           if ($request->has('locations')) {
+            // Sidebar Location
+            if ($request->has('locations')) {
                 $query->whereIn('location', $request->locations);
             }
 
-            // Salary
+            // Salary Filter
             if ($request->filled('salary')) {
 
-                    $ranges = [
-                        '0-3' => [0, 300000],
-                        '3-6' => [300000, 600000],
-                    ];
+                $ranges = [
+                    '0-3' => [0, 300000],
+                    '3-6' => [300000, 600000],
+                ];
 
-                    if (isset($ranges[$request->salary])) {
-                        [$min, $max] = $ranges[$request->salary];
+                if (isset($ranges[$request->salary])) {
+                    [$min, $max] = $ranges[$request->salary];
 
-                        $query->where('salary_min', '>=', $min)
-                            ->where('salary_max', '<=', $max);
-                    }
-             }
+                    $query->where('salary_min', '>=', $min)
+                        ->where('salary_max', '<=', $max);
+                }
+            }
 
             $jobs = $query->latest()->get();
 
             return view('jobs.find-job', compact('jobs', 'categories'));
+        }
 
-                    }
-        
+    public function updateStatus($id, $status)
+        {
+            // Valid status check (security + bug avoid)
+            if (!in_array($status, ['approved', 'rejected'])) {
+                return redirect()->back()->with('error', 'Invalid status');
+            }
+
+            $job = Job::find($id);
+
+            if (!$job) {
+                return redirect()->back()->with('error', 'Job not found');
+            }
+
+            // Update status
+            $job->approval_status = $status;
+            $job->save();
+
+            return redirect()->back()->with('success', 'Job status updated successfully');
+        }
+                
 }

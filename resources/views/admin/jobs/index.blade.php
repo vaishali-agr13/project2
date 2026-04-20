@@ -54,7 +54,38 @@
                             <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
                                 Delete
                             </button>
-                        </form>                    
+                        </form>   
+                        @if($job->posted_by_type == 'company')
+
+                                        @if($job->approval_status == 'pending')
+                                            <!-- Dropdown show hoga -->
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                                                    Action
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item text-success" 
+                                                    href="{{ route('job.status', [$job->id, 'approved']) }}">
+                                                        Approve
+                                                    </a>
+                                                    <a class="dropdown-item text-danger" 
+                                                    href="{{ route('job.status', [$job->id, 'rejected']) }}">
+                                                        Reject
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        @elseif($job->approval_status == 'approved')
+                                            <!-- Approved badge -->
+                                            <span class="badge badge-success">Approved</span>
+
+                                        @elseif($job->approval_status == 'rejected')
+                                            <!-- Rejected badge -->
+                                            <span class="badge badge-danger">Rejected</span>
+
+                                        @endif
+
+                        @endif
                     </td>
                 </tr>
                 @empty
