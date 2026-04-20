@@ -53,7 +53,7 @@ class JobController extends Controller
             'description' => $request->description,
             'job_type' => $request->job_type,
             'status' => $request->status,
-            'posted_by_type'=>$request->posted_by_type,
+            /*'posted_by_type'=>$request->posted_by_type,*/
         ]);
 
         return redirect()->route('jobs.index')->with('success', 'Job Updated Successfully');
