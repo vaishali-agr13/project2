@@ -58,7 +58,7 @@
     <a href="/about" class="hover:text-blue-400">About</a>
     <a href="/services" class="hover:text-blue-400">Services</a>
     <a href="/privacy-policy" class="hover:text-blue-400">Privacy Policy</a>
-    <!-- <a href="/admin/login" class="hover:text-blue-400">Login</a> -->
+    <a href="/admin/login" class="hover:text-blue-400">Login</a>
   </nav>
 
 </header>

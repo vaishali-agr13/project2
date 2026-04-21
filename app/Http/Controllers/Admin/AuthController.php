@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;   // ✅ required
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\JobController;
 
 class AuthController extends Controller
 {
@@ -13,23 +14,63 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+   public function login(Request $request)
     {
-      $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required'
+            ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->intended('admin/jobs/create');
-        }
+            if (Auth::attempt($request->only('email', 'password'))) {
 
-        return back()->with('error', 'Invalid credentials');
-    }
+                $request->session()->regenerate(); // ✅ yaha hona chahiye
+
+                $user = Auth::user();
+
+                // 🔹 ADMIN LOGIN
+                if ($user->role == 'admin') {
+                    return redirect()->intended('admin/jobs/create');
+                }
+
+                // 🔹 CANDIDATE LOGIN
+                if ($user->role == 'candidate') {
+
+                    $data = session('pending_apply');
+
+
+                    if ($data) {
+
+                        session()->forget('pending_apply');
+
+                        // 👉 JobController ka method call karo
+                        return app(JobController::class)
+                            ->storeApplicationFromLogin($data, $data['job_id']);
+                    }
+
+                    if($data){
+                       return redirect()->intended('/');
+                    }
+                    else {
+                        return redirect('/candidate/dashboard');
+                    }
+
+                    
+                }
+            }
+
+    return back()->with('error', 'Invalid credentials');
+}
 
     public function logout()
     {
         Auth::logout();
         return redirect('/admin/login');
+    }
+
+    
+
+    public function showCanddiateLogin()
+    {
+        return view('auth.login');
     }
 }

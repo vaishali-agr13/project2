@@ -309,14 +309,23 @@ return [
 
         [
             'text' => 'All Jobs',
-            'url'  => 'admin/jobs', // Aapka jobs list wala route
+            'url'  => 'admin/jobs',
             'icon' => 'fas fa-fw fa-briefcase',
+            'can'  => 'isAdmin',
+        ],
+
+        [
+            'text' => 'All Jobs',
+            'url'  => 'candidate/jobs',
+            'icon' => 'fas fa-fw fa-briefcase',
+            'can'  => 'isCandidate',
         ],
 
         [
             'text' => 'Post a Job',
             'url'  => 'admin/jobs/create',
             'icon' => 'fas fa-fw fa-plus-circle',
+              'can'  => 'isAdmin',
         ],
 
 
@@ -326,12 +335,23 @@ return [
             'icon' => 'fas fa-fw fa-users',
             'label'       => 4, // Optional: Aap yahan dynamic count bhi dikha sakte hain
             'label_color' => 'success',
+             'can'  => 'isAdmin',
+        ],
+
+        [
+            'text' => 'Applications',
+            'url'  => 'candidate/applications', // Jo route humne abhi banaya
+            'icon' => 'fas fa-fw fa-users',
+            'label'       => 4, // Optional: Aap yahan dynamic count bhi dikha sakte hain
+            'label_color' => 'success',
+             'can'  => 'isCandidate',
         ],
 
          [
             'text' => 'Categories',
             'url'  => 'admin/categories',
             'icon' => 'fas fa-list',
+            'can'  => 'isAdmin',
         ],
 
         // Navbar items:
@@ -351,18 +371,19 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
-        [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
+        // [
+        //     'text' => 'pages',
+        //     'url' => 'admin/pages',
+        //     'icon' => 'far fa-fw fa-file',
+        //     'label' => 4,
+        //     'label_color' => 'success',
+        // ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url' => 'admin/settings',
+            'url' => '/candidate/profile',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'isCandidate',
         ],
         [
             'text' => 'change_password',

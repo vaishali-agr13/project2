@@ -1,0 +1,89 @@
+@extends('adminlte::page')
+@section('title', 'My Profile')
+
+@section('content')
+<div class="content-wrapper">
+
+    <section class="content-header">
+        <div class="container-fluid">
+            <h1>My Profile</h1>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Update Profile</h3>
+                </div>
+
+                <form action="{{ route('candidate.profile.store') }}" method="POST">
+                    @csrf
+
+                    <div class="card-body">
+
+
+                       <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" class="form-control" value="{{ $profile->name ?? '' }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" name="phone" class="form-control" value="{{ $profile->phone ?? '' }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Profile Image</label>
+                            <input type="file" name="profile_photo" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" value="{{ $profile->email ?? '' }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Skills</label>
+                            <input type="text" name="skills" class="form-control" value="{{ $profile->skills ?? '' }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Experience</label>
+                            <input type="text" name="experience" class="form-control" value="{{ $profile->experience ?? '' }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Education</label>
+                            <input type="text" name="education" class="form-control" value="{{ $profile->education ?? '' }}" required>
+                        </div>
+
+                         <div class="form-group">
+                            <label>Upload Resume (PDF/DOC/DOCX)</label>
+                            <input type="file" name="resume" class="form-control">
+                        </div>
+
+                         <div class="form-group">
+                            <label>Portfolio</label>
+                            <input type="text" name="portfolio" class="form-control" value="{{ $profile->portfolio ?? '' }}" required>
+                        </div>
+
+                    </div>
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Save Profile</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </section>
+</div>
+@endsection

@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\JobController; // Yeh line add karein
 use App\Http\Controllers\HomeController; 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\CandidateController;
+
 
 
 
@@ -37,6 +39,20 @@ Route::prefix('admin')->group(function () {
     
 });
 
+Route::middleware('auth')->group(function () {
+
+        Route::get('/candidate/dashboard', [CandidateController::class, 'dashboard'])->name('candidate.dashboard');
+        Route::get('/candidate/profile', [CandidateController::class, 'index'])->name('candidate.profile')->middleware('can:isCandidate');
+        Route::post('/candidate/profile', [CandidateController::class, 'store'])->name('candidate.profile.store');
+        Route::get('/candidate/jobs', [JobController::class, 'index']);
+        Route::get('/candidate/applications', [JobController::class, 'applications']);
+
+
+ });
+
+
+Route::get('/register', [CandidateController::class, 'showForm'])->name('register');
+Route::post('/register', [CandidateController::class, 'register']);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/categories', function () { return view('categories'); });
@@ -54,4 +70,8 @@ Route::get('/jobs/{id}', [JobController::class, 'show'])->name('jobs.show');
 Route::get('/about', function () { return view('about'); });
 
 Route::post('/jobs/{id}/apply', [JobController::class, 'apply'])->name('jobs.apply');
+
+// Route::post('jobs/{id}/apply', [JobController::class, 'apply'])
+//     ->middleware('auth')
+//     ->name('jobs.apply');
 

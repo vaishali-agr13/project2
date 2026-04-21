@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Job; 
@@ -15,10 +15,21 @@ class JobController extends Controller
 
     public function index()
     {
-        // Database se saari jobs fetch karein (Latest pehle)
-       $jobs = Job::with('categoryData')->get(); // IMPORTANT
-       
-        // admin/jobs/index.blade.php file ko data bhejien
+    //    $jobs = Job::with('categoryData')->get(); // IMPORTANT
+
+       $query = Job::query();
+
+        if (auth()->check() && auth()->user()->role === 'candidate') {
+            $query->where(function ($q) {
+                $q->where('posted_by_type', 'admin')
+                ->orWhere(function ($q2) {
+                    $q2->where('posted_by_type', 'company')
+                        ->where('approval_status', 'approved');
+                });
+            });
+        }
+
+        $jobs = $query->with('categoryData')->latest()->get();       
         return view('admin.jobs.index', compact('jobs'));
     }
     public function create()
@@ -97,8 +108,22 @@ class JobController extends Controller
 
     public function applications()
         {
-            // Eager loading use kar rahe hain taaki pata chale kis job ke liye apply kiya gaya hai
-            $applications = Application::with('job')->latest()->get();
+
+
+
+
+            if (auth()->user()->role === 'admin') {
+                // Admin → sab applications dekhega
+                $applications = Application::with('job')
+                    ->latest()
+                    ->get();
+            } else {
+                // Candidate → sirf apni applications
+                $applications = Application::with('job')
+                    ->where('user_id', auth()->id())
+                    ->latest()
+                    ->get();
+            }
 
             return view('admin.applications.index', compact('applications'));
         }
@@ -106,29 +131,88 @@ class JobController extends Controller
 
     public function apply(Request $request, $id)
         {
-            // 1. Validation
-            $request->validate([
-                'full_name' => 'required|string|max:255',
-                'email' => 'required|email',
-                'resume' => 'required|mimes:pdf|max:2048', // Max 2MB PDF
-            ]);
 
-            // 2. Resume Upload
-            if ($request->hasFile('resume')) {
-                $fileName = time().'_'.$request->resume->getClientOriginalName();
-                $filePath = $request->file('resume')->storeAs('resumes', $fileName, 'public');
+                    if (!auth()->check()) {
+
+                                $tempPath = null;
+
+                                if ($request->hasFile('resume')) {
+                                    $fileName = time().'_'.$request->resume->getClientOriginalName();
+                                    // 👇 temp folder me store
+                                    $tempPath = $request->file('resume')->storeAs(
+                                        'temp_resumes',
+                                        $fileName,
+                                        'public'
+                                    );
+                                }
+
+                                session()->put('pending_apply', [
+                                    'job_id' => $id,
+                                    'full_name' => $request->full_name,
+                                    'email' => $request->email,
+                                    'cover_letter' => $request->cover_letter,
+                                    'resume' => $tempPath, // 👈 file path store karo (NOT file object)
+                                ]);
+
+                                return redirect()->route('login');
+                    }
+                            // 1. Validation
+                            $request->validate([
+                                'full_name' => 'required|string|max:255',
+                                'email' => 'required|email',
+                                'resume' => 'required|mimes:pdf|max:2048', // Max 2MB PDF
+                            ]);
+
+                    // 2. Resume Upload
+                    if ($request->hasFile('resume')) {
+                        $fileName = time().'_'.$request->resume->getClientOriginalName();
+                        $filePath = $request->file('resume')->storeAs('resumes', $fileName, 'public');
+                    }
+
+                    // 3. Save to Database
+                    Application::create([
+                        'job_id' => $id,
+                        'full_name' => $request->full_name,
+                        'email' => $request->email,
+                        'resume' => $filePath,
+                        'user_id'=>Auth::id(),
+                        'cover_letter' => $request->cover_letter,
+                    ]);
+
+                    return back()->with('success', 'Application submitted successfully!');
+       }
+
+
+        public function storeApplicationFromLogin($form, $jobId)
+        {
+            // resume remove karo validation se
+            if (
+                empty($form['full_name']) ||
+                empty($form['email'])
+            ) {
+                return redirect('/jobs/'.$jobId)
+                    ->with('error', 'Please fill all required fields.');
             }
 
-            // 3. Save to Database
+            if (!filter_var($form['email'], FILTER_VALIDATE_EMAIL)) {
+                return redirect('/jobs/'.$jobId)
+                    ->with('error', 'Invalid email format.');
+            }
+
+            // ⚠️ resume yaha possible nahi hai
+            // isliye null ya skip karo
+
             Application::create([
-                'job_id' => $id,
-                'full_name' => $request->full_name,
-                'email' => $request->email,
-                'resume' => $filePath,
-                'cover_letter' => $request->cover_letter,
+                'job_id' => $jobId,
+                'full_name' => $form['full_name'],
+                'email' => $form['email'],
+                'resume' => $form['resume'], // important
+                'user_id' => auth()->id(),
+                'cover_letter' => $form['cover_letter'] ?? null,
             ]);
 
-            return back()->with('success', 'Application submitted successfully!');
+            return redirect('/jobs/'.$jobId)
+                ->with('success', 'Application submitted! Please upload resume.');
         }
 
     public function show($id)

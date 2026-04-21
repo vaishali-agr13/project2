@@ -65,6 +65,14 @@
 
             </form>
 
+            <div class="social-auth-links text-center mb-3">
+                <p>- OR -</p>
+            </div>
+
+            <p class="mb-1 text-center">
+                <a href="{{ url('/register') }}">Create a new account</a>
+            </p>
+
         </div>
     </div>
 </div>

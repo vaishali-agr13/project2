@@ -45,16 +45,21 @@
                         @endif
                     </td>
                     <td>
-                        <a href="/admin/jobs/edit/{{$job->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</a>
 
-                        <form action="{{ route('jobs.delete', $job->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
+                    @if(auth()->check() && auth()->user()->role === 'admin')
+                            <a href="/admin/jobs/edit/{{$job->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</a>
 
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
-                                Delete
-                            </button>
-                        </form>   
+                            <form action="{{ route('jobs.delete', $job->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
+                                    Delete
+                                </button>
+                            </form>   
+                        @endif
+
+
                         @if($job->posted_by_type == 'company')
 
                                         @if($job->approval_status == 'pending')
