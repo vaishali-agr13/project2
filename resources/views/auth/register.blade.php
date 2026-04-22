@@ -5,19 +5,23 @@
 
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+    <style>
+         .register-card-body {
+            padding : 37px !important;
+         }
+        </style>
 </head>
 
-<body class="hold-transition register-page">
+<body class="hold-transition register-page" style="background: linear-gradient(135deg, #667eea, #764ba2);">
 
 <div class="register-box">
     <div class="register-logo">
-        <b>Register</b>
+        
     </div>
 
     <div class="card">
         <div class="card-body register-card-body">
-
-            <p class="login-box-msg">Create a new account</p>
+            <p style="font-size: large;font-weight: 600;" class="login-box-msg">Create a new account</p>
 
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -50,7 +54,7 @@
 
             
 
-                <button type="submit" class="btn btn-success btn-block">
+                <button type="submit" class="btn btn-primary btn-block">
                     Register
                 </button>
             </form>

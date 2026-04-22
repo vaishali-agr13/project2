@@ -7,19 +7,24 @@
     <!-- AdminLTE CSS -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+
+    <style>
+
+        .login-card-body {
+            padding:37px !important;
+        }
+    </style>
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background: linear-gradient(135deg, #667eea, #764ba2);">
 
 <div class="login-box">
-    <div class="login-logo">
-        <b>Admin</b>LTE
-    </div>
+  
 
     <div class="card">
         <div class="card-body login-card-body">
 
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p style="font-size: large;font-weight: 600;" class="login-box-msg">Login</p>
 
             @if(session('error'))
                 <div class="alert alert-danger">
@@ -65,9 +70,6 @@
 
             </form>
 
-            <div class="social-auth-links text-center mb-3">
-                <p>- OR -</p>
-            </div>
 
             <p class="mb-1 text-center">
                 <a href="{{ url('/register') }}">Create a new account</a>
