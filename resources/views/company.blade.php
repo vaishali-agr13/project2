@@ -23,14 +23,14 @@
 
           <h3 class="text-lg font-semibold text-gray-800 mb-2">Privacy Policy</h3>
           <p class="text-gray-600">
-            Your company information and job details are सुरक्षित and will not be shared with third parties.
+            Your company information and job details are safe and will not be shared with third parties.
           </p>
         </div>
       </div>
 
       <!-- RIGHT SIDE (Job Form) -->
       <div class="w-full lg:w-1/2">
-        <div class="bg-white p-8 rounded-xl shadow-md">
+        <div class="bg-white p-8 rounded-xl shadow-md border-t-4 custom-border">
           <h2 class="text-2xl font-bold mb-6 text-gray-900">Post a Job</h2>
 
           
@@ -75,7 +75,7 @@
 
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-1">Company Email</label>
-              <input type="email" name="company_email" class="w-full px-4 py-2 border rounded-lg" required>
+              <input type="email" name="company_email" class="w-full px-4 py-2 border rounded-lg" placeholder="info@domain.com" required>
             </div>
 
             <div>

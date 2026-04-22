@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Notifications\AdminNotification; 
 use App\Models\Application;
 use App\Models\Category;
+use App\Mail\JobPostedMail;
+use Illuminate\Support\Facades\Mail;
 // Model ko import karna na bhoolein
 
 class JobController extends Controller
@@ -111,6 +113,11 @@ class JobController extends Controller
 
         }
         else {
+
+
+            Mail::to( $job->company_email)
+               ->send(new JobPostedMail($job));
+
             return back()->with('success', 'Job posted successfully');
         }
     }
