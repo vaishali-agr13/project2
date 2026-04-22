@@ -15,7 +15,7 @@
       </p>
     </div>
     <div>
-      <img src="{{ asset('images/about.jpg') }}" class="rounded-2xl shadow-lg w-full">
+      <img src="{{ asset('images/about.jpg') }}" class="rounded-2xl shadow-lg about-image">
     </div>
   </div>
 </section>

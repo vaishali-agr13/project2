@@ -11,7 +11,9 @@
     <div class="card-header">
         <h3 class="card-title">Jobs List</h3>
         <div class="card-tools">
-            <a href="{{ route('admin.jobs.create') }}" class="btn btn-primary btn-sm">Post New Job</a>
+            @if(auth()->check() && auth()->user()->role == 'admin')
+               <a href="{{ route('admin.jobs.create') }}" class="btn btn-primary btn-sm">Post New Job</a>
+            @endif
         </div>
     </div>
     <div class="card-body p-0">
@@ -22,12 +24,26 @@
                     <th>Title</th>
                     <th>Company</th>
                     <th>Category</th>
-                    <th>Posted By</th>
+                    <th>Salary</th>
                     <th>Type</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
+
+            @php
+              if (!function_exists('formatSalary')) {
+                  function formatSalary($amount) {
+                      if ($amount >= 100000) {
+                          return round($amount / 100000) . ' LPA';
+                      } elseif ($amount >= 1000) {
+                          return round($amount / 1000) . 'k';
+                      }
+                      return $amount;
+                  }   
+              }
+            @endphp
+
             <tbody>
                 @forelse($jobs as $job)
                 <tr>
@@ -35,7 +51,7 @@
                     <td>{{ $job->title }}</td>
                     <td>{{ $job->company_name }}</td>
                     <td>{{ $job->categoryData->name ?? 'N/A' }}</td>
-                    <td>{{ $job->posted_by_type ?? 'N/A' }}</td>
+                    <td>₹ {{ formatSalary($job->salary_min) }} - ₹{{ formatSalary($job->salary_max) }}</td>
                     <td><span class="badge badge-info">{{ $job->job_type }}</span></td>
                     <td>
                         @if($job->status == 1)
@@ -92,6 +108,13 @@
 
                         @endif
                     </td>
+                    <td>
+                     @if(auth()->check() && auth()->user()->role == 'candidate')
+
+                       <a href="{{ url('jobs/'.$job->id) }}">Apply Now  </a>
+
+                     @endif
+                     </td>
                 </tr>
                 @empty
                 <tr>

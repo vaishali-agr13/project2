@@ -16,7 +16,15 @@
     <div class="grid">
         @foreach($category->jobs as $job)
             <div class="card job-card category-card">
-                    <img src="{{ asset('images/company-default-logo.svg') }}" class="company-logo">
+
+                    @php
+                        $days = \Carbon\Carbon::parse($job->created_at)->diffInDays(now());
+                    @endphp
+
+                    @if($days < 3)
+                        <img style="width:20px;height:20px;" src="{{ asset('images/new.gif') }}" class="company-logo">
+
+                    @endif
                     <h4>{{ $job->title }}</h4>
                     <p>{{ $job->company_name }}</p>
                     <p>{{ $job->location }}</p>

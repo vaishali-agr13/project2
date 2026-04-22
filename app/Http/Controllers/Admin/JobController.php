@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Job; 
+use App\Models\User;
+use App\Notifications\AdminNotification; 
 use App\Models\Application;
 use App\Models\Category;
 // Model ko import karna na bhoolein
@@ -96,8 +98,15 @@ class JobController extends Controller
         ]);
 
         // 2. Database mein save karein
-        Job::create($data);
+        $job = Job::create($data);
         if ($request->posted_by_type == 'admin') {
+               $users = User::where('role', 'candidate')->get();
+
+                foreach ($users as $user) {
+                    $user->notify(new AdminNotification(
+                        'New Job Posted: ' . $job->title
+                    ));
+                }
             return redirect()->route('admin.jobs.create')->with('success', 'Job Successfully Post ho gayi hai!');
 
         }

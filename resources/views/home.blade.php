@@ -71,7 +71,7 @@
 
                 <div class="divider"></div>
 
-                <div class="search-item">
+                <!-- <div class="search-item">
                     <select  name="category">
                       <option value="" disabled selected>
                           Select Category
@@ -85,8 +85,64 @@
                         @endforeach
 
                     </select>
-                </div>
+                </div> -->
 
+
+               <div class="search-item relative" x-data="{ open: false, selected: '{{ request('category') ?? '' }}' }">
+    
+                  <div @click="open = !open" class="flex items-center cursor-pointer space-x-3 min-w-[180px]">
+                      
+                      <div class="text-xl">📂</div>
+                      
+                      <div class="flex flex-col overflow-hidden">
+                          <template x-if="selected !== ''">
+                              <span class="text-[10px] text-blue-500 font-bold uppercase leading-none mb-1">Category</span>
+                          </template>
+
+                          <span class="text-gray-700 font-semibold leading-tight truncate" 
+                                x-text="selected === '' ? 'Select Category' : selected">
+                          </span>
+                      </div>
+
+                      <svg class="w-4 h-4 text-gray-400 transition-transform duration-300 ml-auto" 
+                          :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                  </div>
+
+                  <input type="hidden" name="category" :value="selected">
+
+                  <div x-show="open" 
+                      @click.away="open = false"
+                      x-cloak
+                      x-transition:enter="transition ease-out duration-100"
+                      x-transition:enter-start="opacity-0 scale-95"
+                      x-transition:enter-end="opacity-100 scale-100"
+                      class="absolute left-0 mt-3 w-64 bg-white border border-gray-100 rounded-xl shadow-2xl z-50">
+                      
+                      <div class="p-2 max-h-60 overflow-y-auto custom-scrollbar">
+                          <div @click="selected = ''; open = false" 
+                              class="px-4 py-2 text-xs text-gray-400 hover:bg-gray-50 cursor-pointer rounded-lg mb-1">
+                              None (Clear)
+                          </div>
+
+                          @foreach($categories as $category)
+                              <div @click="selected = '{{ $category->name }}'; open = false" 
+                                  class="flex items-center justify-between px-4 py-2.5 hover:bg-blue-50 rounded-lg cursor-pointer transition group"
+                                  :class="selected === '{{ $category->name }}' ? 'bg-blue-50' : ''">
+                                  
+                                  <span class="text-gray-600 group-hover:text-blue-600 font-medium text-sm">{{ $category->name }}</span>
+                                  
+                                  <template x-if="selected === '{{ $category->name }}'">
+                                      <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                          <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                                      </svg>
+                                  </template>
+                              </div>
+                          @endforeach
+                      </div>
+                  </div>
+           </div>
                 <button type="submit">Search</button>
         </div>
 
@@ -156,7 +212,15 @@
 
    @forelse($featuredJobs as $job)
             <div class="card job-card category-card">
-                    <img src="{{ asset('images/company-default-logo.svg') }}" class="company-logo">
+                    @php
+                        $days = \Carbon\Carbon::parse($job->created_at)->diffInDays(now());
+                    @endphp
+
+                    @if($days < 3)
+                        <img style="width:20px;height:20px;" src="{{ asset('images/new.gif') }}" class="company-logo">
+
+                    @endif                   
+                  
                     <h4>{{ $job->title }}</h4>
                     <p>{{ $job->company_name }}</p>
                     <p>{{ $job->location }}</p>
@@ -391,7 +455,7 @@
   <div class="reviews-container">
 
     <div class="review-card">
-      <img src="https://i.pravatar.cc/80?img=1" alt="user">
+      <img src="{{ asset('images/riya.jpg') }}" alt="user">
       <h4>Riya Sharma</h4>
       <p class="role">Frontend Developer</p>
       <p class="review-text">
@@ -401,7 +465,7 @@
     </div>
 
     <div class="review-card">
-      <img src="https://i.pravatar.cc/80?img=2" alt="user">
+      <img src="{{ asset('images/aman.jpg') }}" alt="user">
       <h4>Aman Verma</h4>
       <p class="role">Backend Developer</p>
       <p class="review-text">
@@ -411,8 +475,8 @@
     </div>
 
     <div class="review-card">
-      <img src="https://i.pravatar.cc/80?img=3" alt="user">
-      <h4>Neha Gupta</h4>
+      <img src="{{ asset('images/shikha.jpg') }}" alt="user">
+      <h4>Shikha Gupta</h4>
       <p class="role">UI/UX Designer</p>
       <p class="review-text">
         "Loved the UI and filters. Found a perfect remote job easily!"
@@ -421,7 +485,7 @@
     </div>
 
     <div class="review-card">
-      <img src="https://i.pravatar.cc/80?img=3" alt="user">
+      <img src="{{ asset('images/kirti.jpg') }}" alt="user">
       <h4>Kirti Agrawal</h4>
       <p class="role">Java Developer</p>
       <p class="review-text">

@@ -26,7 +26,7 @@
 
               <div class="divider"></div>
 
-              <div class="search-item">
+              <!-- <div class="search-item">
                   <select  name="category">
                       <option value="" disabled selected>
                             Select Category
@@ -41,7 +41,64 @@
                       @endforeach
 
                   </select>
-              </div>
+              </div> -->
+
+
+              <div class="search-item relative" x-data="{ open: false, selected: '{{ request('category') ?? '' }}' }">
+    
+                <div @click="open = !open" class="flex items-center cursor-pointer space-x-3 min-w-[180px]">
+                    
+                    <div class="text-xl">📂</div>
+                    
+                    <div class="flex flex-col overflow-hidden">
+                        <template x-if="selected !== ''">
+                            <span class="text-[10px] text-blue-500 font-bold uppercase leading-none mb-1">Category</span>
+                        </template>
+
+                        <span class="text-gray-700 font-semibold leading-tight truncate" 
+                              x-text="selected === '' ? 'Select Category' : selected">
+                        </span>
+                    </div>
+
+                    <svg class="w-4 h-4 text-gray-400 transition-transform duration-300 ml-auto" 
+                        :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+
+                <input type="hidden" name="category" :value="selected">
+
+                <div x-show="open" 
+                    @click.away="open = false"
+                    x-cloak
+                    x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-start="opacity-0 scale-95"
+                    x-transition:enter-end="opacity-100 scale-100"
+                    class="absolute left-0 mt-3 w-64 bg-white border border-gray-100 rounded-xl shadow-2xl z-50">
+                    
+                    <div class="p-2 max-h-60 overflow-y-auto custom-scrollbar">
+                        <div @click="selected = ''; open = false" 
+                            class="px-4 py-2 text-xs text-gray-400 hover:bg-gray-50 cursor-pointer rounded-lg mb-1">
+                            None (Clear)
+                        </div>
+
+                        @foreach($categories as $category)
+                            <div @click="selected = '{{ $category->name }}'; open = false" 
+                                class="flex items-center justify-between px-4 py-2.5 hover:bg-blue-50 rounded-lg cursor-pointer transition group"
+                                :class="selected === '{{ $category->name }}' ? 'bg-blue-50' : ''">
+                                
+                                <span class="text-gray-600 group-hover:text-blue-600 font-medium text-sm">{{ $category->name }}</span>
+                                
+                                <template x-if="selected === '{{ $category->name }}'">
+                                    <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
+                                    </svg>
+                                </template>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
 
               <button type="submit">Search</button>
               
@@ -52,10 +109,13 @@
 
   @foreach($categories as $category)
         <a href="{{ url('/categories/'.$category->id) }}">
-
-            <div class="category-box">
             
+            <div class="category-box">
+              
+                            
+
             <div class="category-info">
+                <i style="font-size: 20px;color:#6c1e96" class="fas {{ !empty($category->icon) ? $category->icon : 'fa-folder' }}"></i>
                 <p>{{$category->name}}</p>
                 <span>{{$category->jobs_count}} Jobs Available</span>
             </div>
@@ -73,7 +133,7 @@
   <!-- LEFT SIDEBAR (SEPARATE FORM) -->
   <aside class="filters">
 
-    <form method="GET" action="{{ url('/find-jobs') }}">
+    <form method="GET" action="{{ url('/find-jobs') }}" id="filterForm">
 
       <h3>All Filters</h3>
 
@@ -191,7 +251,14 @@
       <div class="job-card">
 
         <div class="job-header">
-          <img src="{{ asset('images/company-default-logo.svg') }}" class="company-logo">
+          @php
+              $days = \Carbon\Carbon::parse($job->created_at)->diffInDays(now());
+          @endphp
+
+          @if($days < 3)
+              <img style="width:20px;height:20px;" src="{{ asset('images/new.gif') }}" class="company-logo">
+
+          @endif
 
           <div class="job-company">
             <h3>{{$job->company_name}}</h3>
@@ -242,6 +309,21 @@
 </div>
 
 @endsection
+
+
+<script>
+window.onload = function () {
+    var form = document.getElementById('filterForm');
+
+    var inputs = form.querySelectorAll('input[type="checkbox"], input[type="radio"]');
+
+    inputs.forEach(function(input) {
+        input.onchange = function () {
+            form.submit();
+        };
+    });
+};
+</script>
 
 <style>
     /* Hero Section */
@@ -412,16 +494,18 @@
 }
 
 .filter-group h4 {
-  font-size: 16px;
-  margin-bottom: 10px;
+margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .filter-group label {
-   display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  font-size: 14px;
+  display: flex;
+    align-items: center; /* Vertically center alignment */
+    gap: 10px;           /* Checkbox aur text ke beech ka gap */
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #4b5563;
 }
 
 .filters h3,
@@ -435,8 +519,11 @@
 
 .filter-group input[type="checkbox"],
 .filter-group input[type="radio"] {
-  width: 16px;
-  height: 16px;
+ width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #2563eb; /* Blue color for checked state */
+    margin: 0;
 }
 
 .filters input {

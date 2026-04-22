@@ -26,7 +26,15 @@ select.form-control {
   background-color: #fff !important;
 }
 
-input, textarea, select {
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent !important;
+    border: none;
+}
+
+input, textarea {
   color: #111 !important;
   background: #fff !important;
 }
@@ -62,23 +70,24 @@ input::placeholder {
 
 /* SEARCH */
 .search-box {
-  margin-top: 20px;
   display: flex;
-  align-items: center;
-  background: white;
-  border-radius: 50px;
-  padding: 10px 15px;
-  max-width: 900px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  gap: 10px;
-  flex-wrap: wrap;
+    align-items: center;
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 100px; /* Pillow shape */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+
 }
 
 .search-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
+    display: flex;
+    align-items: center;
+   padding: 5px 15px;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+}
+.search-item:hover {
+    background-color: rgba(243, 244, 246, 1); /* Light gray hover */
 }
 
 .search-item input,
@@ -98,8 +107,18 @@ input::placeholder {
 
 .divider {
   width: 1px;
-  height: 30px;
-  background: #ddd;
+    height: 30px;
+    background-color: #e5e7eb;
+    margin: 0 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 10px;
 }
 
 .search-box button {
@@ -771,6 +790,13 @@ height: 50px;   /* try 45–60px */
   border-radius: 50%;
   margin-bottom: 10px;
 }
+.about-image {
+  max-width: 50%;
+}
+
+.items-center{
+  background-color: #f1f5f9;
+}
 
 .review-card h4 {
   margin: 5px 0;
@@ -810,10 +836,7 @@ height: 50px;   /* try 45–60px */
     text-align: center;
   }
 
-  .search-box {
-    flex-direction: column;
-    border-radius: 20px;
-  }
+ 
 
   .divider {
     display: none;
