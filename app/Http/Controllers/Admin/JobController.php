@@ -156,16 +156,14 @@ class JobController extends Controller
 
                     if (!auth()->check()) {
 
+
                                 $tempPath = null;
 
                                 if ($request->hasFile('resume')) {
                                     $fileName = time().'_'.$request->resume->getClientOriginalName();
-                                    // 👇 temp folder me store
-                                    $tempPath = $request->file('resume')->storeAs(
-                                        'temp_resumes',
-                                        $fileName,
-                                        'public'
-                                    );
+                                    // 👇 temp folder me stor
+
+                                    $filePath = $request->file('resume')->storeAs('resumes', $fileName, 'public');
                                 }
 
                                 session()->put('pending_apply', [
@@ -173,7 +171,7 @@ class JobController extends Controller
                                     'full_name' => $request->full_name,
                                     'email' => $request->email,
                                     'cover_letter' => $request->cover_letter,
-                                    'resume' => $tempPath, // 👈 file path store karo (NOT file object)
+                                    'resume' => $filePath, // 👈 file path store karo (NOT file object)
                                 ]);
 
                                 return redirect()->route('login');
@@ -195,7 +193,7 @@ class JobController extends Controller
                     Application::create([
                         'job_id' => $id,
                         'full_name' => $request->full_name,
-                        'email' => $request->email,
+                       
                         'resume' => $filePath,
                         'user_id'=>Auth::id(),
                         'cover_letter' => $request->cover_letter,

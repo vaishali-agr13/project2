@@ -40,6 +40,7 @@ class AuthController extends Controller
 
                     if ($data) {
 
+                       $data['email'] = $user->email;
                         session()->forget('pending_apply');
 
                         // 👉 JobController ka method call karo

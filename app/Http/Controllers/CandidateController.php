@@ -69,7 +69,7 @@ class CandidateController extends Controller
         Application::create([
             'job_id' => $data['job_id'],
             'full_name' => $data['full_name'],
-            'email' => $data['email'],
+            'email' =>  Auth::user()->email,
             'resume' => $data['resume'],
             'user_id' => $user->id,
             'cover_letter' => $data['cover_letter'],
