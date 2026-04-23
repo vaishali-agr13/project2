@@ -69,6 +69,8 @@ return [
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Admin Logo',
+    'logo_link' => '#',
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -257,7 +259,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '#',
     'logout_url' => 'admin/logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -315,6 +317,13 @@ return [
         ],
 
         [
+            'text' => 'Dashboard',
+            'url'  => 'candidate/dashboard',
+            'icon' => 'fas fa-tachometer-alt',
+            'can'  => 'isCandidate',
+        ],
+
+        [
             'text' => 'All Jobs',
             'url'  => 'candidate/jobs',
             'icon' => 'fas fa-fw fa-briefcase',
@@ -333,7 +342,7 @@ return [
             'text' => 'Applications',
             'url'  => 'admin/applications', // Jo route humne abhi banaya
             'icon' => 'fas fa-fw fa-users',
-            'label'       => 4, // Optional: Aap yahan dynamic count bhi dikha sakte hain
+          //  'label'       => 4, // Optional: Aap yahan dynamic count bhi dikha sakte hain
             'label_color' => 'success',
              'can'  => 'isAdmin',
         ],
@@ -342,7 +351,7 @@ return [
             'text' => 'Applications',
             'url'  => 'candidate/applications', // Jo route humne abhi banaya
             'icon' => 'fas fa-fw fa-users',
-            'label'       => 4, // Optional: Aap yahan dynamic count bhi dikha sakte hain
+            //'label'       => 4, // Optional: Aap yahan dynamic count bhi dikha sakte hain
             'label_color' => 'success',
              'can'  => 'isCandidate',
         ],
@@ -362,10 +371,10 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
+        // [
+        //     'type' => 'sidebar-menu-search',
+        //     'text' => 'search',
+        // ],
         [
             'text' => 'blog',
             'url' => 'admin/blog',
@@ -378,72 +387,74 @@ return [
         //     'label' => 4,
         //     'label_color' => 'success',
         // ],
-        ['header' => 'account_settings'],
+        ['header' => 'account_settings',
+         'can' => 'isCandidate',
+        ],
         [
             'text' => 'profile',
             'url' => '/candidate/profile',
             'icon' => 'fas fa-fw fa-user',
             'can' => 'isCandidate',
         ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
-        ],
+        // [
+        //     'text' => 'change_password',
+        //     'url' => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
+        // [
+        //     'text' => 'multilevel',
+        //     'icon' => 'fas fa-fw fa-share',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_one',
+        //             'url' => '#',
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url' => '#',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'level_two',
+        //                     'url' => '#',
+        //                 ],
+        //                 [
+        //                     'text' => 'level_two',
+        //                     'url' => '#',
+        //                     'submenu' => [
+        //                         [
+        //                             'text' => 'level_three',
+        //                             'url' => '#',
+        //                         ],
+        //                         [
+        //                             'text' => 'level_three',
+        //                             'url' => '#',
+        //                         ],
+        //                     ],
+        //                 ],
+        //             ],
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url' => '#',
+        //         ],
+        //     ],
+        //],
+        // ['header' => 'labels'],
+        // [
+        //     'text' => 'important',
+        //     'icon_color' => 'red',
+        //     'url' => '#',
+        // ],
+        // [
+        //     'text' => 'warning',
+        //     'icon_color' => 'yellow',
+        //     'url' => '#',
+        // ],
+        // [
+        //     'text' => 'information',
+        //     'icon_color' => 'cyan',
+        //     'url' => '#',
+        // ],
     ],
 
     /*

@@ -5,7 +5,7 @@
 @section('title', 'Candidate Dashboard')
 
 @section('content')
-<div class="content-wrapper">
+
     
     <!-- Content Header -->
     <section class="content-header">
@@ -120,5 +120,5 @@
 
         </div>
     </section>
-</div>
+
 @endsection

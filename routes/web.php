@@ -39,7 +39,7 @@ Route::prefix('admin')->group(function () {
     
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'can:isCandidate'])->group(function () {
 
         Route::get('/candidate/dashboard', [CandidateController::class, 'dashboard'])->name('candidate.dashboard');
         Route::get('/candidate/profile', [CandidateController::class, 'index'])->name('candidate.profile')->middleware('can:isCandidate');
