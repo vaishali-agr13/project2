@@ -101,11 +101,11 @@ class JobController extends Controller
 
         // 2. Database mein save karein
         $job = Job::create($data);
-        $email = Auth::user()->email;
+       
 
         if ($request->posted_by_type == 'admin') {
                $users = User::where('role', 'candidate')->get();
-
+               $email = Auth::user()->email;
                 foreach ($users as $user) {
                     $user->notify(new AdminNotification(
                         'New Job Posted: ' . $job->title
