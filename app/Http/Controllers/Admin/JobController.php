@@ -101,6 +101,8 @@ class JobController extends Controller
 
         // 2. Database mein save karein
         $job = Job::create($data);
+        $email = Auth::user()->email;
+
         if ($request->posted_by_type == 'admin') {
                $users = User::where('role', 'candidate')->get();
 
@@ -109,14 +111,18 @@ class JobController extends Controller
                         'New Job Posted: ' . $job->title
                     ));
                 }
-            return redirect()->route('admin.jobs.create')->with('success', 'Job Successfully Post ho gayi hai!');
+            Mail::to( $job->company_email)
+               ->cc($email)
+               ->send(new JobPostedMail($job));
+            return redirect()->route('admin.jobs.create')->with('success', 'Job Successfully Posted');
 
         }
         else {
+               Mail::to( $job->company_email)
+                ->cc('rjindia.help@gmail.com')
+                ->send(new JobPostedMail($job));
 
-
-            Mail::to( $job->company_email)
-               ->send(new JobPostedMail($job));
+            
 
             return back()->with('success', 'Job posted successfully');
         }
