@@ -48,12 +48,26 @@
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 border-t border-b py-6">
                         <div>
+
+                         @php
+                            if (!function_exists('formatSalary')) {
+                                function formatSalary($amount) {
+                                    if ($amount >= 100000) {
+                                        return round($amount / 100000) . ' LPA';
+                                    } elseif ($amount >= 1000) {
+                                        return round($amount / 1000) . 'k';
+                                    }
+                                    return $amount;
+                                }   
+                            }
+                        @endphp
                             <p class="text-gray-500 text-sm">Salary</p>
-                            <p class="font-bold text-gray-800">{{ $job->salary_min }} - {{ $job->salary_max }}</p>
+                            <p class="font-bold text-gray-800">₹ {{ formatSalary($job->salary_min) }} - ₹{{ formatSalary($job->salary_max) }} </p>
                         </div>
                         <div>
                             <p class="text-gray-500 text-sm">Category</p>
-                            <p class="font-bold text-gray-800">{{ $job->category }}</p>
+                           
+                            <p class="font-bold text-gray-800">{{ $job->categoryData->name }}</p>
                         </div>
                         <div>
                             <p class="text-gray-500 text-sm">Posted On</p>

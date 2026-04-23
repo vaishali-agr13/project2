@@ -240,7 +240,7 @@ class JobController extends Controller
     public function show($id)
         {
             // 1. Database se job find karein
-            $job = Job::find($id);
+           $job = Job::with('categoryData')->find($id);
 
             // 2. Check karein agar job nahi mili toh 404 error dikhayein
             if (!$job) {
