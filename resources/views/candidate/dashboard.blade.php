@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+
+
 @section('title', 'Candidate Dashboard')
 
 @section('content')
