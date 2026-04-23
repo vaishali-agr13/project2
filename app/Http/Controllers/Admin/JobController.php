@@ -193,7 +193,7 @@ class JobController extends Controller
                     Application::create([
                         'job_id' => $id,
                         'full_name' => $request->full_name,
-                       
+                         'email'=>auth()->user()->email, 
                         'resume' => $filePath,
                         'user_id'=>Auth::id(),
                         'cover_letter' => $request->cover_letter,
