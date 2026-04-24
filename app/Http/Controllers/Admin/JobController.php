@@ -184,60 +184,54 @@ class JobController extends Controller
 
 
     public function apply(Request $request, $id)
-        {
+            {
+                // 🔐 Step 1: Validation
+                $request->validate([
+                    'full_name' => 'required|string|max:255',
+                    'email' => 'required_if:guest,true|email',
+                    'resume' => 'required|mimes:pdf|max:2048',
+                    'phone' => 'required|string|max:20',
+                    'cover_letter' => 'nullable|string',
+                ]);
 
-                    if (!auth()->check()) {
+                // 📄 Step 2: Resume Upload (safe handling)
+                $filePath = null;
 
+                if ($request->hasFile('resume')) {
+                    $fileName = time() . '_' . $request->file('resume')->getClientOriginalName();
+                    $filePath = $request->file('resume')->storeAs('resumes', $fileName, 'public');
+                }
 
-                                $tempPath = null;
+                // 👤 Step 3: If user NOT logged in → store session & redirect
+                if (!auth()->check()) {
 
-                                if ($request->hasFile('resume')) {
-                                    $fileName = time().'_'.$request->resume->getClientOriginalName();
-                                    // 👇 temp folder me stor
-
-                                    $filePath = $request->file('resume')->storeAs('resumes', $fileName, 'public');
-                                }
-
-                                session()->put('pending_apply', [
-                                    'job_id' => $id,
-                                    'full_name' => $request->full_name,
-                                    'email' => $request->email,
-                                    'cover_letter' => $request->cover_letter,
-                                    'phone' => $request->phone,
-                                    'resume' => $filePath, // 👈 file path store karo (NOT file object)
-                                ]);
-
-                                return redirect()->route('register');
-                    }
-                            // 1. Validation
-                            $request->validate([
-                                'full_name' => 'required|string|max:255',
-                                'email' => 'required|email',
-                                'resume' => 'required|mimes:pdf|max:2048', // Max 2MB PDF
-                                'phone'=>'required|string|max:20',
-                            ]);
-
-                    // 2. Resume Upload
-                    if ($request->hasFile('resume')) {
-                        $fileName = time().'_'.$request->resume->getClientOriginalName();
-                        $filePath = $request->file('resume')->storeAs('resumes', $fileName, 'public');
-                    }
-
-                    // 3. Save to Database
-                    Application::create([
+                    session()->put('pending_apply', [
                         'job_id' => $id,
                         'full_name' => $request->full_name,
-                        'email'=>auth()->user()->email, 
-                        'phone'=>$request->phone,
-                        'resume' => $filePath,
-                        'user_id'=>Auth::id(),
+                        'email' => $request->email,
                         'cover_letter' => $request->cover_letter,
+                        'phone' => $request->phone,
+                        'resume' => $filePath,
                     ]);
 
-                    return redirect()->route('candidate.profile')->with('success', 'Job applied successfully!');
+                    return redirect()->route('register');
+                }
 
-                   // return back()->with('success', 'Application submitted successfully!');
-       }
+                // 💾 Step 4: Save Application (logged-in user)
+                Application::create([
+                    'job_id' => $id,
+                    'full_name' => $request->full_name,
+                    'email' => auth()->user()->email,
+                    'phone' => $request->phone,
+                    'resume' => $filePath,
+                    'user_id' => auth()->id(),
+                    'cover_letter' => $request->cover_letter,
+                ]);
+
+                return redirect()
+                    ->route('candidate.profile')
+                    ->with('success', 'Job applied successfully!');
+            }
 
 
         public function storeApplicationFromLogin($form, $jobId)
