@@ -129,9 +129,25 @@ class CandidateController extends Controller
             'name'=>'required',
             'profile_photo'=>'required',
             'email'=>'required',
-            'resume'=>'required',
+             'resume' => 'nullable|mimes:pdf|max:2048',
             'portfolio'=>'required',
         ]);
+
+
+        $resumePath = $request->old_resume;
+
+            if ($request->hasFile('resume')) {
+
+                // optional: purani file delete (safe cleanup)
+                if ($request->old_resume && file_exists(storage_path('app/public/' . $request->old_resume))) {
+                    unlink(storage_path('app/public/' . $request->old_resume));
+                }
+
+                $file = $request->file('resume');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+
+                $resumePath = $file->storeAs('resumes', $fileName, 'public');
+            }
 
         $profile = CandidateProfile::updateOrCreate(
             ['user_id' => auth()->id()],
@@ -140,7 +156,7 @@ class CandidateController extends Controller
                 'email' => $request->email,
                 'profile_photo' => $request->profile_photo,
                 'portfolio' => $request->portfolio,
-                'resume' => $request->resume,
+                'resume' => $resumePath,
                 'phone' => $request->phone,
                 'skills' => $request->skills,
                 'experience' => $request->experience,

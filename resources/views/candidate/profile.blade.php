@@ -19,12 +19,22 @@
                 </div>
             @endif
 
+            @if ($errors->any())
+                <div style="color:red;">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Update Profile</h3>
                 </div>
 
-                <form action="{{ route('candidate.profile.store') }}" method="POST">
+                <form action="{{ route('candidate.profile.store') }}"  enctype="multipart/form-data" method="POST">
                     @csrf
 
                     <div class="card-body">
@@ -75,7 +85,7 @@
                                         </a>
                                     </p>
                                 @endif
-
+                                <input type="hidden" name="old_resume" value="{{ $profile->resume }}">
                                 <input type="file" name="resume" class="form-control">
                         </div>
 

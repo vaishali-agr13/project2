@@ -15,67 +15,138 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-   public function login(Request $request)
-    {
+
+    public function loginAdmin(Request $request)
+        {
             $request->validate([
                 'email' => 'required|email',
                 'password' => 'required'
             ]);
 
-            if (Auth::attempt($request->only('email', 'password'))) {
+            if (Auth::attempt([
+                'email' => $request->email,
+                'password' => $request->password,
+                'role' => 'admin'
+            ])) {
 
-                $request->session()->regenerate(); // ✅ yaha hona chahiye
+                $request->session()->regenerate();
+
+                return redirect()->intended('admin/jobs/create');
+            }
+
+            return back()->with('error', 'Invalid admin credentials');
+        }
+//    public function login(Request $request)
+//     {
+//             $request->validate([
+//                 'email' => 'required|email',
+//                 'password' => 'required'
+//             ]);
+
+//             if (Auth::attempt($request->only('email', 'password'))) {
+
+//                 $request->session()->regenerate(); // ✅ yaha hona chahiye
+
+//                 $user = Auth::user();
+
+//                 // 🔹 ADMIN LOGIN
+//                 if ($user->role == 'admin') {
+//                     return redirect()->intended('admin/jobs/create');
+//                 }
+
+//                 // 🔹 CANDIDATE LOGIN
+//                 if ($user->role == 'candidate') {
+
+
+//                     $profileExists = CandidateProfile::where('user_id', $user->id)->exists();
+
+//                     if (!$profileExists) {
+//                         CandidateProfile::create([
+//                             'user_id' => $user->id,
+//                             'name' => $user->name,
+//                             'email' => $user->email,
+//                         ]);
+//                     }
+
+//                     $data = session('pending_apply');
+
+
+//                     if ($data) {
+//                        $data['full_name'] =  $user->name;
+//                        $data['email'] = $user->email;
+//                         session()->forget('pending_apply');
+
+//                         // 👉 JobController ka method call karo
+//                         return app(JobController::class)
+//                             ->storeApplicationFromLogin($data, $data['job_id']);
+//                     }
+
+//                     if($data){
+//                         return redirect()->route('candidate.profile')->with('success', 'Job applied successfully!');
+
+//                        //return redirect()->intended('/');
+//                     }
+//                     else {
+//                         return redirect('/candidate/dashboard');
+//                     }
+
+                    
+//                 }
+//             }
+
+//     return back()->with('error', 'Invalid credentials');
+//    }
+
+
+        public function loginCandidate(Request $request)
+        {
+            $request->validate([
+                'email' => 'required|email',
+                'password' => 'required'
+            ]);
+
+            if (Auth::attempt([
+                'email' => $request->email,
+                'password' => $request->password,
+                'role' => 'candidate'
+            ])) {
+
+                $request->session()->regenerate();
 
                 $user = Auth::user();
 
-                // 🔹 ADMIN LOGIN
-                if ($user->role == 'admin') {
-                    return redirect()->intended('admin/jobs/create');
+                // 🔹 Profile create if not exists
+                $profileExists = CandidateProfile::where('user_id', $user->id)->exists();
+
+                if (!$profileExists) {
+                    CandidateProfile::create([
+                        'user_id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                    ]);
                 }
 
-                // 🔹 CANDIDATE LOGIN
-                if ($user->role == 'candidate') {
+                // 🔹 Pending job apply logic
+                $data = session('pending_apply');
 
+                if ($data) {
+                    $data['full_name'] = $user->name;
+                    $data['email'] = $user->email;
 
-                    $profileExists = CandidateProfile::where('user_id', $user->id)->exists();
+                    session()->forget('pending_apply');
 
-                    if (!$profileExists) {
-                        CandidateProfile::create([
-                            'user_id' => $user->id,
-                            'name' => $user->name,
-                            'email' => $user->email,
-                        ]);
-                    }
-
-                    $data = session('pending_apply');
-
-
-                    if ($data) {
-                       $data['full_name'] =  $user->name;
-                       $data['email'] = $user->email;
-                        session()->forget('pending_apply');
-
-                        // 👉 JobController ka method call karo
-                        return app(JobController::class)
-                            ->storeApplicationFromLogin($data, $data['job_id']);
-                    }
-
-                    if($data){
-                        return redirect()->route('candidate.profile')->with('success', 'Job applied successfully!');
-
-                       //return redirect()->intended('/');
-                    }
-                    else {
-                        return redirect('/candidate/dashboard');
-                    }
-
-                    
+                    return app(JobController::class)
+                        ->storeApplicationFromLogin($data, $data['job_id']);
                 }
+
+                // 🔹 Normal redirect
+                return redirect('/candidate/dashboard');
             }
 
-    return back()->with('error', 'Invalid credentials');
-}
-
+            return back()->with('error', 'Invalid candidate credentials');
+    }
+    
+    
     public function logout()
     {
         Auth::logout();

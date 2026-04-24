@@ -36,7 +36,13 @@
                 </div>
             @endif
 
-            <form action="{{ url('/admin/login') }}" method="post">
+            @if(request()->is('candidate/login'))
+                 <form action="{{ url('/candidate/login') }}" method="post">
+              @else
+                 <form action="{{ url('/admin/login') }}" method="post">
+             @endif
+
+            
                 @csrf
 
                 <div class="input-group mb-3">
