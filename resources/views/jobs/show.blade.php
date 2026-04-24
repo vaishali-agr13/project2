@@ -3,7 +3,7 @@
 @section('content')
 <!--pop up code -->
 
-<div id="thankPopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
+<!-- <div id="thankPopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999;">
   
   <div style="background:white; width:320px; padding:20px; border-radius:8px; text-align:center; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:black;">
     
@@ -18,7 +18,6 @@
         Chat on WhatsApp
     </a>
 
-    <!-- Community Join Button -->
     <a href="https://chat.whatsapp.com/H4PArHFPz8L0W4L3msdTKP" target="_blank"
        style="display:block; margin-top:10px; background:#661e92; color:white; padding:10px; border-radius:5px; text-decoration:none;">
         Join Community
@@ -27,7 +26,7 @@
 
 
   </div>
-</div>
+</div> -->
 
 
 <div class="bg-gray-100 min-h-screen py-10">
@@ -119,10 +118,19 @@
                             placeholder="john@example.com" required>                        
                         </div>
 
+                         <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label>
+                            <input type="number" name="phone"
+                            class="w-full px-4 py-2 border rounded-lg text-gray-900 bg-white focus:ring-2 focus:ring-blue-500 outline-none"
+                            placeholder="Enter Phone No" required>                        
+                        </div>
+
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-1">Resume (PDF)</label>
                             <div class="border-2 border-dashed border-gray-300 p-4 rounded-lg text-center hover:border-blue-500 transition cursor-pointer">
                                 <input type="file" name="resume" accept=".pdf" class="hidden" id="resumeUpload" required>
+                                <p id="file-name"></p>
+
                                 <label for="resumeUpload" class="cursor-pointer text-gray-500">
                                     <i class="fas fa-cloud-upload-alt text-2xl mb-2 block"></i>
                                     <span class="text-sm">Click to upload PDF</span>
@@ -151,18 +159,30 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+ console.log('event outside');
+    const input = document.getElementById('resumeUpload');
+    const fileText = document.getElementById('file-name');
+
+    input.addEventListener('change', function(e) {
+        console.log('event inside');
+        fileText.innerText = e.target.files.length > 0 
+            ? e.target.files[0].name 
+            : 'No file selected';
+    });
+
+});
+</script>
 @endsection
+@push('scripts')
 
-<script>
-function closeThankPopup() {
-    document.getElementById('thankPopup').style.display = 'none';
-}
-</script>
-
-@if(session('success'))
-<script>
-    window.onload = function() {
-        document.getElementById('thankPopup').style.display = 'block';
-    }
-</script>
-@endif
+@endpush
+<!--@if(session('success'))
+// <script>
+//     window.onload = function() {
+//         document.getElementById('thankPopup').style.display = 'block';
+//     }
+// </script>
+@endif-->

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;   // ✅ required
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\JobController;
+use App\Models\CandidateProfile;
 
 class AuthController extends Controller
 {
@@ -35,11 +36,22 @@ class AuthController extends Controller
                 // 🔹 CANDIDATE LOGIN
                 if ($user->role == 'candidate') {
 
+
+                    $profileExists = CandidateProfile::where('user_id', $user->id)->exists();
+
+                    if (!$profileExists) {
+                        CandidateProfile::create([
+                            'user_id' => $user->id,
+                            'name' => $user->name,
+                            'email' => $user->email,
+                        ]);
+                    }
+
                     $data = session('pending_apply');
 
 
                     if ($data) {
-
+                       $data['full_name'] =  $user->name;
                        $data['email'] = $user->email;
                         session()->forget('pending_apply');
 
@@ -49,7 +61,9 @@ class AuthController extends Controller
                     }
 
                     if($data){
-                       return redirect()->intended('/');
+                        return redirect()->route('candidate.profile')->with('success', 'Job applied successfully!');
+
+                       //return redirect()->intended('/');
                     }
                     else {
                         return redirect('/candidate/dashboard');

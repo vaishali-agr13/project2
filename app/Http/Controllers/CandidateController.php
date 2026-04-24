@@ -59,27 +59,52 @@ class CandidateController extends Controller
         // auto login
         Auth::login($user);
 
-        if (session()->has('pending_apply')) {
+        if (session()->has('pending_apply')) 
+        {
 
-        $data = session('pending_apply');
+           $data = session('pending_apply');
 
        
 
-        // application save
-        Application::create([
-            'job_id' => $data['job_id'],
-            'full_name' => $data['full_name'],
-            'email' =>  Auth::user()->email,
-            'resume' => $data['resume'],
-            'user_id' => $user->id,
-            'cover_letter' => $data['cover_letter'],
-        ]);
+              // application save
+                Application::create([
+                    'job_id' => $data['job_id'],
+                    'full_name' =>$user->name,
+                    'email' =>   $user->email,
+                    'resume' => $data['resume'],
+                    'user_id' => $user->id,
+                    'phone'=>$data['phone'],
+                    'cover_letter' => $data['cover_letter'],
+                ]);
+
+
+                CandidateProfile::updateOrCreate(
+                    ['user_id' => $user->id],   // match condition
+                    [
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'resume' => $data['resume'], 
+                        'phone'=>$data['phone'], 
+                        // agar profile me resume store karna hai
+                    ]
+                );
 
             session()->forget('pending_apply');
 
-            return redirect('/jobs/'.$data['job_id'])
-                ->with('success', 'Application submitted successfully!');
+            return redirect()->route('candidate.profile')->with('success', 'Job applied successfully!');
+
+            // return redirect('/jobs/'.$data['job_id'])
+            //     ->with('success', 'Application submitted successfully!');
         }
+
+        CandidateProfile::updateOrCreate(
+                    ['user_id' => $user->id],   // match condition
+                    [
+                        'name' => $user->name,
+                        'email' => $user->email,
+                    ]
+        );
+
 
         return redirect('/')
             ->with('success', 'Registration successful!');
@@ -89,6 +114,7 @@ class CandidateController extends Controller
 
      public function index()
     {
+        
         $profile = CandidateProfile::where('user_id', auth()->id())->first();
         return view('candidate.profile', compact('profile'));
     }
@@ -121,8 +147,8 @@ class CandidateController extends Controller
                 'education' => $request->education,
             ]
         );
-
-        return back()->with('success', 'Profile updated successfully');
+         return redirect('/candidate/jobs')->with('success', 'Profile saved successfully!');
+      //  return back()->with('success', 'Profile updated successfully');
     }
 
 

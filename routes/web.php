@@ -16,7 +16,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/login', [AuthController::class, 'login']);
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-        Route::middleware('auth')->group(function () {
+        Route::middleware('auth', 'can:isAdmin')->group(function () {
             Route::get('/jobs/create', [JobController::class, 'create'])->name('admin.jobs.create');
             Route::get('/applications', [JobController::class, 'applications'])->name('applications.index');
             Route::post('/jobs/store', [JobController::class, 'store'])->name('admin.jobs.store');
@@ -24,6 +24,7 @@ Route::prefix('admin')->group(function () {
             Route::get('/jobs/edit/{id}', [JobController::class, 'edit'])->name('jobs.edit');
             Route::delete('/jobs/delete/{id}', [JobController::class, 'destroy'])->name('jobs.delete');
             Route::post('/jobs/update/{id}', [JobController::class, 'update'])->name('jobs.update');
+            Route::get('/companies/jobs', [JobController::class, 'companiesJob']);
 
             Route::get('/categories', [CategoryController::class, 'index']);
             Route::get('/categories/create', [CategoryController::class, 'create']);
@@ -33,8 +34,8 @@ Route::prefix('admin')->group(function () {
             Route::post('/categories/update/{id}', [CategoryController::class, 'update']);
             Route::delete('/categories/delete/{id}', [CategoryController::class, 'destroy']);
             Route::get('/job-status/{id}/{status}', [JobController::class, 'updateStatus'])->name('job.status');
-
-            
+            Route::delete('/applications/{id}', [JobController::class, 'destroyApplication'])->name('applications.delete');
+            Route::get('/applications/export', [JobController::class, 'export'])->name('applications.export');
         });
     
 });
@@ -42,16 +43,18 @@ Route::prefix('admin')->group(function () {
 Route::middleware(['auth', 'can:isCandidate'])->group(function () {
 
         Route::get('/candidate/dashboard', [CandidateController::class, 'dashboard'])->name('candidate.dashboard');
-        Route::get('/candidate/profile', [CandidateController::class, 'index'])->name('candidate.profile')->middleware('can:isCandidate');
+        Route::get('/candidate/profile', [CandidateController::class, 'index'])->name('candidate.profile');
         Route::post('/candidate/profile', [CandidateController::class, 'store'])->name('candidate.profile.store');
         Route::get('/candidate/jobs', [JobController::class, 'index']);
         Route::get('/candidate/applications', [JobController::class, 'applications']);
 
 
+
  });
 
+Route::get('candidate/login', [AuthController::class, 'showLogin'])->name('login');
 
-Route::get('/register', [CandidateController::class, 'showForm'])->name('register');
+Route::get('candidate/register', [CandidateController::class, 'showForm'])->name('register');
 Route::post('/register', [CandidateController::class, 'register']);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');

@@ -7,6 +7,46 @@
 @stop
 
 @section('content')
+
+        <form method="GET" action="{{ url()->current() }}" class="mb-3">
+            <div class="row">
+
+                {{-- 🔍 Title Search --}}
+                <div class="col-md-4">
+                    <input type="text" name="title" class="form-control"
+                        placeholder="Search by job title"
+                        value="{{ request('title') }}">
+                </div>
+
+                {{-- 📅 Date Search --}}
+                <div class="col-md-4">
+                    <input type="date" name="date" class="form-control"
+                        value="{{ request('date') }}">
+                </div>
+
+                {{-- 🔘 Buttons --}}
+                <div class="col-md-4 d-flex">
+                    <button type="submit" class="btn btn-primary mr-2">
+                        Filter
+                    </button>
+
+                    <a href="{{ url()->current() }}" class="btn btn-secondary">
+                        Reset
+                    </a>
+                </div>
+
+            </div>
+        </form>
+
+    
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{{ route('applications.export', request()->all()) }}" 
+            class="btn btn-danger">
+                Export PDF
+            </a>
+        </div>
+
+
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">All Candidates List</h3>
@@ -19,6 +59,7 @@
                     <th>Candidate Name</th>
                     <th>Applied For</th>
                     <th>Email</th>
+                    <th>Phone</th>
                     <th>Resume</th>
                     <th>Date</th>
                     <th style="width: 150px">Actions</th>
@@ -32,6 +73,9 @@
                     <td><span class="badge badge-info">{{ $app->job->title ?? 'N/A' }}</span></td>
                     <td>{{ $app->email }}</td>
                     <td>
+                       <a href="https://wa.me/91{{ $app->phone }}" target="_blank">Chat on WhatsApp</a>
+                    </td>
+                    <td>
                         <a href="{{ asset('storage/' . $app->resume) }}" target="_blank" class="btn btn-sm btn-outline-danger">
                             <i class="fas fa-file-pdf"></i> View Resume
                         </a>
@@ -42,7 +86,25 @@
                             View Details
                         </button>
                     </td>
+                    @auth
+                        <td>
+                            @if(auth()->user()->role === 'admin')
+                              <form action="{{ route('applications.delete', $app->id) }}" method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this application?');">
+
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="btn btn-danger">
+                                        Delete
+                                    </button>
+                                </form>
+                            @endif
+                        </td>
+                     @endauth
                 </tr>
+
+
 
                 {{-- Modal for Cover Letter --}}
                 <div class="modal fade" id="modal-{{ $app->id }}">
@@ -59,6 +121,7 @@
                         </div>
                     </div>
                 </div>
+
                 @empty
                 <tr>
                     <td colspan="7" class="text-center">No applications received yet.</td>

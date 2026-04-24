@@ -11,31 +11,28 @@ use App\Notifications\AdminNotification;
 use App\Models\Application;
 use App\Models\Category;
 use App\Mail\JobPostedMail;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 use Illuminate\Support\Facades\Mail;
 // Model ko import karna na bhoolein
 
 class JobController extends Controller
 {
 
-    public function index()
-    {
-    //    $jobs = Job::with('categoryData')->get(); // IMPORTANT
-
-       $query = Job::query();
-
-        if (auth()->check() && auth()->user()->role === 'candidate') {
-            $query->where(function ($q) {
+      public function index()
+        {
+            $query = Job::where(function ($q) {
                 $q->where('posted_by_type', 'admin')
                 ->orWhere(function ($q2) {
                     $q2->where('posted_by_type', 'company')
                         ->where('approval_status', 'approved');
                 });
             });
-        }
 
-        $jobs = $query->with('categoryData')->latest()->get();       
-        return view('admin.jobs.index', compact('jobs'));
-    }
+            $jobs = $query->with('categoryData')->latest()->get();
+
+            return view('admin.jobs.index', compact('jobs'));
+        }
     public function create()
     {
         $categories = Category::all();
@@ -50,6 +47,37 @@ class JobController extends Controller
 
         return view('admin.jobs.edit', compact('job', 'categories'));
     }
+
+
+
+        public function export(Request $request)
+        {
+            $query = Application::with('job');
+
+            // 🔹 Role logic
+            if (auth()->user()->role !== 'admin') {
+                $query->where('user_id', auth()->id());
+            }
+
+            // 🔍 Title filter
+            if ($request->filled('title')) {
+                $query->whereHas('job', function ($q) use ($request) {
+                    $q->where('title', 'like', '%' . $request->title . '%');
+                });
+            }
+
+            // 📅 Date filter
+            if ($request->filled('date')) {
+                $query->whereDate('created_at', $request->date);
+            }
+
+            $applications = $query->latest()->get();
+
+            // PDF view load
+            $pdf = Pdf::loadView('admin.applications.pdf', compact('applications'));
+
+            return $pdf->download('applications.pdf');
+        }
 
 
     public function update(Request $request, $id)
@@ -128,24 +156,28 @@ class JobController extends Controller
         }
     }
 
-    public function applications()
+    public function applications(Request $request)
         {
+            $query = Application::with('job');
 
-
-
-
-            if (auth()->user()->role === 'admin') {
-                // Admin → sab applications dekhega
-                $applications = Application::with('job')
-                    ->latest()
-                    ->get();
-            } else {
-                // Candidate → sirf apni applications
-                $applications = Application::with('job')
-                    ->where('user_id', auth()->id())
-                    ->latest()
-                    ->get();
+            // 🔹 ROLE BASED DATA
+            if (auth()->user()->role !== 'admin') {
+                $query->where('user_id', auth()->id());
             }
+
+            // 🔍 Title search (job title se)
+            if ($request->filled('title')) {
+                $query->whereHas('job', function ($q) use ($request) {
+                    $q->where('title', 'like', '%' . $request->title . '%');
+                });
+            }
+
+            // 📅 Date filter (application date)
+            if ($request->filled('date')) {
+                $query->whereDate('created_at', $request->date);
+            }
+
+            $applications = $query->latest()->get();
 
             return view('admin.applications.index', compact('applications'));
         }
@@ -171,16 +203,18 @@ class JobController extends Controller
                                     'full_name' => $request->full_name,
                                     'email' => $request->email,
                                     'cover_letter' => $request->cover_letter,
+                                    'phone' => $request->phone,
                                     'resume' => $filePath, // 👈 file path store karo (NOT file object)
                                 ]);
 
-                                return redirect()->route('login');
+                                return redirect()->route('register');
                     }
                             // 1. Validation
                             $request->validate([
                                 'full_name' => 'required|string|max:255',
                                 'email' => 'required|email',
                                 'resume' => 'required|mimes:pdf|max:2048', // Max 2MB PDF
+                                'phone'=>'required|string|max:20',
                             ]);
 
                     // 2. Resume Upload
@@ -193,13 +227,16 @@ class JobController extends Controller
                     Application::create([
                         'job_id' => $id,
                         'full_name' => $request->full_name,
-                         'email'=>auth()->user()->email, 
+                        'email'=>auth()->user()->email, 
+                        'phone'=>$request->phone,
                         'resume' => $filePath,
                         'user_id'=>Auth::id(),
                         'cover_letter' => $request->cover_letter,
                     ]);
 
-                    return back()->with('success', 'Application submitted successfully!');
+                    return redirect()->route('candidate.profile')->with('success', 'Job applied successfully!');
+
+                   // return back()->with('success', 'Application submitted successfully!');
        }
 
 
@@ -228,11 +265,14 @@ class JobController extends Controller
                 'email' => $form['email'],
                 'resume' => $form['resume'], // important
                 'user_id' => auth()->id(),
+                'phone'=>$form['phone'],
                 'cover_letter' => $form['cover_letter'] ?? null,
             ]);
 
-            return redirect('/jobs/'.$jobId)
-                ->with('success', 'Application submitted! Please upload resume.');
+            return redirect()->route('candidate.profile')->with('success', 'Job applied successfully!');
+
+            // return redirect('/jobs/'.$jobId)
+            //     ->with('success', 'Application submitted! Please upload resume.');
         }
 
     public function show($id)
@@ -250,6 +290,25 @@ class JobController extends Controller
         }
 
 
+         public function destroyApplication($id)
+        {
+
+             $Application = Application::find($id);
+
+                if (!$Application) {
+                    abort(404);
+                }
+
+                // 🔐 Only admin can delete
+                if (auth()->user()->role !== 'admin') {
+                    abort(403);
+                }
+
+                $Application->delete();
+
+                return redirect()->back()->with('success', 'Application deleted successfully!');
+        }
+        
     public function find_job(Request $request)
         {
             // $categories = Category::with(['jobs' => function ($query) {
@@ -362,4 +421,10 @@ class JobController extends Controller
             return redirect()->back()->with('success', 'Job status updated successfully');
         }
                 
+    public function companiesJob()
+        {
+            $jobs = Job::where('posted_by_type', 'company')->get();
+            return view('admin.company_job.index', compact('jobs'));
+        }
+         
 }

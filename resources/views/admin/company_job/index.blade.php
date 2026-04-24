@@ -62,59 +62,51 @@
                     </td>
                     <td>
 
-                        {{-- 🔹 ADMIN ACTIONS --}}
-                        @if(auth()->check() && auth()->user()->role === 'admin')
-                            
-                            <a href="{{ url('/admin/jobs/edit/'.$job->id) }}" class="btn btn-sm btn-warning">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
+                    @if(auth()->check() && auth()->user()->role === 'admin')
+                            <a href="/admin/jobs/edit/{{$job->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</a>
 
                             <form action="{{ route('jobs.delete', $job->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Are you sure?')">
+                                <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
                                     Delete
                                 </button>
                             </form>   
-
                         @endif
 
 
-                        {{-- 🔹 COMPANY JOB STATUS --}}
                         @if($job->posted_by_type == 'company')
 
-                            @if($job->approval_status == 'pending')
+                                        @if($job->approval_status == 'pending')
+                                            <!-- Dropdown show hoga -->
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                                                    Action
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item text-success" 
+                                                    href="{{ route('job.status', [$job->id, 'approved']) }}">
+                                                        Approve
+                                                    </a>
+                                                    <a class="dropdown-item text-danger" 
+                                                    href="{{ route('job.status', [$job->id, 'rejected']) }}">
+                                                        Reject
+                                                    </a>
+                                                </div>
+                                            </div>
 
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                                        Action
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item text-success" 
-                                        href="{{ route('job.status', [$job->id, 'approved']) }}">
-                                            Approve
-                                        </a>
-                                        <a class="dropdown-item text-danger" 
-                                        href="{{ route('job.status', [$job->id, 'rejected']) }}">
-                                            Reject
-                                        </a>
-                                    </div>
-                                </div>
+                                        @elseif($job->approval_status == 'approved')
+                                            <!-- Approved badge -->
+                                            <span class="badge badge-success">Approved</span>
 
-                            @elseif($job->approval_status == 'approved')
+                                        @elseif($job->approval_status == 'rejected')
+                                            <!-- Rejected badge -->
+                                            <span class="badge badge-danger">Rejected</span>
 
-                                <span class="badge badge-success">Approved</span>
+                                        @endif
 
-                            @elseif($job->approval_status == 'rejected')
-
-                                <span class="badge badge-danger">Rejected</span>
-
-                            @endif 
-
-                        @endif 
-
+                        @endif
                     </td>
                     <td>
                      @if(auth()->check() && auth()->user()->role == 'candidate')

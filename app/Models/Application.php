@@ -17,6 +17,7 @@ class Application extends Model
         'resume',
         'cover_letter',
         'user_id',
+        'phone',
     ];
 
     public function job()

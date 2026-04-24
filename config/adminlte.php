@@ -337,6 +337,13 @@ return [
               'can'  => 'isAdmin',
         ],
 
+        [
+            'text' => 'Companies Job',
+            'url'  => 'admin/companies/jobs',
+            'icon' => 'fas fa-fw fa-plus-circle',
+              'can'  => 'isAdmin',
+        ],
+
 
         [
             'text' => 'Applications',

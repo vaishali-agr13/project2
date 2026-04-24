@@ -66,7 +66,17 @@
 
                          <div class="form-group">
                             <label>Upload Resume (PDF/DOC/DOCX)</label>
-                            <input type="file" name="resume" class="form-control">
+
+                                @if(!empty($profile->resume))
+                                    <p>
+                                        Current Resume: 
+                                        <a href="{{ asset('storage/' . $profile->resume) }}" target="_blank">
+                                            {{ basename($profile->resume) }}
+                                        </a>
+                                    </p>
+                                @endif
+
+                                <input type="file" name="resume" class="form-control">
                         </div>
 
                          <div class="form-group">

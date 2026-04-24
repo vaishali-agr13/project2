@@ -1,12 +1,19 @@
-TesT sidebar
 <aside class="main-sidebar {{ config('adminlte.classes_sidebar', 'sidebar-dark-primary elevation-4') }}">
 
     {{-- Sidebar brand logo --}}
-    @if(config('adminlte.logo_img_xl'))
+    <!-- @if(config('adminlte.logo_img_xl'))
         @include('adminlte::partials.common.brand-logo-xl')
     @else
         @include('adminlte::partials.common.brand-logo-xs')
-    @endif
+    @endif -->
+
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <div class="info">
+        <a href="#" class="d-block text-white">
+            {{ auth()->check() ? auth()->user()->name : '' }}
+        </a>
+    </div>
+    </div>
 
     {{-- Sidebar menu --}}
     <div class="sidebar">

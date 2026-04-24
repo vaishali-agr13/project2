@@ -19,7 +19,11 @@
 <body class="hold-transition login-page" style="background: linear-gradient(135deg, #667eea, #764ba2);">
 
 <div class="login-box">
-  
+        @if(request()->is('candidate/login'))
+            <h2 style="margin-left:66px;">Candidate Login</h2>
+        @else
+            <h2 style="margin-left:85px;">Admin Login</h2>
+        @endif
 
     <div class="card">
         <div class="card-body login-card-body">

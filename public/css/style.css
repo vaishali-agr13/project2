@@ -42,7 +42,9 @@ input, textarea {
 input::placeholder, textarea::placeholder {
   color: #6b7280 !important;
 }
-
+#file-name {
+  color: #6b7280 !important;
+}
 .hero-img {
   flex: 1;
   text-align: center;
