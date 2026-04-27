@@ -346,7 +346,7 @@ return [
 
 
         [
-            'text' => 'Applications',
+            'text' => 'Apply Job',
             'url'  => 'admin/applications', // Jo route humne abhi banaya
             'icon' => 'fas fa-fw fa-users',
           //  'label'       => 4, // Optional: Aap yahan dynamic count bhi dikha sakte hain
@@ -355,7 +355,7 @@ return [
         ],
 
         [
-            'text' => 'Applications',
+            'text' => 'Apply Job',
             'url'  => 'candidate/applications', // Jo route humne abhi banaya
             'icon' => 'fas fa-fw fa-users',
             //'label'       => 4, // Optional: Aap yahan dynamic count bhi dikha sakte hain

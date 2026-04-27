@@ -82,7 +82,7 @@
             </div>
 
             <input type="hidden" name="posted_by_type" value="admin">
-
+            <input type="hidden" name="from" value="{{ $from }}">
 
             <button class="btn btn-primary mt-3">Update Job</button>
         </form>

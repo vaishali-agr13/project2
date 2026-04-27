@@ -8,43 +8,61 @@
 
 @section('content')
 
-        <form method="GET" action="{{ url()->current() }}" class="mb-3">
-            <div class="row">
+        @if(auth()->check() && auth()->user()->role === 'admin')
 
-                {{-- 🔍 Title Search --}}
-                <div class="col-md-4">
-                    <input type="text" name="title" class="form-control"
-                        placeholder="Search by job title"
-                        value="{{ request('title') }}">
-                </div>
+                <form method="GET" action="{{ url()->current() }}" class="mb-3">
+                    <div class="row">
 
-                {{-- 📅 Date Search --}}
-                <div class="col-md-4">
-                    <input type="date" name="date" class="form-control"
-                        value="{{ request('date') }}">
-                </div>
+                        {{-- 🔍 Title Search --}}
+                        <div class="col-md-4">
+                            <input type="text" name="title" class="form-control"
+                                placeholder="Search by job title"
+                                value="{{ request('title') }}">
+                        </div>
 
-                {{-- 🔘 Buttons --}}
-                <div class="col-md-4 d-flex">
-                    <button type="submit" class="btn btn-primary mr-2">
-                        Filter
-                    </button>
+                        {{-- 📅 Date Search --}}
+                        <div class="col-md-4">
+                            <input type="date" name="date" class="form-control"
+                                value="{{ request('date') }}">
+                        </div>
 
-                    <a href="{{ url()->current() }}" class="btn btn-secondary">
-                        Reset
+                        {{-- 👤 Name Search --}}
+                            <div class="col-md-4 mt-2">
+                                <input type="text" name="name" class="form-control"
+                                    placeholder="Search by name"
+                                    value="{{ request('name') }}">
+                            </div>
+
+                            {{-- 📱 Mobile Search --}}
+                            <div class="col-md-4 mt-2">
+                                <input type="text" name="mobile" class="form-control"
+                                    placeholder="Search by mobile number"
+                                    value="{{ request('mobile') }}">
+                            </div>
+
+                        {{-- 🔘 Buttons --}}
+                        <div class="col-md-4 d-flex">
+                            <button type="submit" class="btn btn-primary mr-2">
+                                Filter
+                            </button>
+
+                            <a href="{{ url()->current() }}" class="btn btn-secondary">
+                                Reset
+                            </a>
+                        </div>
+
+                    </div>
+                </form>
+
+            
+                <div class="d-flex justify-content-end mb-3">
+                    <a href="{{ route('applications.export', request()->all()) }}" 
+                    class="btn btn-danger">
+                        Export PDF
                     </a>
                 </div>
 
-            </div>
-        </form>
-
-    
-        <div class="d-flex justify-content-end mb-3">
-            <a href="{{ route('applications.export', request()->all()) }}" 
-            class="btn btn-danger">
-                Export PDF
-            </a>
-        </div>
+        @endif
 
 
 <div class="card">
@@ -62,6 +80,7 @@
                     <th>Phone</th>
                     <th>Resume</th>
                     <th>Date</th>
+                    <th>status</th>
                     <th style="width: 150px">Actions</th>
                 </tr>
             </thead>
@@ -81,14 +100,56 @@
                         </a>
                     </td>
                     <td>{{ $app->created_at->format('d M, Y') }}</td>
+
+                    <td>
+                        @if($app->status == 'approved')
+                            <span class="badge badge-success">Approved</span>
+                        @elseif($app->status == 'rejected')
+                            <span class="badge badge-danger">Rejected</span>
+                        @else
+                            <span class="badge badge-warning">Pending</span>
+                        @endif
+                    </td>
+
                     <td>
                         <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-{{ $app->id }}">
                             View Details
                         </button>
                     </td>
                     @auth
+
+                    @if(auth()->user()->role === 'admin')
+                    <td>
+                        @if($app->status == 'pending')
+
+                            {{-- Approve --}}
+                            <form action="{{ route('applications.updateStatus', $app->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <input type="hidden" name="status" value="approved">
+                                <button type="submit" class="btn btn-success btn-sm"
+                                    onclick="return confirm('Approve this application?')">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </form>
+
+                            {{-- Reject --}}
+                            <form action="{{ route('applications.updateStatus', $app->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <input type="hidden" name="status" value="rejected">
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Reject this application?')">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </form>
+
+                        @else
+                            <span class="badge badge-secondary">Action Done</span>
+                        @endif
+                    </td>
+                    
+                    
                         <td>
-                            @if(auth()->user()->role === 'admin')
+                            
                               <form action="{{ route('applications.delete', $app->id) }}" method="POST"
                                     onsubmit="return confirm('Are you sure you want to delete this application?');">
 
@@ -99,8 +160,11 @@
                                         Delete
                                     </button>
                                 </form>
-                            @endif
+                            
                         </td>
+                        
+                        
+                        @endif
                      @endauth
                 </tr>
 

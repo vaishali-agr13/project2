@@ -25,7 +25,7 @@ Route::prefix('admin')->group(function () {
             Route::delete('/jobs/delete/{id}', [JobController::class, 'destroy'])->name('jobs.delete');
             Route::post('/jobs/update/{id}', [JobController::class, 'update'])->name('jobs.update');
             Route::get('/companies/jobs', [JobController::class, 'companiesJob']);
-
+            Route::post('/applications/{id}/status', [JobController::class, 'updateApplicationStatus'])->name('applications.updateStatus');
             Route::get('/categories', [CategoryController::class, 'index']);
             Route::get('/categories/create', [CategoryController::class, 'create']);
             Route::post('/categories/store', [CategoryController::class, 'store']);

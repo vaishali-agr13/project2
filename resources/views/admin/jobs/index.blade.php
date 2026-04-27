@@ -23,8 +23,11 @@
                     <th>ID</th>
                     <th>Title</th>
                     <th>Company</th>
+                    <th>Company Email</th>
+                     <th>Location</th>
+                     <th>salary</th>
                     <th>Category</th>
-                    <th>Salary</th>
+                    <th>description</th>
                     <th>Type</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -50,8 +53,11 @@
                     <td>{{ $job->id }}</td>
                     <td>{{ $job->title }}</td>
                     <td>{{ $job->company_name }}</td>
-                    <td>{{ $job->categoryData->name ?? 'N/A' }}</td>
+                    <td>{{ $job->company_email }}</td>
+                    <td>{{ $job->location }}</td>
                     <td>₹ {{ formatSalary($job->salary_min) }} - ₹{{ formatSalary($job->salary_max) }}</td>
+                    <td>{{ $job->categoryData->name ?? 'N/A' }}</td>
+                     <td>{{ \Illuminate\Support\Str::limit($job->description, 10, '...') }}</td>
                     <td><span class="badge badge-info">{{ $job->job_type }}</span></td>
                     <td>
                         @if($job->status == 1)
@@ -65,7 +71,7 @@
                         {{-- 🔹 ADMIN ACTIONS --}}
                         @if(auth()->check() && auth()->user()->role === 'admin')
                             
-                            <a href="{{ url('/admin/jobs/edit/'.$job->id) }}" class="btn btn-sm btn-warning">
+                            <a href="{{ url('/admin/jobs/edit/'.$job->id.'?from=jobs') }}" class="btn btn-smbtn btn-success">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
 

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Notifications\AdminNotification; 
 use App\Models\Application;
 use App\Models\Category;
+use App\Mail\ApplicationStatusMail;
 use App\Mail\JobPostedMail;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -40,12 +41,14 @@ class JobController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         $job = Job::findOrFail($id);
         $categories = Category::all();
 
-        return view('admin.jobs.edit', compact('job', 'categories'));
+         $from = $request->from;
+
+        return view('admin.jobs.edit', compact('job', 'categories','from'));
     }
 
 
@@ -66,9 +69,19 @@ class JobController extends Controller
                 });
             }
 
-            // 📅 Date filter
+                // 📅 Date filter
             if ($request->filled('date')) {
                 $query->whereDate('created_at', $request->date);
+            }
+
+                // 👤 Name search
+            if ($request->filled('name')) {
+                $query->where('full_name', 'like', '%' . $request->name . '%');
+            }
+
+            // 📱 Mobile search
+            if ($request->filled('mobile')) {
+                $query->where('phone', 'like', '%' . $request->mobile . '%');
             }
 
             $applications = $query->latest()->get();
@@ -99,16 +112,39 @@ class JobController extends Controller
             /*'posted_by_type'=>$request->posted_by_type,*/
         ]);
 
-        return redirect()->route('jobs.index')->with('success', 'Job Updated Successfully');
+        if($request->from=='company'){
+             return redirect('/admin/companies/jobs')->with('success', 'Job updated successfully');
+        }
+        else if ($request->from=='jobs'){
+            return redirect()->route('jobs.index')->with('success', 'Job Updated Successfully');
+        }
     }
 
     public function destroy($id)
     {
         $job = Job::findOrFail($id);
         $job->delete();
-
-        return redirect()->route('jobs.index')->with('success', 'Job Deleted Successfully');
+        return redirect('/admin/companies/jobs')->with('success', 'Job Deleted Successfully');
+        //return redirect()->route('/companies/jobs')->with('success', 'Job Deleted Successfully');
     }
+
+
+    public function updateApplicationStatus(Request $request, $id)
+        {
+            $application = Application::findOrFail($id);
+
+            // validate status
+            $request->validate([
+                'status' => 'required|in:approved,rejected'
+            ]);
+
+            $application->status = $request->status;
+            $application->save();
+
+            Mail::to($application->email)->send(new ApplicationStatusMail($application));
+
+            return redirect()->back()->with('success', 'Status updated successfully');
+        }
 
     public function store(Request $request)
     {
@@ -177,6 +213,16 @@ class JobController extends Controller
                 $query->whereDate('created_at', $request->date);
             }
 
+
+                // 👤 Name search
+                if ($request->filled('name')) {
+                    $query->where('full_name', 'like', '%' . $request->name . '%');
+                }
+
+                // 📱 Mobile search
+                if ($request->filled('mobile')) {
+                    $query->where('phone', 'like', '%' . $request->mobile . '%');
+                }
             $applications = $query->latest()->get();
 
             return view('admin.applications.index', compact('applications'));

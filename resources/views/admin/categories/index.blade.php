@@ -16,6 +16,30 @@
     </div>
 @endif
 
+            <form method="GET" action="{{ url()->current() }}" class="mb-3">
+                <div class="row align-items-center">
+
+                    {{-- 🔍 Search --}}
+                    <div class="col-md-4">
+                        <input type="text" name="name" class="form-control"
+                            placeholder="Search by name"
+                            value="{{ request('name') }}">
+                    </div>
+
+                    {{-- 🔘 Buttons --}}
+                    <div class="col-md-4 d-flex">
+                        <button type="submit" class="btn btn-primary mr-2">
+                            Filter
+                        </button>
+
+                        <a href="{{ url()->current() }}" class="btn btn-secondary">
+                            Reset
+                        </a>
+                    </div>
+
+                </div>
+            </form>
+
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">All Categories</h3>
@@ -33,8 +57,8 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Description</th>
+                    <th>Job Category</th>
+                    <th>Job Description</th>
                     <th width="150">Action</th>
                 </tr>
             </thead>
@@ -44,9 +68,9 @@
                     <tr>
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $cat->name }}</td>
-                        <td>{{ $cat->description }}</td>
+                        <td>{{ \Illuminate\Support\Str::limit($cat->description, 10, '...') }}</td>
                         <td>
-                        <a href="{{ url('/admin/categories/edit/'.$cat->id) }}" class="btn btn-sm btn-warning">
+                        <a href="{{ url('/admin/categories/edit/'.$cat->id) }}" class="btn btn-sm btn-success">
                             Edit
                         </a>                            
                         <form action="{{ url('/admin/categories/delete/'.$cat->id) }}" method="POST" style="display:inline;">

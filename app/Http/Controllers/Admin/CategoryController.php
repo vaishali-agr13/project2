@@ -10,10 +10,21 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     // List
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
+        // $categories = Category::all();
+
+
+        $query = Category::query();
+
+  
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->name . '%');
+         }
+
+        $categories = $query->latest()->get();
         return view('admin.categories.index', compact('categories'));
+
     }
 
     // Form

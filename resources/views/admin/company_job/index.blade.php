@@ -10,11 +10,11 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Jobs List</h3>
-        <div class="card-tools">
+        <!-- <div class="card-tools">
             @if(auth()->check() && auth()->user()->role == 'admin')
                <a href="{{ route('admin.jobs.create') }}" class="btn btn-primary btn-sm">Post New Job</a>
             @endif
-        </div>
+        </div> -->
     </div>
     <div class="card-body p-0">
         <table class="table table-hover text-nowrap">
@@ -23,9 +23,13 @@
                     <th>ID</th>
                     <th>Title</th>
                     <th>Company</th>
+                    <th>Company Email</th>
+                    <th>Location</th>
                     <th>Category</th>
                     <th>Salary</th>
                     <th>Type</th>
+                    <th>Experience Required</th>
+                    <th>Description</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -50,9 +54,14 @@
                     <td>{{ $job->id }}</td>
                     <td>{{ $job->title }}</td>
                     <td>{{ $job->company_name }}</td>
+                    <td>{{ $job->company_email }}</td>
+                    <td>{{ $job->location }}</td>
                     <td>{{ $job->categoryData->name ?? 'N/A' }}</td>
                     <td>₹ {{ formatSalary($job->salary_min) }} - ₹{{ formatSalary($job->salary_max) }}</td>
                     <td><span class="badge badge-info">{{ $job->job_type }}</span></td>
+                    <td>{{ $job->experience }}</td>
+                    <td>{{ \Illuminate\Support\Str::limit($job->description, 10, '...') }}</td>
+
                     <td>
                         @if($job->status == 1)
                             <span class="badge badge-success">Active</span>
@@ -63,7 +72,7 @@
                     <td>
 
                     @if(auth()->check() && auth()->user()->role === 'admin')
-                            <a href="/admin/jobs/edit/{{$job->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Edit</a>
+                            <a href="/admin/jobs/edit/{{$job->id.'?from=company'}}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i> Edit</a>
 
                             <form action="{{ route('jobs.delete', $job->id) }}" method="POST" style="display:inline;">
                                 @csrf

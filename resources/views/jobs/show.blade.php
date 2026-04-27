@@ -80,7 +80,7 @@
 
                     <div class="prose max-w-none text-gray-700 leading-relaxed">
                         <h3 class="text-xl font-bold text-gray-900 mb-4">Job Description</h3>
-                        <p>{{ $job->description }}</p>
+                        <p>{!! $job->description !!}</p>
                         
                         <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4">Requirements</h3>
                         <ul class="list-disc pl-5 space-y-2">

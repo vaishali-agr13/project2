@@ -155,7 +155,7 @@
                     {{-- Description --}}
                     <div class="form-group">
                         <label for="description">Job Description</label>
-                        <textarea name="description" class="form-control" rows="5" placeholder="Enter full job requirements..." required>{{ old('description') }}</textarea>
+                        <textarea name="description" id="description" class="form-control" rows="5" placeholder="Enter full job requirements..." required>{{ old('description') }}</textarea>
                     </div>
                 </div>
 
@@ -195,5 +195,11 @@
             }, 500);
         }
     }, 3000);
+
+    <script>
+    $('#description').summernote({
+        height: 200
+    });
+</script>
     </script>
 @stop
