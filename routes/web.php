@@ -31,6 +31,8 @@ Route::prefix('admin')->group(function () {
             Route::post('/categories/store', [CategoryController::class, 'store']);
 
             Route::get('/categories/edit/{id}', [CategoryController::class, 'edit']);
+            Route::get('/dashboard', [JobController::class, 'dashboard'])->name('admin.dashboard');
+
             Route::post('/categories/update/{id}', [CategoryController::class, 'update']);
             Route::delete('/categories/delete/{id}', [CategoryController::class, 'destroy']);
             Route::get('/job-status/{id}/{status}', [JobController::class, 'updateStatus'])->name('job.status');

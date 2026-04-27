@@ -324,6 +324,13 @@ return [
         ],
 
         [
+            'text' => 'Dashboard',
+            'url'  => 'admin/dashboard',
+            'icon' => 'fas fa-tachometer-alt',
+            'can'  => 'isAdmin',
+        ],
+
+        [
             'text' => 'All Jobs',
             'url'  => 'candidate/jobs',
             'icon' => 'fas fa-fw fa-briefcase',

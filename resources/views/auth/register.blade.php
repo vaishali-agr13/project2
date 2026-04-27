@@ -60,7 +60,7 @@
             </form>
 
             <p class="mt-3 text-center">
-                <a href="{{ url('admin/login') }}">Already have an account? Login</a>
+                <a href="{{ url('candidate/login') }}">Already have an account? Login</a>
             </p>
 
         </div>

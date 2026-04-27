@@ -82,7 +82,7 @@
 
 
             <p class="mb-1 text-center">
-                <a href="{{ url('/register') }}">Create a new account</a>
+                <a href="{{ url('/candidate/register') }}">Create a new account</a>
             </p>
 
         </div>

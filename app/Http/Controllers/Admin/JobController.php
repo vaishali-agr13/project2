@@ -330,6 +330,22 @@ class JobController extends Controller
         }
 
 
+        public function dashboard(){
+                $totalJobs = Job::count();
+
+                $totalCompanies = Job::where('posted_by_type', 'company')->count();
+
+                $totalApplications = Application::count();
+                $totalCategories = Category::count();
+
+                return view('admin.dashboard', compact(
+                    'totalJobs',
+                    'totalCompanies',
+                    'totalApplications',
+                    'totalCategories'
+                ));
+        }
+
          public function destroyApplication($id)
         {
 
