@@ -54,7 +54,7 @@ Route::middleware(['auth', 'can:isCandidate'])->group(function () {
 
  });
 
-Route::get('candidate/login', [AuthController::class, 'showLogin'])->name('login');
+Route::get('candidate/login', [AuthController::class, 'showLogin']);
 Route::post('candidate/login', [AuthController::class, 'loginCandidate']);
 
 Route::get('candidate/register', [CandidateController::class, 'showForm'])->name('register');
