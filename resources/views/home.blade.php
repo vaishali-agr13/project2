@@ -326,13 +326,13 @@
 
     <!-- LEFT CONTENT -->
     <div>
-      <h2 class="text-3xl font-bold mb-4">Join Our Community 🚀</h2>
-      <p class="text-purple-100 mb-6">
+      <h2 class="text-3xl font-bold mb-4" style="color:#661e92">Join Our Community 🚀</h2>
+      <p class="text-purple-100 mb-6" style="color:#661e92">
         Stay updated with the latest job openings, internships, and hiring alerts.  
         Join our WhatsApp community and never miss an opportunity.
       </p>
 
-      <ul class="space-y-2 mb-6 text-purple-100">
+      <ul class="space-y-2 mb-6 text-purple-100" style="color:#661e92">
         <li>✔ Daily Job Updates</li>
         <li>✔ Internship Alerts</li>
         <li>✔ Direct Hiring Notifications</li>
@@ -345,7 +345,7 @@
       </a>
 
       <!-- CONTACT -->
-      <p class="mt-4 text-sm text-purple-200">
+      <p class="mt-4 text-sm text-purple-200" style="color:#661e92">
         📞 Contact: +91 9039023534
       </p>
     </div>

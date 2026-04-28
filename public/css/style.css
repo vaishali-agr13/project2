@@ -72,13 +72,80 @@ input::placeholder, textarea::placeholder {
 
 /* SEARCH */
 .search-box {
+  position: relative;
+  overflow: visible !important;
   display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 10px 20px;
-    border-radius: 100px; /* Pillow shape */
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  align-items: center;
+  flex-wrap: wrap;   /* IMPORTANT */
+  gap: 10px;
+  background: #fff;
+  padding: 12px 16px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
 
+}
+
+@media (max-width: 600px) {
+  .divider {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+  .search-box {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .search-box {
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 20px;
+    gap: 10px;
+  }
+
+  .search-item {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  
+  .divider {
+    display: none;
+  }
+
+  .search-box button {
+    width: 100%;
+  }
+}
+
+  .search-item {
+   position: relative;
+  flex: 1;
+  }
+
+  .search-item [x-show] {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 99999;
+  width: 100%;
+}
+
+
+  .search-item .absolute {
+  z-index: 9999;
+}
+
+  .search-box button {
+   flex: 0 0 auto;
+  padding: 12px 20px;
+  border-radius: 50px;
+  overflow: visible;
+  position: relative;
+  white-space: nowrap;
+
+  }
 }
 
 .search-item {
@@ -87,6 +154,8 @@ input::placeholder, textarea::placeholder {
    padding: 5px 15px;
     transition: all 0.3s ease;
     border-radius: 8px;
+    flex: 1;
+  min-width: 0; 
 }
 .search-item:hover {
     background-color: rgba(243, 244, 246, 1); /* Light gray hover */
@@ -96,6 +165,7 @@ input::placeholder, textarea::placeholder {
 .search-item select {
   color: #111;
   font-size: 14px;
+  min-width: 0;
   width: 100%;
   background: transparent;
 }
@@ -130,6 +200,8 @@ input::placeholder, textarea::placeholder {
   border: none;
   border-radius: 50px;
   cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 /* SECTION BASE */
@@ -842,6 +914,7 @@ height: 50px;   /* try 45–60px */
 
   .divider {
     display: none;
+     flex-shrink: 0;
   }
 
   .container {

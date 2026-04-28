@@ -272,7 +272,8 @@
         </div>
 
         <div class="job-description">
-          {{$job->description}}
+          
+          {{ \Illuminate\Support\Str::limit($job->description, 10, '...') }}
         </div>
 
         @php
