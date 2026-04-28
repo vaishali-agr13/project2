@@ -16,7 +16,7 @@
             @endif
         </div> -->
     </div>
-    <div class="card-body p-0">
+    <div class="card-body p-0 table-responsive">
         <table class="table table-hover text-nowrap">
             <thead>
                 <tr>
