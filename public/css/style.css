@@ -80,19 +80,26 @@ input::placeholder, textarea::placeholder {
   gap: 10px;
   background: #fff;
   padding: 12px 16px;
-  border-radius: 20px;
+  border-radius: 25px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.08);
 
 }
 
 @media (max-width: 768px) {
+
+   .search-item{
+      padding: 12px 14px; 
+    }
     
     .search-box input {
-        font-size: 25px !important;
+       font-size: 16px !important;
+        height: 45px;         /* height fix */
+        line-height: 45px;
     }
 
     .search-box input::placeholder {
-        font-size: 25px !important;
+         font-size: 15px !important;
+        color: #9ca3af; 
     }
 
     .search-box select {
@@ -100,9 +107,14 @@ input::placeholder, textarea::placeholder {
   }
 
   .category-text {
-    font-size:24px;
-    padding: 20px !important;
-  }
+        font-size: 15px;
+        padding: 10px 5px !important;
+    }
+}
+
+.search-item span {
+    font-size: 18px;   /* icon thoda bada */
+    margin-right: 8px;
 }
 
 @media (max-width: 600px) {
@@ -181,8 +193,34 @@ input::placeholder, textarea::placeholder {
     background-color: rgba(243, 244, 246, 1); /* Light gray hover */
 }
 
+#welcomePopup > div {
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+@media (max-width: 480px) {
+    #welcomePopup > div {
+        width: 92%;
+        padding: 18px;
+    }
+
+    #welcomePopup h3 {
+        font-size: 22px !important;
+    }
+
+    #welcomePopup p {
+        font-size: 14px !important;
+    }
+
+    #welcomePopup img {
+        height: 60px !important;
+    }
+}
+
 .search-item input,
 .search-item select {
+  letter-spacing: 0.3px;
   color: #111;
   font-size: 14px;
   min-width: 0;
