@@ -85,6 +85,26 @@ input::placeholder, textarea::placeholder {
 
 }
 
+@media (max-width: 768px) {
+    
+    .search-box input {
+        font-size: 25px !important;
+    }
+
+    .search-box input::placeholder {
+        font-size: 25px !important;
+    }
+
+    .search-box select {
+    padding: 10px 12px;   /* top-bottom + left-right gap */   
+  }
+
+  .category-text {
+    font-size:24px;
+    padding: 20px !important;
+  }
+}
+
 @media (max-width: 600px) {
   .divider {
     display: none;
@@ -947,4 +967,6 @@ height: 50px;   /* try 45–60px */
     bottom: -25px;
     transform: translateX(50%);
   }
+
+
 }

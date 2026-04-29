@@ -17,6 +17,12 @@
     </style>
 </head>
 
+@if(session('error'))
+    <div class="alert alert-warning">
+        {{ session('error') }}
+    </div>
+@endif
+
 <body class="hold-transition login-page" style="background: linear-gradient(135deg, #667eea, #764ba2);">
 
 <div class="login-box">
