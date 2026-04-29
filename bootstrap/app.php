@@ -15,12 +15,14 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         //
     })
-    ->withExceptions(function ($exceptions) {
-            $exceptions->render(function (TokenMismatchException $e, Request $request) {
-                return redirect()->back()
-                    ->withInput()
-                    ->with('error', 'Page expired, please try again');
-            });
+   ->withExceptions(function ($exceptions) {
+    $exceptions->render(function (HttpException $e, Request $request) {
+        dd($e->getStatusCode());
+    });
+
+
+
+
     })->withProviders()
     
     ->create();
