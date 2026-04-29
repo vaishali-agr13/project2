@@ -90,7 +90,7 @@
 
                <div class="search-item relative" x-data="{ open: false, selected: '{{ request('category') ?? '' }}' }">
     
-                  <div @click="open = !open" class="category-text flex items-center cursor-pointer space-x-3 min-w-[180px]">
+                  <div @click="open = !open" class="category-text flex items-center cursor-pointer space-x-3 w-full">
                       
                       <div class="text-xl">📂</div>
                       
