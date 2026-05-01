@@ -163,6 +163,20 @@ input::placeholder, textarea::placeholder {
   z-index: 99999;
   width: 100%;
 }
+.category-dropdown {
+  position: absolute;
+  top: 100%;        /* 👈 arrow ke neeche */
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-top: 6px;
+  z-index: 9999;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  max-height: 250px;
+  overflow-y: auto;
+}
 
 
   .search-item .absolute {
@@ -342,6 +356,9 @@ input::placeholder, textarea::placeholder {
 
 /* JOB CARD */
 .job-card {
+
+    min-height: 260px;   /* 👈 height increase */
+
     background: #f3f4f6;
     padding: 14px;
     border-radius: 10px;
@@ -1030,6 +1047,13 @@ input::placeholder, textarea::placeholder {
   color:#661e92;
 }
 
+.cat-name {
+        font-weight: 700;
+        color: #333;
+        margin: 15px 0 5px 0;
+        font-size: 16px;
+  /*color: #4b5563;*/ 
+}
 .custom-border {
   border-top: 2px solid #661e92
 }

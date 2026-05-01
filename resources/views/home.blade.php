@@ -118,9 +118,9 @@
                       x-transition:enter="transition ease-out duration-100"
                       x-transition:enter-start="opacity-0 scale-95"
                       x-transition:enter-end="opacity-100 scale-100"
-                      class="absolute left-0 mt-3 w-64 bg-white border border-gray-100 rounded-xl shadow-2xl z-50">
+                      class="absolute left-0 top-full mt-2 w-64 bg-white border border-gray-100 rounded-xl shadow-2xl z-50">
                       
-                      <div class="p-2 max-h-60 overflow-y-auto custom-scrollbar">
+                      <div x-show="open" x-transition class="category-dropdown">
                           <div @click="selected = ''; open = false" 
                               class="px-4 py-2 text-xs text-gray-400 hover:bg-gray-50 cursor-pointer rounded-lg mb-1">
                               None (Clear)
@@ -168,7 +168,7 @@
           <div class="category-icon">
               <i class="fas {{ !empty($category->icon) ? $category->icon : 'fa-folder' }}"></i>
           </div>
-         <p style="font-weight: bold;"> {{$category->name}}</p>
+         <p class="cat-name"> {{$category->name}}</p>
 
           <p style="color:grey"> {{$category->jobs_count}} Jobs Avilaible </p>
        </a>

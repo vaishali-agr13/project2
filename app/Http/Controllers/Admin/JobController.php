@@ -334,6 +334,7 @@ class JobController extends Controller
                 $totalJobs = Job::count();
 
                 $totalCompanies = Job::where('posted_by_type', 'company')->count();
+                $candidateCount = User::where('role', 'candidate')->count();
 
                 $totalApplications = Application::count();
                 $totalCategories = Category::count();
@@ -342,7 +343,8 @@ class JobController extends Controller
                     'totalJobs',
                     'totalCompanies',
                     'totalApplications',
-                    'totalCategories'
+                    'totalCategories',
+                    'candidateCount'
                 ));
         }
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\CandidateProfile;
 use App\Models\Application;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 
 class CandidateController extends Controller
@@ -40,6 +41,12 @@ class CandidateController extends Controller
         return view('auth.register');
     }
 
+
+    public function candidateList(){
+          $candidates = User::where('role', 'candidate')->get();
+
+          return view('candidate.index', compact('candidates'));
+    }
      public function register(Request $request)
     {
         
@@ -55,6 +62,15 @@ class CandidateController extends Controller
             'password' => Hash::make($request->password),
             'role' => 'candidate',
         ]);
+
+        Mail::raw(
+                        "Welcome {$user->name},\n\nYour account has been created.\nEmail: {$user->email}\nPassword: {$request->password}",
+                        function ($message) use ($user) {
+                            $message->to($user->email)
+                                    ->subject('Registration Successful');
+                        }
+                 );
+
 
         // auto login
         Auth::login($user);

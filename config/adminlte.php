@@ -301,26 +301,13 @@ return [
     */
 
     'menu' => [
+
+        ['header' => 'JOB MANAGEMENT'],
+        
         [
             'type' => 'navbar-search',
             'text' => 'search',
             'topnav_right' => true,
-        ],
-
-        ['header' => 'JOB MANAGEMENT'],
-
-        [
-            'text' => 'All Jobs',
-            'url'  => 'admin/jobs',
-            'icon' => 'fas fa-fw fa-briefcase',
-            'can'  => 'isAdmin',
-        ],
-
-        [
-            'text' => 'Dashboard',
-            'url'  => 'candidate/dashboard',
-            'icon' => 'fas fa-tachometer-alt',
-            'can'  => 'isCandidate',
         ],
 
         [
@@ -331,30 +318,66 @@ return [
         ],
 
         [
+            'text' => 'Dashboard',
+            'url'  => 'candidate/dashboard',
+            'icon' => 'fas fa-tachometer-alt',
+            'can'  => 'isCandidate',
+        ],
+
+       
+
+        [
+            'text' => 'All Jobs',
+            
+            'icon' => 'fas fa-fw fa-briefcase',
+            'can'  => 'isAdmin',
+            'submenu' => [
+                        [
+                            'text' => 'Companies Job',
+                            'url'  => 'admin/companies/jobs',
+                            'icon' => 'fas fa-fw fa-plus-circle',
+                        ],
+                        [
+                            'text' => 'Post a Job',
+                            'url'  => 'admin/jobs/create',
+                            'icon' => 'fas fa-fw fa-plus-circle',
+                        ],
+                        [
+                            'text' => 'All Jobs',
+                            'url'  => 'admin/jobs',
+                            'icon' => 'far fa-circle',
+                        ],
+                    ],
+        ],
+
+       
+
+        
+
+        [
             'text' => 'All Jobs',
             'url'  => 'candidate/jobs',
             'icon' => 'fas fa-fw fa-briefcase',
             'can'  => 'isCandidate',
         ],
 
-        [
-            'text' => 'Post a Job',
-            'url'  => 'admin/jobs/create',
-            'icon' => 'fas fa-fw fa-plus-circle',
-              'can'  => 'isAdmin',
-        ],
+        
 
-        [
-            'text' => 'Companies Job',
-            'url'  => 'admin/companies/jobs',
-            'icon' => 'fas fa-fw fa-plus-circle',
-              'can'  => 'isAdmin',
-        ],
+        
 
 
         [
-            'text' => 'Apply Job',
+            'text' => 'Received Applications',
             'url'  => 'admin/applications', // Jo route humne abhi banaya
+            'icon' => 'fas fa-fw fa-users',
+          //  'label'       => 4, // Optional: Aap yahan dynamic count bhi dikha sakte hain
+            'label_color' => 'success',
+             'can'  => 'isAdmin',
+        ],
+
+        [
+            'text' => 'Ragistered Candidate',
+            'url'  => 'admin/candidate-list', // Jo route humne abhi banaya
             'icon' => 'fas fa-fw fa-users',
           //  'label'       => 4, // Optional: Aap yahan dynamic count bhi dikha sakte hain
             'label_color' => 'success',
@@ -401,8 +424,7 @@ return [
         //     'label' => 4,
         //     'label_color' => 'success',
         // ],
-        ['header' => 'account_settings',
-         'can' => 'isCandidate',
+        ['header' => 'account_settings'
         ],
         [
             'text' => 'profile',

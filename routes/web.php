@@ -18,6 +18,8 @@ Route::prefix('admin')->group(function () {
 
         Route::middleware('auth', 'can:isAdmin')->group(function () {
                 
+            Route::get('/candidate-list', [CandidateController::class, 'candidateList']);
+
             Route::get('/profile', [AuthController::class, 'profile']);
             Route::post('/profile/store', [AuthController::class, 'storeProfile'])->name('profile.store');
             Route::put('/profile/{id}', [AuthController::class, 'updateProfile'])->name('profile.update');

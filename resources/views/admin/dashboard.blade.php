@@ -28,7 +28,7 @@
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h3>{{ $totalApplications ?? 0 }}</h3>
-                            <p>Applied Jobs</p>
+                            <p>Received Applications</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-briefcase"></i>
@@ -72,9 +72,25 @@
                         <div class="icon">
                             <i class="fas fa-lightbulb"></i>
                         </div>
-                        <a href="#" class="small-box-footer">View Jobs <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer">More Info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{ $candidateCount ?? 0 }}</h3>
+                            <p>Total Registered Candidates </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More Info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+
             </div>
 
           

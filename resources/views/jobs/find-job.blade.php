@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
 @extends('layouts.app')
 @section('content')
 
@@ -74,7 +76,7 @@
                     x-transition:enter="transition ease-out duration-100"
                     x-transition:enter-start="opacity-0 scale-95"
                     x-transition:enter-end="opacity-100 scale-100"
-                    class="absolute left-0 mt-3 w-64 bg-white border border-gray-100 rounded-xl shadow-2xl z-50">
+                    class="absolute left-0 top-full mt-2 w-64 bg-white border border-gray-100 rounded-xl shadow-2xl z-50">
                     
                     <div class="p-2 max-h-60 overflow-y-auto custom-scrollbar">
                         <div @click="selected = ''; open = false" 
@@ -105,27 +107,28 @@
           </div>
         </form>
   <!-- Categories -->
-  <div class="categories">
-
-  @foreach($categories as $category)
-        <a href="{{ url('/categories/'.$category->id) }}">
-            
-            <div class="category-box">
-              
-                            
-
-            <div class="category-info">
-                <i style="font-size: 20px;color:#6c1e96" class="fas {{ !empty($category->icon) ? $category->icon : 'fa-folder' }}"></i>
-                <p>{{$category->name}}</p>
-                <span>{{$category->jobs_count}} Jobs Available</span>
-            </div>
-            
-            </div>
-        </a>
-    @endforeach
-  </div>
-
-  
+ <div class="categories-container">
+    <div class="swiper categorySwiper">
+        <div class="swiper-wrapper">
+            @foreach($categories as $category)
+                <!-- Slide must be the direct child of swiper-wrapper -->
+                <div class="swiper-slide">
+                    <a href="{{ url('/categories/'.$category->id) }}" style="text-decoration: none; display: block; width: 100%;">
+                        <div class="category-box">
+                            <div class="category-info">
+                                <i style="font-size: 24px; color:#6c1e96" class="fas {{ !empty($category->icon) ? $category->icon : 'fa-folder' }}"></i>
+                                <p class="cat-name" style="font-weight: bold; margin: 10px 0 5px; color: #333;">{{$category->name}}</p>
+                                <span style="font-size: 12px; color: #888;">{{$category->jobs_count}} Jobs Available</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+        
+        <!-- Dots -->
+        <div class="swiper-pagination"></div>
+    </div>
 </div>
 
 <div class="jobs-page">
@@ -323,6 +326,42 @@
 
 @endsection
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- 3. Initialize Swiper -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const swiper = new Swiper('.categorySwiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            // Responsive breakpoints
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                1024: {
+                    slidesPerView: 4,
+                },
+                1280: {
+                    slidesPerView: 5,
+                }
+            }
+        });
+    });
+</script>
+
 
 <script>
 window.onload = function () {
@@ -447,21 +486,25 @@ function toggleFilters() {
 }
 
 .category-box {
-  background-color: #fff;
-  color: #000;
-  width: 180px;
-  border-radius: 15px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: 0.3s;
+  background: #fff;
+        border-radius: 15px;
+        padding: 25px 20px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #f0f0f0;
+        cursor: pointer;
+        text-decoration: none !important;
 }
 
 .category-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(108, 30, 150, 0.1);
 }
 
 .category-box i {
@@ -475,9 +518,18 @@ function toggleFilters() {
 }
 
 .category-info span {
-  font-size: 0.85rem;
-  color: #666;
+   color: #888;
+        font-size: 13px;
 }
+
+ .swiper-pagination-bullet-active {
+        background: #6c1e96 !important; /* Your Purple Color */
+    }
+    
+    .swiper-pagination {
+        position: relative !important;
+        margin-top: 30px !important;
+    }
 
 /* Header Text */
 .header-text {
@@ -488,6 +540,13 @@ function toggleFilters() {
   color: #00395b;
 }
 
+.categories-container {
+        padding: 40px 0;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+}
 
 
 /* Page Layout */
