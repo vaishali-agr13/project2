@@ -130,8 +130,16 @@
 
 <div class="jobs-page">
 
+<button class="filter-toggle" onclick="toggleFilters()">
+  ☰ Filters
+</button>
+
   <!-- LEFT SIDEBAR (SEPARATE FORM) -->
   <aside class="filters">
+
+  <button onclick="toggleFilters()" style="float:right; font-size:18px; border:none; background:none; cursor:pointer;">
+  ✖
+</button>
 
     <form method="GET" action="{{ url('/find-jobs') }}" id="filterForm">
 
@@ -242,69 +250,70 @@
     </form>
 
   </aside>
-
+<div class="overlay" onclick="toggleFilters()"></div>
 
   <!-- RIGHT JOB LIST -->
   <main class="job-listing">
+    <div class="job-container">
+          @forelse($jobs as $job)
+            <div class="job-card">
 
-    @forelse($jobs as $job)
-      <div class="job-card">
+              <div class="job-header">
+                @php
+                    $days = \Carbon\Carbon::parse($job->created_at)->diffInDays(now());
+                @endphp
 
-        <div class="job-header">
-          @php
-              $days = \Carbon\Carbon::parse($job->created_at)->diffInDays(now());
-          @endphp
+                @if($days < 3)
+                    <img style="width:20px;height:20px;" src="{{ asset('images/new.gif') }}" class="company-logo">
 
-          @if($days < 3)
-              <img style="width:20px;height:20px;" src="{{ asset('images/new.gif') }}" class="company-logo">
+                @endif
 
-          @endif
+                <div class="job-company">
+                  <h3>{{$job->company_name}}</h3>
+                  <p>{{$job->location}}</p>
+                </div>
+              </div>
 
-          <div class="job-company">
-            <h3>{{$job->company_name}}</h3>
-            <p>{{$job->location}}</p>
+              <div class="job-title">
+                <h2>{{$job->title}}</h2>
+                <p>{{$job->job_type}} • 1 year ago</p>
+              </div>
+
+              <div class="job-description">
+                
+                {{ \Illuminate\Support\Str::limit($job->description, 10, '...') }}
+              </div>
+
+              @php
+                    if (!function_exists('formatSalary')) {
+                        function formatSalary($amount) {
+                            if ($amount >= 100000) {
+                                return round($amount / 100000) . ' LPA';
+                            } elseif ($amount >= 1000) {
+                                return round($amount / 1000) . 'k';
+                            }
+                            return $amount;
+                        }   
+                    }
+              @endphp
+
+              <div class="job-footer">
+                <p class="salary">₹ {{ formatSalary($job->salary_min) }} - ₹{{ formatSalary($job->salary_max) }} </p>
+
+                <a href="{{ url('/jobs/'.$job->id) }}" class="apply-btn">
+                  View Details
+                </a>
+              </div>
+
+            </div>
+          @empty
+ 
+          <div style="width:100%; text-align:center; padding:40px;">
+            <h2 style="color:#444;">No Jobs Found</h2>
+            <p style="color:gray;">Try changing filters or search keyword</p>
           </div>
-        </div>
-
-        <div class="job-title">
-          <h2>{{$job->title}}</h2>
-          <p>{{$job->job_type}} • 1 year ago</p>
-        </div>
-
-        <div class="job-description">
-          
-          {{ \Illuminate\Support\Str::limit($job->description, 10, '...') }}
-        </div>
-
-        @php
-              if (!function_exists('formatSalary')) {
-                  function formatSalary($amount) {
-                      if ($amount >= 100000) {
-                          return round($amount / 100000) . ' LPA';
-                      } elseif ($amount >= 1000) {
-                          return round($amount / 1000) . 'k';
-                      }
-                      return $amount;
-                  }   
-              }
-        @endphp
-
-        <div class="job-footer">
-          <p class="salary">₹ {{ formatSalary($job->salary_min) }} - ₹{{ formatSalary($job->salary_max) }} </p>
-
-          <a href="{{ url('/jobs/'.$job->id) }}" class="apply-btn">
-            View Details
-          </a>
-        </div>
-
-      </div>
-    @empty
-    <div style="width:100%; text-align:center; padding:40px;">
-      <h2 style="color:#444;">No Jobs Found</h2>
-      <p style="color:gray;">Try changing filters or search keyword</p>
-    </div>
-   @endforelse
-
+         @endforelse
+   </div>
   </main>
 
 </div>
@@ -324,6 +333,13 @@ window.onload = function () {
         };
     });
 };
+</script>
+
+<script>
+function toggleFilters() {
+    document.querySelector('.filters').classList.toggle('active');
+    document.querySelector('.overlay').classList.toggle('active');
+}
 </script>
 
 <style>
@@ -380,6 +396,8 @@ window.onload = function () {
   height: 25px;
   background: #ddd;
 }
+
+
 
 .search-box select,
 .search-box input {

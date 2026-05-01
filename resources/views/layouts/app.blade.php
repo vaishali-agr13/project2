@@ -30,12 +30,14 @@
   <div class="top-right">
     <span>
       <a href="https://wa.me/919039023534" target="_blank">
-           <i class="fa-brands fa-whatsapp"></i> +91 9039023534
+           <i class="fa-brands fa-whatsapp"></i> 
+           {{ $profile->phone ?? '+91 9039023534' }}
+           
       </a>
      </span>
     <span>
        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@rjindiajobs.com" target="_blank">
-           <i class="fa-regular fa-envelope"></i> info@rjindiajobs.com
+           <i class="fa-regular fa-envelope"></i>  {{ $profile->email ?? 'info@rjindiajobs.com ' }}
        </a>
     </span>
   </div>
@@ -193,12 +195,12 @@
     <div class="footer-col">
       <h5>Contact</h5>
       <p> <a href="https://wa.me/919039023534" target="_blank">
-           <i class="fa-brands fa-whatsapp"></i> +91 9039023534
+           <i class="fa-brands fa-whatsapp"></i> {{ $profile->phone ?? '+91 9039023534' }}
           </a>
       </p>
       <p>
          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=info@rjindiajobs.com" target="_blank">
-           <i class="fa-regular fa-envelope"></i>  info@rjindiajobs.com
+           <i class="fa-regular fa-envelope"></i>  {{ $profile->email ?? 'info@rjindiajobs.com ' }}
          </a>
       </p>
 

@@ -180,10 +180,14 @@
     </style>
 @stop
 
+
 @section('js')
-    <script> console.log('Job Create Form Loaded Successfully!'); 
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 
+<script>
+    console.log('Job Create Form Loaded Successfully!');
 
+    // Auto hide alert
     setTimeout(function () {
         let alert = document.querySelector('.alert');
         if (alert) {
@@ -196,10 +200,7 @@
         }
     }, 3000);
 
-    <script>
-    $('#description').summernote({
-        height: 200
-    });
+    // CKEditor init
+    CKEDITOR.replace('description');
 </script>
-    </script>
 @stop

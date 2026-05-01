@@ -410,6 +410,13 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'can' => 'isCandidate',
         ],
+
+         [
+            'text' => 'profile',
+            'url' => '/admin/profile',
+            'icon' => 'fas fa-fw fa-user',
+            'can' => 'isAdmin',
+        ],
         // [
         //     'text' => 'change_password',
         //     'url' => 'admin/settings',

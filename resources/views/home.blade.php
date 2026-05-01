@@ -347,7 +347,7 @@
           </a>
 
           <p class="mt-4 text-sm text-purple-200">
-            📞 Contact: +91 9039023534
+            📞 Contact: {{ $profile->phone ?? '+91 9039023534' }}
           </p>
       </div>
 

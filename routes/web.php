@@ -17,6 +17,10 @@ Route::prefix('admin')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
         Route::middleware('auth', 'can:isAdmin')->group(function () {
+                
+            Route::get('/profile', [AuthController::class, 'profile']);
+            Route::post('/profile/store', [AuthController::class, 'storeProfile'])->name('profile.store');
+            Route::put('/profile/{id}', [AuthController::class, 'updateProfile'])->name('profile.update');
             Route::get('/jobs/create', [JobController::class, 'create'])->name('admin.jobs.create');
             Route::get('/applications', [JobController::class, 'applications'])->name('applications.index');
             Route::post('/jobs/store', [JobController::class, 'store'])->name('admin.jobs.store');

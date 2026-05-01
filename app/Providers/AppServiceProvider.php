@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Providers;
-
+use App\Models\Profile;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $Profile = Profile::where('user_type', 'admin')->first();
+        View::share('profile', $Profile);
     }
 }

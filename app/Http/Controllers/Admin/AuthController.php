@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\JobController;
 use App\Models\CandidateProfile;
+use App\Models\Profile;
 
 class AuthController extends Controller
 {
@@ -15,6 +16,76 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+
+    public function profile(){
+         //$user = Auth::user();
+        $profile = Profile::where('user_type','admin')->first();
+
+        return view('auth.profile', compact('profile'));
+    }
+
+    public function updateProfile(Request $request, $id)
+        {
+            $request->validate([
+                'name'  => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'phone' => 'nullable|string|max:20',
+            ]);
+
+            $profile = Profile::findOrFail($id);
+
+            $data = [
+                'name'  => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'logo' => $request->logo,
+                'user_type' => 'admin'
+            ];
+
+
+                if ($request->hasFile('logo')) {
+
+                    // old logo delete (important)
+                    if ($profile->logo && Storage::disk('public')->exists($profile->logo)) {
+                        Storage::disk('public')->delete($profile->logo);
+                    }
+
+                    // new logo upload
+                    $data['logo'] = $request->file('logo')->store('profiles', 'public');
+                }
+            
+            $profile->update($data);
+            return redirect()->back()->with('success', 'Profile updated successfully!');
+        }
+
+
+    public function storeProfile(Request $request)
+    {
+        $request->validate([
+            'name'  => 'required',
+            'email' => 'required|email',
+            'phone' => 'nullable',
+            'logo'  => 'nullable|image'
+        ]);
+
+        //$data = $request->all();
+
+        $data = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'user_type' => 'admin' // 👈 fixed value
+                ];
+
+                //print_r($data);die;
+        if ($request->hasFile('logo')) {
+            $data['logo'] = $request->file('logo')->store('profiles', 'public');
+        }
+
+        Profile::create($data);
+
+        return back()->with('success', 'Profile created successfully!');
+    }
 
     public function loginAdmin(Request $request)
         {

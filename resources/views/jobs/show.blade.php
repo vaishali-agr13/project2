@@ -80,14 +80,14 @@
 
                     <div class="prose max-w-none text-gray-700 leading-relaxed">
                         <h3 class="text-xl font-bold text-gray-900 mb-4">Job Description</h3>
-                        <p>{!! $job->description !!}</p>
+                            {!! html_entity_decode($job->description) !!}
                         
-                        <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4">Requirements</h3>
+                        <!-- <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4">Requirements</h3>
                         <ul class="list-disc pl-5 space-y-2">
                             <li>Strong understanding of Laravel and PHP.</li>
                             <li>Experience with Tailwind CSS or Bootstrap.</li>
                             <li>Ability to work in a fast-paced environment.</li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>
