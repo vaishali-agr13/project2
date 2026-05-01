@@ -258,15 +258,18 @@
           @forelse($jobs as $job)
             <div class="job-card">
 
-              <div class="job-header">
+              <div class="job-header" style="position:relative;">
                 @php
                     $days = \Carbon\Carbon::parse($job->created_at)->diffInDays(now());
                 @endphp
 
                 @if($days < 3)
-                    <img style="width:20px;height:20px;" src="{{ asset('images/new.gif') }}" class="company-logo">
+                  <img style="width:20px;height:20px;" src="{{ asset('images/new.gif') }}" class="new-gif company-logo">
+
 
                 @endif
+
+
 
                 <div class="job-company">
                   <h3>{{$job->company_name}}</h3>
@@ -695,5 +698,13 @@ margin-bottom: 10px;
   margin-top: 10px;
   color: red;
   text-decoration: none;
+}
+
+.new-gif{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
     </style>
