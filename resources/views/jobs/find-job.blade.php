@@ -2,7 +2,7 @@
 
 @extends('layouts.app')
 @section('content')
-
+<main>
 <div class="jobs-hero">
   <!-- Hero Text -->
   <div class="hero-content header-text">
@@ -140,9 +140,9 @@
   <!-- LEFT SIDEBAR (SEPARATE FORM) -->
   <aside class="filters">
 
-  <button onclick="toggleFilters()" style="float:right; font-size:18px; border:none; background:none; cursor:pointer;">
-  ✖
-</button>
+      <button onclick="toggleFilters()" style="float:right; font-size:18px; border:none; background:none; cursor:pointer;">
+      ✖
+    </button>
 
     <form method="GET" action="{{ url('/find-jobs') }}" id="filterForm">
 
@@ -323,7 +323,7 @@
   </main>
 
 </div>
-
+</main>
 @endsection
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -386,6 +386,27 @@ function toggleFilters() {
 
 <style>
     /* Hero Section */
+html, body {
+  height: auto;
+}
+body {
+    margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1;
+}
+
+.jobs-hero,
+.categories-container,
+.jobs-page {
+  margin-bottom: 0 !important;   /* 🔥 MUST */
+}
+
+
 .jobs-hero {
   background-color: #e7f3fd;
   padding: 60px 20px;
@@ -553,7 +574,7 @@ function toggleFilters() {
 .jobs-page {
   display: flex;
   gap: 20px;
-  padding: 20px;
+   min-height: 80vh;
     align-items: flex-start;   /* 🔥 YE ADD KARO */
 
 }
@@ -587,6 +608,18 @@ margin-bottom: 10px;
     cursor: pointer;
     font-size: 14px;
     color: #4b5563;
+}
+
+.main-footer {
+  margin-top: auto;   /* 🔥 MOST IMPORTANT */
+  width: 100%;
+  background: #0f172a;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;   /* ✅ spacing inside, not outside */
 }
 
 .filters h3,
@@ -631,7 +664,9 @@ margin-bottom: 10px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);  /* 🔥 2 cards per row */
   gap: 20px;
-  margin: 20px;
+    margin: 0;
+      padding: 20px;
+
 
 }
 
