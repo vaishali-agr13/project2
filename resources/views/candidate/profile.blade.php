@@ -85,7 +85,7 @@
                                         </a>
                                     </p>
                                 @endif
-                                <input type="hidden" name="old_resume" value="{{ $profile->resume }}">
+                                <input type="hidden" name="old_resume" value="{{ $profile?->resume }}">
                                 <input type="file" name="resume" class="form-control">
                         </div>
 

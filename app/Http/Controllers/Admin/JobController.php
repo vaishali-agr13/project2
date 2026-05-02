@@ -287,6 +287,13 @@ class JobController extends Controller
                     'cover_letter' => $request->cover_letter,
                 ]);
 
+                   $user = auth()->user();
+
+                    if ($user->role !== 'candidate') {
+                        $user->role = 'candidate';
+                        $user->save();
+                    }
+
                 return redirect()
                     ->route('candidate.profile')
                     ->with('success', 'Job applied successfully!');

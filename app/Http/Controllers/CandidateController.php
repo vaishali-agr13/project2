@@ -130,7 +130,6 @@ class CandidateController extends Controller
 
      public function index()
     {
-        
         $profile = CandidateProfile::where('user_id', auth()->id())->first();
         return view('candidate.profile', compact('profile'));
     }
