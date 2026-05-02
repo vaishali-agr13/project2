@@ -125,9 +125,12 @@
                         <h3 class="text-xl font-bold text-gray-900 mb-4">Number of openings</h3>
                             {{$job->no_of_openings}}
                     </div>
-                     <button type="button" onclick="toggleApplyForm()" class="text-lime-500 text-white px-4 py-2 rounded-lg ml-auto block">
-                             Apply Now
-                     </button>
+
+                    <button type="button" onclick="toggleApplyForm()" 
+                        class="bg-lime-500 hover:bg-lime-600 text-white px-4 py-2 rounded-lg ml-auto block">
+                        Apply Now
+                    </button>
+
                 </div>
                 
             </div>
