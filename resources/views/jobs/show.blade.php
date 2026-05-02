@@ -19,7 +19,7 @@
     </a>
 
     <a href="https://chat.whatsapp.com/H4PArHFPz8L0W4L3msdTKP" target="_blank"
-       style="display:block; margin-top:10px; background:#661e92; color:white; padding:10px; border-radius:5px; text-decoration:none;">
+       style="display:block; margin-top:10px; background:#76ac20; color:white; padding:10px; border-radius:5px; text-decoration:none;">
         Join Community
     </a>
 
@@ -125,7 +125,7 @@
                         <h3 class="text-xl font-bold text-gray-900 mb-4">Number of openings</h3>
                             {{$job->no_of_openings}}
                     </div>
-                     <button type="button" onclick="toggleApplyForm()" class="bg-purple-700 text-white px-4 py-2 rounded-lg ml-auto block">
+                     <button type="button" onclick="toggleApplyForm()" class="text-lime-500 text-white px-4 py-2 rounded-lg ml-auto block">
                              Apply Now
                      </button>
                 </div>
