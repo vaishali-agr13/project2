@@ -140,15 +140,52 @@
                             </div>
                         </div>
 
+                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="status">Who can apply</label>
+                               <input type="text" name="who_can_apply" class="form-control" placeholder="Who Can Apply" value="{{ old('who_can_apply') }}" required>
+
+                            </div>
+                        </div>
+
                          <div class="col-md-6">
                             <div class="form-group">
                                 <label for="location">Location</label>
                                 <input type="text" name="location" class="form-control" placeholder="e.g. Indore, Remote, etc." value="{{ old('location') }}" required>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="location">Roles and Responsibility</label>
+                                <input type="text" name="roles_responsibility" class="form-control" placeholder="Roles and Responsibility" value="{{ old('roles_responsibility') }}" required>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
+
+                       <div class="form-group">
+                            <label for="description">No of Openings</label>
+                            <input type="text" name="no_of_openings" class="form-control" placeholder="No of Openings" value="{{ old('no_of_openings') }}" required>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="status">Skills Required</label>
+                               <select name="skills_required[]" multiple class="form-control">
+                                    <option value="php">PHP</option>
+                                    <option value="laravel">Laravel</option>
+                                    <option value="mysql">MySQL</option>
+                                    <option value="javascript">JavaScript</option>
+                                    <option value="vue">Vue.js</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        
+
                        
                     </div>
 

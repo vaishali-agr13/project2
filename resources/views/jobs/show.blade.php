@@ -76,6 +76,12 @@
                             <p class="text-gray-500 text-sm">Experience</p>
                             <p class="font-bold text-gray-800">{{ $job->experience }}</p>
                         </div>
+
+                        <div>
+                            <p class="text-gray-500 text-sm">{{$applicationCount}} applicants</p>
+                        </div>
+
+                        
                     </div>
 
                     <div class="prose max-w-none text-gray-700 leading-relaxed">
@@ -89,11 +95,45 @@
                             <li>Ability to work in a fast-paced environment.</li>
                         </ul> -->
                     </div>
+                    <div class="prose max-w-none text-gray-700 leading-relaxed">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Roles & Responsibilities</h3>
+                            {{$job->roles_responsibility}}
+                    </div>
+
+                    <div class="prose max-w-none text-gray-700 leading-relaxed">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Skills Required</h3>
+
+                           @php
+                                $skills = is_string($job->skills_required)
+                                    ? json_decode($job->skills_required, true)
+                                    : $job->skills_required;
+                            @endphp
+
+                            @if(is_array($skills))
+                                @foreach($skills as $skill)
+                                    <span>{{ $skill }},</span>
+                                @endforeach
+                            @endif
+                    </div>
+
+                    <div class="prose max-w-none text-gray-700 leading-relaxed">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Who can apply</h3>
+                            {{$job->who_can_apply}}
+                    </div>
+
+                    <div class="prose max-w-none text-gray-700 leading-relaxed">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Number of openings</h3>
+                            {{$job->no_of_openings}}
+                    </div>
+                     <button type="button" onclick="toggleApplyForm()" class="bg-purple-700 text-white px-4 py-2 rounded-lg ml-auto block">
+                             Apply Now
+                     </button>
                 </div>
+                
             </div>
 
             <div class="w-full lg:w-1/3 px-4">
-                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 custom-border sticky top-10">
+                <div id="applyForm" class="hidden mt-4 bg-white p-6 rounded-xl shadow-md border-t-4 custom-border sticky top-10">
                     <h3 class="text-xl font-bold text-gray-900 mb-4">Apply Now</h3>
                     
                     @if(session('success'))
@@ -174,6 +214,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 });
+
+   function toggleApplyForm() {
+        const form = document.getElementById('applyForm');
+        form.classList.toggle('hidden');
+    }
+
 </script>
 @endsection
 @push('scripts')

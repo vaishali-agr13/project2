@@ -24,7 +24,14 @@ class Job extends Model
         'job_type',
         'status',
         'experience',
+        'roles_responsibility',
+        'skills_required',
+        'who_can_apply',
         'approval_status',
+        'no_of_openings',
+    ];
+    protected $casts = [
+        'skills_required' => 'array',
     ];
 
     public function categoryData()

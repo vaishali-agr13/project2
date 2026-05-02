@@ -93,6 +93,58 @@
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Max Salary</label>
                 <input type="text" name="salary_max" class="w-full px-4 py-2 border rounded-lg" placeholder="3-6 LPA" required>
               </div>
+
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Who can apply</label>
+                <input type="text" name="who_can_apply" class="w-full px-4 py-2 border rounded-lg" placeholder="who can apply" required>
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">No Of Openings</label>
+                <input type="text" name="no_of_openings" class="w-full px-4 py-2 border rounded-lg" placeholder="No of Openings" required>
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Roles & Responsibility</label>
+                <input type="text" name="roles_responsibility" class="w-full px-4 py-2 border rounded-lg" placeholder="Roles & Responsibility" required>
+              </div>
+
+               <div class="col-span-2">
+                  <label class="block text-sm font-semibold text-gray-700 mb-1">
+                      Skills Required
+                  </label>
+
+                  <div class="border rounded-lg p-3 bg-gray-50">
+                      <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+
+                          <label class="flex items-center space-x-2">
+                              <input type="checkbox" name="skills_required[]" value="php" class="accent-purple-700">
+                              <span>PHP</span>
+                          </label>
+
+                          <label class="flex items-center space-x-2">
+                              <input type="checkbox" name="skills_required[]" value="laravel" class="accent-purple-700">
+                              <span>Laravel</span>
+                          </label>
+
+                          <label class="flex items-center space-x-2">
+                              <input type="checkbox" name="skills_required[]" value="mysql" class="accent-purple-700">
+                              <span>MySQL</span>
+                          </label>
+
+                          <label class="flex items-center space-x-2">
+                              <input type="checkbox" name="skills_required[]" value="javascript" class="accent-purple-700">
+                              <span>JavaScript</span>
+                          </label>
+
+                          <label class="flex items-center space-x-2">
+                              <input type="checkbox" name="skills_required[]" value="vue" class="accent-purple-700">
+                              <span>Vue.js</span>
+                          </label>
+
+                      </div>
+                  </div>
+              </div>
               
 
               <div>

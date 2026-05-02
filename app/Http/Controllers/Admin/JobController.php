@@ -109,6 +109,11 @@ class JobController extends Controller
             'description' => $request->description,
             'job_type' => $request->job_type,
             'status' => $request->status,
+            'skills_required'=>json_encode($request->skills_required),
+            'who_can_apply'=>$request->who_can_apply,
+            'roles_responsibility'=>$request->roles_responsibility,
+            'no_of_openings'=>$request->no_of_openings,
+
             /*'posted_by_type'=>$request->posted_by_type,*/
         ]);
 
@@ -161,9 +166,17 @@ class JobController extends Controller
             'company_email' => 'nullable',
             'experience' => 'required', // Isse mandatory banaya hai
              'posted_by_type' => 'required'  ,
+             'skills_required'=>'required',
+             'who_can_apply'=>'required',
+             'roles_responsibility'=>'required',
+             'no_of_openings'=>'required'
         ]);
 
         // 2. Database mein save karein
+
+        $data = $request->all();
+
+        $data['skills_required'] = json_encode($request->skills_required);
         $job = Job::create($data);
        
 
@@ -319,6 +332,7 @@ class JobController extends Controller
         {
             // 1. Database se job find karein
            $job = Job::with('categoryData')->find($id);
+           $applicationCount = Application::where('job_id', $id)->count();
 
             // 2. Check karein agar job nahi mili toh 404 error dikhayein
             if (!$job) {
@@ -326,7 +340,7 @@ class JobController extends Controller
             }
 
             // 3. 'job' variable ko view mein bhejien (Ye sabse zaroori step hai)
-            return view('jobs.show', compact('job')); 
+            return view('jobs.show', compact('job','applicationCount'));   
         }
 
 

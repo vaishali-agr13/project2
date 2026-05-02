@@ -45,6 +45,38 @@
                 <input type="text" name="location" class="form-control" value="{{ $job->location }}">
             </div>
 
+           <div class="form-group">
+                <label>Roles & Responsibility</label>
+                <input type="text" name="roles_responsibility" class="form-control" value="{{ $job->roles_responsibility }}">
+            </div>
+
+             <div class="form-group">
+                <label>No Of Openings</label>
+                <input type="text" name="no_of_openings" class="form-control" value="{{ $job->no_of_openings }}">
+            </div>
+
+            <div class="form-group">
+                <label>Who Can Apply</label>
+                <input type="text" name="who_can_apply" class="form-control" value="{{ $job->who_can_apply }}">
+            </div>
+
+
+            @php
+                $selectedSkills = old('skills_required', is_array($job->skills_required) 
+                    ? $job->skills_required 
+                    : json_decode($job->skills_required, true));
+            @endphp
+           <div class="form-group">
+                <label>Skills Required</label>
+                <select name="skills_required[]" multiple class="form-control">
+                    <option value="php" {{ in_array('php', $selectedSkills ?? []) ? 'selected' : '' }}>PHP</option>
+                    <option value="laravel" {{ in_array('laravel', $selectedSkills ?? []) ? 'selected' : '' }}>Laravel</option>
+                    <option value="mysql" {{ in_array('mysql', $selectedSkills ?? []) ? 'selected' : '' }}>MySQL</option>
+                    <option value="javascript" {{ in_array('javascript', $selectedSkills ?? []) ? 'selected' : '' }}>JavaScript</option>
+                    <option value="vue" {{ in_array('vue', $selectedSkills ?? []) ? 'selected' : '' }}>Vue.js</option>
+                </select>
+            </div>
+            
             <div class="form-group">
                 <label>Min Salary</label>
                 <input type="text" name="salary_min" class="form-control" value="{{ $job->salary_min }}">
