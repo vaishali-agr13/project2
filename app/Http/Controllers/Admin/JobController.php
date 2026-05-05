@@ -129,7 +129,7 @@ class JobController extends Controller
     {
         $job = Job::findOrFail($id);
         $job->delete();
-        return redirect('/admin/companies/jobs')->with('success', 'Job Deleted Successfully');
+        return redirect('/admin/jobs')->with('success', 'Job Deleted Successfully');
         //return redirect()->route('/companies/jobs')->with('success', 'Job Deleted Successfully');
     }
 
