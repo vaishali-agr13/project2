@@ -84,7 +84,7 @@
                         
                     </div>
 
-                    <div class="prose max-w-none text-gray-700 leading-relaxed">
+                    <div class="prose max-w-none text-gray-700 leading-relaxed break-words overflow-hidden">
                         <h3 class="text-xl font-bold text-gray-900 mb-4">Job Description</h3>
                             {!! html_entity_decode($job->description) !!}
                         
