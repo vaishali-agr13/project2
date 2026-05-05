@@ -7,7 +7,7 @@ margin: 0;
 
 /* HERO */
 .hero {
-  color: #0049af;
+  color: #76ac20;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -67,7 +67,7 @@ input::placeholder, textarea::placeholder {
 }
 
 .hero-text span {
-  color: #0049af;
+  color: #76ac20;
 }
 
 /* SEARCH */
@@ -290,7 +290,7 @@ input::placeholder, textarea::placeholder {
 
 .search-box button {
   padding: 12px 25px;
-  background: #0049af;
+  background: #76ac20;
   color: white;
   border: none;
   border-radius: 50px;
@@ -326,7 +326,7 @@ input::placeholder, textarea::placeholder {
   display: block;
   width: 60px;
   height: 4px;
-  background: #0049af;
+  background: #76ac20;
   border-radius: 10px;
   margin-top: 6px;
 }
@@ -499,7 +499,7 @@ input::placeholder, textarea::placeholder {
     display: block;
     margin: 10px 20px;
     padding: 10px 15px;
-    background: #0049af;
+    background: #76ac20;
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -603,7 +603,7 @@ input::placeholder, textarea::placeholder {
   left: 0;
   height: 4px;
   width: 100%;
-  background: #0049af;
+  background: #76ac20;
   opacity: 1;
 }
 
@@ -621,7 +621,7 @@ input::placeholder, textarea::placeholder {
 
 /* BUTTON */
 .apply-btn {
-   background: #0049af;
+   background: #76ac20;
     color: white;
     padding: 8px 14px;
     border-radius: 20px;
@@ -688,7 +688,7 @@ input::placeholder, textarea::placeholder {
 .btn-explore {
   margin-top:25px;
   display: inline-block;
-  background: #0049af;
+  background: #76ac20;
   color: white;
   padding: 12px 22px;
   border-radius: 25px;
@@ -728,7 +728,7 @@ input::placeholder, textarea::placeholder {
 
 .counter-box h2 {
   font-size: 32px;
-  color: #0049af;
+  color: #76ac20;
 }
 
 /* JOB ALERT */
@@ -813,7 +813,7 @@ input::placeholder, textarea::placeholder {
   position: absolute;
   top: -15px;
   left: 20px;
-  background: #0049af;
+  background: #76ac20;
   color: white;
   font-size: 12px;
   padding: 5px 10px;
@@ -832,7 +832,7 @@ input::placeholder, textarea::placeholder {
   top: 50%;
   transform: translateY(-50%);
   font-size: 24px;
-  color: #0049af;
+  color: #76ac20;
 }
 
 .how-card:hover {
@@ -848,7 +848,7 @@ input::placeholder, textarea::placeholder {
 }
 
 .advice-card a {
-  color: #0049af;   /* blue */
+  color: #76ac20;   /* blue */
   text-decoration: none;
   font-weight: 600;
   display: inline-block;
@@ -890,7 +890,7 @@ input::placeholder, textarea::placeholder {
   padding: 12px 20px;
   border-radius: 50px;
   border: none;
-  background: #0049af;
+  background: #76ac20;
   color: white;
   cursor: pointer;
   white-space: nowrap;
@@ -921,7 +921,7 @@ input::placeholder, textarea::placeholder {
 
 /* TOP HEADER */
 .top-header {
-  background: #0049af;
+  background: #76ac20;
   color: white;
   padding: 8px 5%;
   display: flex;
@@ -974,7 +974,7 @@ input::placeholder, textarea::placeholder {
 
 /* FOOTER */
 .main-footer {
-  background: #0049af;
+  background: #76ac20;
   color: #cbd5e1;
   margin-top: 60px;
 }
@@ -1067,7 +1067,7 @@ input::placeholder, textarea::placeholder {
 }
 
 .category-icon {
-  color:#0049af;
+  color:#76ac20;
 }
 
 .cat-name {
@@ -1078,10 +1078,10 @@ input::placeholder, textarea::placeholder {
   /*color: #4b5563;*/ 
 }
 .custom-border {
-  border-top: 2px solid #0049af
+  border-top: 2px solid #76ac20
 }
 .submit-btn {
-  background-color: #0049af;
+  background-color: #76ac20;
 }
 
 header {

@@ -52,7 +52,7 @@
         <img src="{{ asset('images/company-logo.png') }}"  class="company_logo"  alt="Resume Tips">
 
             <div class="flex flex-col leading-tight" style="margin-left:29px">
-                <span class="font-bold text-[#0049af] text-lg">
+                <span class="font-bold text-[#76ac20] text-lg">
                RJ India
                 </span>
                

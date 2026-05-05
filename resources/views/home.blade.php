@@ -305,7 +305,7 @@
   <div class="job-alert-container">
 
     <div class="job-alert-left">
-      <h2>Never miss out <span style="color: #0049af">on the latest career</span> opportunities</h2>
+      <h2>Never miss out <span style="color: #76ac20">on the latest career</span> opportunities</h2>
       
       <p>
         Get daily alerts and stay ahead!
@@ -327,7 +327,7 @@
 
 
 <!-- 🔹 WHATSAPP COMMUNITY SECTION -->
-<section class="py-16 text-white" style="background:#0049af; position:relative; z-index:1;">
+<section class="py-16 text-white" style="background:#76ac20; position:relative; z-index:1;">
     <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
 
     <!-- LEFT CONTENT -->
