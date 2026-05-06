@@ -91,7 +91,7 @@
 
                                     @foreach($cities as $city)
                                         <option value="{{ $city }}"
-                                            {{ $profile->location == $city ? 'selected' : '' }}>
+                                            {{ optional($profile)->location == $city ? 'selected' : '' }}>
                                             {{ $city }}
                                         </option>
                                     @endforeach
