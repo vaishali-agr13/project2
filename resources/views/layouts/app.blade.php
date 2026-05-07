@@ -51,9 +51,9 @@
     <a href="/">
         <img src="{{ asset('images/company-logo.png') }}"  class="company_logo"  alt="Resume Tips">
 
-            <div class="flex flex-col leading-tight" style="margin-left:29px">
-                <span class="font-bold text-[#76ac20] text-lg">
-               RJ India
+            <div class="flex flex-col leading-tight">
+                <span class="font-bold text-[#0049af] text-lg">
+               FK Strategy
                 </span>
                
           </div>
@@ -150,6 +150,12 @@
             <a href="/about" class="block px-4 py-2 hover:bg-gray-100">About</a>
             <a href="/find-jobs" class="block px-4 py-2 hover:bg-gray-100">Find a Job</a>
             <a href="/companies" class="block px-4 py-2 hover:bg-gray-100">Post Job</a>
+
+            @if(auth()->check() && auth()->user()->role === 'candidate')
+                <a href="/candidate/dashboard" class="block px-4 py-2 hover:bg-gray-100">
+                    Dashboard
+                </a>
+            @endif
 
             @if(auth()->check())
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
