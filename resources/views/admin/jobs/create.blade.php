@@ -240,7 +240,9 @@
     }, 3000);
 
     // CKEditor init
-    CKEDITOR.replace('description');
+      CKEDITOR.replace('description', {
+        versionCheck: false
+    });
 
 
 
