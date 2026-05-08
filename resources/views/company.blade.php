@@ -113,7 +113,7 @@
                   <label class="block text-sm font-semibold text-gray-700 mb-1">
                       Skills Required
                   </label>
-                  <input type="text" name="skills_required" class="w-full px-4 py-2 border rounded-lg" placeholder="No of Openings" required>
+                  <input type="text" name="skills_required" class="w-full px-4 py-2 border rounded-lg" placeholder="Skills Required" required>
 
 
                   <!-- <div class="border rounded-lg p-3 bg-gray-50">
