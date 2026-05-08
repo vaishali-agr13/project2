@@ -229,6 +229,14 @@
   <!-- BOTTOM BAR -->
   <div class="footer-bottom">
     <p>© 2026 JobPortal. All rights reserved.</p>
+
+    <p class="mt-2 md:mt-0">
+                Designed by 
+                <a href="#"
+                   class="font-bold text-blue-600 hover:text-blue-700 transition duration-300">
+                   VipDigital Hub
+                </a>
+    </p>
   </div>
 
 

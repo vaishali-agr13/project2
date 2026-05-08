@@ -674,8 +674,6 @@ margin-bottom: 10px;
 /* Job Listing */
 .job-listing {
   flex: 1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);  /* 🔥 2 cards per row */
   gap: 20px;
     margin: 0;
       padding: 20px;
@@ -692,7 +690,55 @@ margin-bottom: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.08);
 }
 
-/* Job Header */
+
+.job-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+
+
+@media (max-width:768px){
+
+  .jobs-page{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: block;
+  }
+
+  .job-listing{
+    width: 100%;
+    padding: 0 12px !important;
+    margin: 0;
+  }
+
+  .job-container{
+    display: flex !important;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .job-card{
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .filter-toggle{
+    margin-left: 12px;
+    margin-bottom: 15px;
+  }
+
+}
+
+/* Header */
 .job-header {
   display: flex;
   align-items: center;
