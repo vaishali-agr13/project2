@@ -99,7 +99,7 @@
                     <a href="{{ url('/categories/'.$category->id) }}" style="text-decoration: none; display: block; width: 100%;">
                         <div class="category-box">
                             <div class="category-info">
-                                <i style="font-size: 24px; color:#76ac20" class="fas {{ !empty($category->icon) ? $category->icon : 'fa-folder' }}"></i>
+                                <i style="font-size: 24px; color:#0049af" class="fas {{ !empty($category->icon) ? $category->icon : 'fa-folder' }}"></i>
                                 <p class="cat-name" style="font-weight: bold; margin: 10px 0 5px; color: #333;">{{$category->name}}</p>
                                 <span style="font-size: 12px; color: #888;">{{$category->jobs_count}} Jobs Available</span>
                             </div>
@@ -148,13 +148,16 @@
 
       <div class="filter-group">
         <h4>Location</h4>
-        <label class="filter-option">
-          <input type="checkbox" name="locations[]" value="Delhi"
-          {{ in_array('Delhi', request('locations', [])) ? 'checked' : '' }}>
-          <span>Delhi</span>
-        </label>
+        @foreach($districts as $district)
+            <label class="filter-option">
+              <input type="checkbox" name="locations[]" value="{{$district}}"
+              {{ in_array($district, request('locations', [])) ? 'checked' : '' }}>
+              <span>{{$district}}</span>
+            </label>
+        @endforeach
+      
 
-        <label class="filter-option">
+        <!-- <label class="filter-option">
           <input type="checkbox" name="locations[]" value="Mumbai"
           {{ in_array('Mumbai', request('locations', [])) ? 'checked' : '' }}>
         <span>Mumbai</span>
@@ -193,7 +196,7 @@
           {{ in_array('Bhopal', request('locations', [])) ? 'checked' : '' }}>
           <span>Bhopal</span>
         </label>
-      </div>
+      </div> -->
 
       <div class="filter-group">
         <h4>Salary</h4>
@@ -284,7 +287,7 @@
                 <div class="job-company">
                   <h3>{{$job->company_name}}</h3>
                   <p>
-                    {{ \Illuminate\Support\Str::limit($job->location, 10, '...') }}
+                    {{ \Illuminate\Support\Str::limit($job->district, 10, '...') }}
                   </p>
                 </div>
               </div>
@@ -499,7 +502,7 @@ main {
   background-color: #e7f3fd;
   padding: 60px 20px;
   text-align: center;
-  color: #00395b;
+  color: #76ac20;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -512,7 +515,7 @@ main {
 }
 
 .jobs-hero .hero-content .highlight {
-  color: #76ac20;
+  color: #0049af;
 }
 
 .jobs-hero .hero-content p {
@@ -592,7 +595,7 @@ main {
 }
 
 .swiper-pagination-bullet-active {
-        background: #76ac20 !important;
+        background: #0049af !important;
     }
     
 .swiper-pagination {
@@ -609,7 +612,7 @@ main {
 }
 
 .apply-btn:hover {
-  background-color: #16326a;
+  background-color: #76ac20;
 }
 
 .search-item {
