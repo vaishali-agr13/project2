@@ -469,6 +469,7 @@ class JobController extends Controller
             ]);
 
             Mail::to( $email)
+                ->cc('rjindia.help@gmail.com')
                 ->send(new JobPostedMail($job));
 
             return back()->with('success', 'Job posted successfully');
