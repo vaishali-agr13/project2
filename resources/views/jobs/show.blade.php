@@ -40,7 +40,7 @@
                         <div>
                             <p class="text-gray-500 text-sm">Category</p>
                            
-                            <p class="font-bold text-gray-800">{{ $job->categoryData->name }}</p>
+                            <p class="font-bold text-gray-800">{{ optional($job->categoryData)->name ?? 'No Category' }}</p>
                         </div>
                         <div>
                             <p class="text-gray-500 text-sm">Posted On</p>

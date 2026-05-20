@@ -261,6 +261,8 @@ window.addEventListener("wheel", function(e) {
 </script>
 
 </footer>
+    @yield('scripts')
+
 
 </body>
 </html>
